@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet, TouchableOpacity, Button} from 'react-native';
+import {View, Text, TextInput, StyleSheet, Button} from 'react-native';
 
 const LoginForm = ({ navigation }) => {
     const [username, setUsername] = React.useState('');

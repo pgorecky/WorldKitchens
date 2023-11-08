@@ -1,5 +1,5 @@
 import React, {useRef, useEffect} from 'react';
-import {View, Text, Button, StyleSheet, Image, Animated, Easing} from 'react-native';
+import {View, Text, Button, StyleSheet, Animated, Easing} from 'react-native';
 import {useFonts} from "expo-font";
 
 const WelcomePage = ({navigation}) => {

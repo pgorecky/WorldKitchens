@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, Animated, Easing } from 'react-native';
 
 class WelcomeScreen extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             witajAnim: new Animated.Value(0),
             wAnim: new Animated.Value(0),
