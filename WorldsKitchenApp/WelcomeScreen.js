@@ -16,7 +16,7 @@ class WelcomeScreen extends Component {
     }
 
     startAnimations() {
-        const duration = 1000;
+        const duration = 600;
 
         Animated.sequence([
             Animated.parallel([
@@ -47,7 +47,7 @@ class WelcomeScreen extends Component {
                     }),
                 ]),
             ]),
-            Animated.delay(3000), // Oczekiwanie 3 sekundy
+            Animated.delay(800),
             Animated.parallel([
                 Animated.sequence([
                     Animated.timing(this.state.wAnim, {
@@ -76,7 +76,9 @@ class WelcomeScreen extends Component {
                     useNativeDriver: true,
                 }),
             ]),
-        ]).start();
+        ]).start(() => {
+            this.props.onAnimationFinish();
+        });
     }
 
     render() {
