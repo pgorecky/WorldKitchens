@@ -1,30 +1,27 @@
-import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import WelcomeScreen from "./WelcomeScreen";
+import {NavigationContainer} from '@react-navigation/native';
+import WelcomeScreen from "./Screens/WelcomeScreen";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import WelcomePage from "./WelcomePage";
-import LoginForm from "./LoginForm";
+import WelcomePage from "./Screens/WelcomePage";
+import LoginForm from "./Screens/LoginForm";
+import AuthContent from "./AuthContent";
+import SelectRegion from "./Screens/SelectRegion";
+import RegisterForm from "./Screens/RegisterForm";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
-  return (
-      <NavigationContainer>
-          <Stack.Navigator>
-              <Stack.Screen name="Welcome" options={{ headerShown: false }}>
-                  {(props) => <WelcomeScreen {...props} onAnimationFinish={() => props.navigation.navigate('Login')} />}
-              </Stack.Screen>
-              <Stack.Screen style={styles.container} name={'Login'} component={WelcomePage}/>
-              <Stack.Screen style={styles.container} name={'LoginForm'} component={LoginForm}/>
-          </Stack.Navigator>
-      </NavigationContainer>
-);
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Welcome" options={{headerShown: false}}>
+                    {(props) => <WelcomeScreen {...props}
+                                               onAnimationFinish={() => props.navigation.navigate('WelcomePage')}/>}
+                </Stack.Screen>
+                <Stack.Screen options={{headerShown: false}} name={'WelcomePage'} component={WelcomePage}/>
+                <Stack.Screen options={{headerShown: false}} name={'LoginForm'} component={LoginForm}/>
+                <Stack.Screen options={{headerShown: false}} name={'RegisterForm'} component={RegisterForm}/>
+                <Stack.Screen options={{headerShown: false}} name={'Test'} component={AuthContent}/>
+                <Stack.Screen options={{headerShown: false}} name={'SelectRegion'} component={SelectRegion}/>
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

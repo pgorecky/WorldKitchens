@@ -47,7 +47,7 @@ class WelcomeScreen extends Component {
                     }),
                 ]),
             ]),
-            Animated.delay(800),
+            Animated.delay(400),
             Animated.parallel([
                 Animated.sequence([
                     Animated.timing(this.state.wAnim, {
@@ -142,7 +142,7 @@ class WelcomeScreen extends Component {
                             fontSize: 30,
                         }}
                     >
-                        {'   '}
+                        {' '}
                     </Text>
                     <Animated.Text
                         style={{
