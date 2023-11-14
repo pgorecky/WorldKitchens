@@ -21,14 +21,10 @@ const RegisterForm = ({ navigation }) => {
                     lastName: lastname,
                 }
             );
-            //
-            // if (response.data && response.data.token) {
-            //     // setAuthHeader(response.data.token);
-            //     navigation.navigate('LoginForm');
-            // } else {
-            //     throw new Error('Token not found in response');
-            // }
-
+            if (response.data && response.data.token) {
+                await setAuthHeader(response.data.token);
+                navigation.navigate('LoginForm');
+            }
         } catch (error) {
             console.error('Register failed', error.message);
             Alert.alert('Rejestracja nieudana', 'Wystąpił błąd podczas tworzenia użytkownika');

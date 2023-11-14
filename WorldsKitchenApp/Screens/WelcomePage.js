@@ -2,6 +2,7 @@ import React, {useRef, useEffect} from 'react';
 import {View, Text, Button, Animated, Easing} from 'react-native';
 import {useFonts} from "expo-font";
 import {styles} from "../styles/styles";
+import {removeAuthHeader} from "../services/axios_config";
 
 const WelcomePage = ({navigation}) => {
     const spinValue = useRef(new Animated.Value(0)).current;
@@ -11,6 +12,7 @@ const WelcomePage = ({navigation}) => {
     });
 
     useEffect(() => {
+        removeAuthHeader();
         Animated.loop(
             Animated.timing(spinValue, {
                 toValue: 1,

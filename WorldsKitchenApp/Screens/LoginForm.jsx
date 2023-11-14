@@ -3,7 +3,7 @@ import {View, Text, TextInput, Button, Alert} from 'react-native';
 import {request, setAuthHeader} from "../services/axios_config";
 import {styles} from "../styles/styles";
 
-const LoginForm = ({ navigation }) => {
+const LoginForm = ({navigation}) => {
 
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -13,13 +13,15 @@ const LoginForm = ({ navigation }) => {
             const response = request(
                 'POST',
                 '/login', {
-                login: username,
-                password: password,
-            }).then(
+                    login: username,
+                    password: password,
+                }).then(
                 (response) => {
+                    navigation.navigate('MainView')
+                    // console.error('Login failed');
+                    // Alert.alert('Logowanie nieudane', 'Invalid username or password. Please try again.');
                     setAuthHeader(response.data.token);
                 });
-            navigation.navigate('SelectRegion')
 
         } catch (error) {
             console.error('Login failed', error.message);

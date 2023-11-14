@@ -4,7 +4,7 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import WelcomePage from "./Screens/WelcomePage";
 import LoginForm from "./Screens/LoginForm";
 import AuthContent from "./AuthContent";
-import SelectRegion from "./Screens/SelectRegion";
+import MainView from "./Screens/MainView";
 import RegisterForm from "./Screens/RegisterForm";
 
 const Stack = createNativeStackNavigator();
@@ -20,7 +20,7 @@ export default function App() {
                 <Stack.Screen options={{headerShown: false}} name={'LoginForm'} component={LoginForm}/>
                 <Stack.Screen options={{headerShown: false}} name={'RegisterForm'} component={RegisterForm}/>
                 <Stack.Screen options={{headerShown: false}} name={'Test'} component={AuthContent}/>
-                <Stack.Screen options={{headerShown: false}} name={'SelectRegion'} component={SelectRegion}/>
+                <Stack.Screen options={{headerShown: false}} name={'MainView'} component={MainView}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
