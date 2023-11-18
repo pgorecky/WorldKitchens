@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -34,4 +36,10 @@ public class User {
     @Column(nullable = false)
     @Size(max = 100)
     private String password;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Dish> createdDishes;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Comment> comments;
 }
