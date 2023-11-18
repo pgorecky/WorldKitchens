@@ -1,47 +1,36 @@
-import React, {useRef, useEffect} from 'react';
-import {View, Text, Button, Animated, Easing} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, Text, Image} from 'react-native';
 import {useFonts} from "expo-font";
 import {styles} from "../styles/styles";
 import {removeAuthHeader} from "../services/axios_config";
+import {Button} from 'react-native-elements';
 
 const WelcomePage = ({navigation}) => {
-    const spinValue = useRef(new Animated.Value(0)).current;
 
     const [loaded] = useFonts({
-        DancingScript: require('../assets/fonts/DancingScript.ttf'),
+        Dosis: require('../assets/fonts/Dosis/static/Dosis-Medium.ttf'),
     });
 
     useEffect(() => {
         removeAuthHeader();
-        Animated.loop(
-            Animated.timing(spinValue, {
-                toValue: 1,
-                duration: 40000,
-                easing: Easing.linear,
-                useNativeDriver: true,
-            })
-        ).start();
-    }, [spinValue]);
-
-    const spin = spinValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: ['0deg', '1800deg'],
     });
     if (!loaded) {
         return null;
     }
     return (
         <View style={styles.container}>
+            <Image source={require('../assets/welcome-bckgr.jpg')}/>
             <Text style={styles.title}>Kuchnia świata</Text>
-            <Animated.Image
-                style={[styles.pizza, {transform: [{rotate: spin}]}]}
-                source={require('../assets/pizza.png')}
-            />
+
             <View style={styles.buttonContainer}>
-                <Button title="Zaloguj się"
-                        onPress={() => navigation.navigate('LoginForm')}/>
-                <Button title="Zarejestruj się"
-                        onPress={() => navigation.navigate('RegisterForm')}/>
+                <Button
+                    buttonStyle={styles.buttonLogin}
+                    title="Zaloguj się"
+                    onPress={() => navigation.navigate('LoginForm')}/>
+                <Button
+                    buttonStyle={styles.buttonRegister}
+                    title="Zarejestruj się"
+                    onPress={() => navigation.navigate('RegisterForm')}/>
             </View>
         </View>
     );

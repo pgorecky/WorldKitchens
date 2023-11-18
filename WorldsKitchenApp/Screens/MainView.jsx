@@ -5,6 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import DetailsScreen from "./DetailsScreen";
 import HomeScreen from "./HomeScreen";
 import ProfileScreen from "./ProfileScreen";
+import {styles} from "../styles/styles";
 
 const homeName = "Przepisy";
 const detailsName = "Ulubione";
@@ -17,6 +18,7 @@ function MainView () {
                     initialRouteName={homeName}
                     screenOptions={({ route }) => ({
                         tabBarIcon: ({ focused, color, size }) => {
+
                             let iconName;
                             let rn = route.name;
 
@@ -34,10 +36,12 @@ function MainView () {
                         },
                     })}
                     tabBarOptions={{
-                        activeTintColor: 'tomato',
+                        activeBackgroundColor: '#282828',
+                        inactiveBackgroundColor: '#282828',
+                        activeTintColor: '#1DB954',
                         inactiveTintColor: 'grey',
-                        labelStyle: { paddingBottom: 10, fontSize: 10 },
-                        style: { padding: 10, height: 70}
+                        labelStyle: { paddingBottom: 5, fontSize: 10 },
+                        style: { padding: 10, height: 200}
                     }}>
 
                     <Tab.Screen

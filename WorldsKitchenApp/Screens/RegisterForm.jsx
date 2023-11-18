@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text, TextInput, Button, Alert} from 'react-native';
+import {View, Text, Alert, ScrollView, TouchableOpacity} from 'react-native';
 import {request, setAuthHeader} from "../services/axios_config";
-import {styles} from "../styles/styles";
+import {styles} from "../styles/LoginStyles";
+import InputTextField from "../components/InputTextField";
 
 const RegisterForm = ({ navigation }) => {
 
@@ -31,42 +32,86 @@ const RegisterForm = ({ navigation }) => {
         }
     };
 
+    const handleLoginNav = () => {
+        navigation.navigate('LoginForm');
+    }
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.title}>Rejestracja</Text>
-            <View style={styles.form}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Nazwa użytkownika"
-                    value={username}
+
+            <View>
+                <InputTextField
+                    style={styles.inputTitle}
+                    title="Nazwa użytkownika"
                     onChangeText={(text) => setUsername(text)}
                 />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Hasło"
-                    secureTextEntry={true}
-                    value={password}
+
+                <InputTextField
+                    style={{
+                        marginTop: 32,
+                        marginBottom: 8
+                    }}
+                    title="Hasło"
+                    isSecure={true}
                     onChangeText={(text) => setPassword(text)}
                 />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Imię"
-                    value={firstname}
+
+                <InputTextField
+                    style={[styles.inputTitle, {
+                        marginTop: 32,
+                        marginBottom: 8
+                    }]}
+                    title="Imię"
                     onChangeText={(text) => setFirstname(text)}
                 />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Nazwisko"
-                    value={lastname}
+
+                <InputTextField
+                    style={[styles.inputTitle, {
+                        marginTop: 32,
+                        marginBottom: 8
+                    }]}
+                    title="Nazwisko"
                     onChangeText={(text) => setLastname(text)}
                 />
-                <Button
-                    title="Dołącz"
-                    onPress={handleRegister}
-                />
+
+                <TouchableOpacity
+                    style={styles.submitContainer}
+                    onPress={() => handleRegister()}>
+                    <Text
+                        style={[
+                            styles.text,
+                            {
+                                color: "#FFF",
+                                fontWeight: "600",
+                                fontSize: 16
+                            }
+                        ]}
+                    >
+                        Zarejestruj się
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={handleLoginNav}
+                >
+                    <Text
+                        style={[
+                            styles.text,
+                            {
+                                fontSize: 14,
+                                color: "#ABB4BD",
+                                textAlign: "center",
+                                marginTop: 36
+                            }
+                        ]}
+                    >
+                        Masz już konto?
+                        <Text style={[styles.text, styles.link, {marginTop: 20}]}>  Zaloguj się</Text>
+                    </Text>
+                </TouchableOpacity>
+
             </View>
-        </View>
+        </ScrollView>
     );
 };
 
