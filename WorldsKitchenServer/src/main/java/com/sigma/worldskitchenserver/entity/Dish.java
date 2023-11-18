@@ -15,7 +15,13 @@ public class Dish {
     private String name;
 
     @ElementCollection
+    @CollectionTable(
+            name = "ingredients",
+            joinColumns = @JoinColumn(name = "dish_id")
+    )
+    @Column(name = "ingredient", length = 255)
     private List<String> ingredients;
+
 
     private int calories;
 
@@ -30,5 +36,11 @@ public class Dish {
     private List<Comment> comments;
 
     @ElementCollection
+    @CollectionTable(
+            name = "preparation_steps",
+            joinColumns = @JoinColumn(name = "dish_id")
+    )
+    @Column(name = "step", length = 255)
     private List<String> preparationSteps;
+
 }
