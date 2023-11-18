@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Alert, ScrollView, TouchableOpacity} from 'react-native';
-import {request, setAuthHeader} from "../services/axios_config";
+import {removeAuthHeader, request, setAuthHeader} from "../services/axios_config";
 import {styles} from "../styles/LoginStyles";
 import InputTextField from "../components/InputTextField";
 
@@ -10,6 +10,7 @@ const LoginForm = ({navigation}) => {
     const [password, setPassword] = React.useState('');
 
     const handleLogin = async () => {
+        await removeAuthHeader();
         try {
             const response = await request(
                 'POST',
