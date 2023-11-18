@@ -1,10 +1,19 @@
 package com.sigma.worldskitchenserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sigma.worldskitchenserver.enums.Region;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 @Entity
 @Table(name = "dishes")
 public class Dish {
@@ -33,6 +42,7 @@ public class Dish {
     private User author;
 
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Comment> comments;
 
     @ElementCollection
