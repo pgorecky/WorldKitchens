@@ -53,7 +53,8 @@ export const styles = StyleSheet.create({
         height: 200,
         borderRadius: 12,
         overflow: "hidden",
-        marginHorizontal: 10
+        marginHorizontal: 10,
+        flexDirection: 'row',
     },
 
     recent: {
@@ -75,5 +76,21 @@ export const styles = StyleSheet.create({
         borderRadius: 6,
         marginTop: 3,
         marginRight: 20
+    },
+    cardTransparency: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        padding: 10,
+    },
+    cardMealName: {
+        color: secondColor,
+        fontFamily: 'Dosis'
+    },
+    cardMealDetails: {
+        color: '#AEB5BC',
+        fontFamily: 'Dosis'
     }
 });

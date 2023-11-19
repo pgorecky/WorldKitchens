@@ -59,3 +59,32 @@ VALUES (1, 2, 'Bardzo smaczne danie! Polecam.');
 INSERT INTO comments (dish_id, user_id, content)
 VALUES (1, 1, 'Wspaniałe spaghetti carbonara, uwielbiam! 🍝');
 
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Chicken Alfredo Pasta', 700, 'AMERICAN', 1);
+
+INSERT INTO preparation_steps (dish_id, step)
+VALUES (3, 'Cook pasta');
+
+INSERT INTO preparation_steps (dish_id, step)
+VALUES (3, 'Prepare Alfredo sauce');
+
+INSERT INTO preparation_steps (dish_id, step)
+VALUES (3, 'Cook chicken');
+
+INSERT INTO preparation_steps (dish_id, step)
+VALUES (3, 'Combine everything');
+
+INSERT INTO ingredients (dish_id, ingredient)
+VALUES (3, 'Pasta');
+
+INSERT INTO ingredients (dish_id, ingredient)
+VALUES (3, 'Cream');
+
+INSERT INTO ingredients (dish_id, ingredient)
+VALUES (3, 'Chicken');
+
+INSERT INTO comments (dish_id, user_id, content)
+VALUES (3, 1, 'Niezwykle smaczne!');
+
+INSERT INTO comments (dish_id, user_id, content)
+VALUES (3, 2, 'Fantastyczne danie, uwielbiam Alfredo!');
