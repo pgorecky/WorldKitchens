@@ -26,7 +26,7 @@ export const removeAuthHeader = async () => {
     }
 }
 
-axios.defaults.baseURL = 'http://192.168.1.23:8080';
+axios.defaults.baseURL = 'http://192.168.1.229:8080';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export const request = async (method, url, data) => {

@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         color: "#FFF",
-        shadowColor: "rgba(255, 22, 84, 0.24)",
+        shadowColor: "green",
         shadowOffset: {width: 0, height: 9},
         shadowOpacity: 1,
         shadowRadius: 20,
