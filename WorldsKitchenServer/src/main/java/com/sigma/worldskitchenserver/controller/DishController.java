@@ -29,8 +29,8 @@ public class DishController {
         List<Dish> allDishes = dishRepository.findAll();
         List<DishDto> dtoDishes = new ArrayList<>();
         for (Dish dish : allDishes) {
-            var dtoUser = dishMapper.toDishDto(dish);
-            dtoDishes.add(dtoUser);
+            var dishDto = dishMapper.toDishDto(dish);
+            dtoDishes.add(dishDto);
         }
         return ResponseEntity.ok(dtoDishes);
     }

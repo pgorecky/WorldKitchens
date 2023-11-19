@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Text, View, SafeAreaView, Image, ScrollView, ActivityIndicator} from "react-native";
 import {getMyProfileDetails} from "../services/UserService";
-import {styles} from '../styles/profileStyles'
+import {styles} from '../styles/ProfileStyles'
 import {Button} from "react-native-elements";
 
 const ProfileScreen = ({navigation}) => {
