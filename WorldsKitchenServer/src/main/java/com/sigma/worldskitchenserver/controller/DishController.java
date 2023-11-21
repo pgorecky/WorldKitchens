@@ -30,7 +30,7 @@ public class DishController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity getAllDishes() {
+    public ResponseEntity<?> getAllDishes() {
         List<Dish> allDishes = dishRepository.findAll();
         List<DishDto> dtoDishes = new ArrayList<>();
         for (Dish dish : allDishes) {
@@ -41,7 +41,7 @@ public class DishController {
     }
 
     @GetMapping("/my")
-    public ResponseEntity getMyDishes() {
+    public ResponseEntity<?> getMyDishes() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDto user = (UserDto) authentication.getPrincipal();
         List<Dish> allDishes = dishRepository.findByAuthor_Id(user.getId());
