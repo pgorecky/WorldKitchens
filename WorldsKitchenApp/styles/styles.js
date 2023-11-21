@@ -58,4 +58,39 @@ export const styles = StyleSheet.create({
         marginBottom: 10,
         borderRadius: 30,
     },
+
+    welcomeName: {
+        color: '#1DB954',
+        fontSize: 55,
+        fontFamily: 'Dosis'
+    },
+
+    welcomeText: {
+        fontSize: 16,
+        color: 'white',
+        fontFamily: 'Dosis'
+    },
+
+    welcomeButton: {
+        backgroundColor: '#1DB954',
+        fontSize: 16,
+        borderRadius: 4,
+        paddingVertical: 12,
+        marginTop: 12,
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#FFF",
+        shadowColor: "green",
+        shadowOffset: {width: 0, height: 9},
+        shadowOpacity: 1,
+        shadowRadius: 20,
+        elevation: 5
+    },
+
+    welcomeButtonText: {
+        fontFamily: "Dosis",
+        color: "#FFF",
+        fontWeight: "600",
+        fontSize: 16
+    }
 });

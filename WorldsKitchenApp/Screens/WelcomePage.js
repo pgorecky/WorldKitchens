@@ -21,9 +21,11 @@ const WelcomePage = ({navigation}) => {
     useEffect(() => {
         removeAuthHeader();
     });
+
     if (!loaded) {
         return null;
     }
+
     return (
         <View style={{flex: 1, backgroundColor: '#282828'}}>
             <View style={{flex: 1}}>
@@ -102,62 +104,20 @@ const WelcomePage = ({navigation}) => {
                     top: 400,
                     width: "100%"
                 }}>
-                    <Text style={{
-                        color: '#1DB954',
-                        fontSize: 55,
-                        fontFamily: 'Dosis',
-                    }}>Kuchnia</Text>
-                    <Text style={{
-                        color: '#1DB954',
-                        fontSize: 55,
-                        fontFamily: 'Dosis',
-                    }}>Świata</Text>
+                    <Text style={styles.welcomeName}>Kuchnia</Text>
+                    <Text style={styles.welcomeName}>Świata</Text>
 
                     <View style={{marginVertical: 22}}>
-                        <Text style={{
-                            fontSize: 16,
-                            color: 'white',
-                            marginVertical: 4,
-                            fontFamily: 'Dosis'
-                        }}>Dziel się swoimi przepisami</Text>
-                        <Text style={{
-                            fontSize: 16,
-                            color: 'white',
-                            fontFamily: 'Dosis'
-                        }}>oraz korzystaj z przepisów innych!!!</Text>
+                        <Text style={styles.welcomeText}>Dziel się swoimi przepisami</Text>
+                        <Text style={styles.welcomeText}>oraz korzystaj z przepisów innych!!!</Text>
                     </View>
 
                     <View >
                         <TouchableOpacity
-                            onPress={handleRegisterNav}
-                            style={{
-                                backgroundColor: '#1DB954',
-                                fontSize: 16,
-                                borderRadius: 4,
-                                paddingVertical: 12,
-                                marginTop: 12,
-                                alignItems: "center",
-                                justifyContent: "center",
-                                color: "#FFF",
-                                shadowOffset: {width: 0, height: 9},
-                                shadowOpacity: 1,
-                                shadowRadius: 20,
-                                elevation: 5
-                            }}
+                            onPress={handleLoginNav}
+                            style={styles.welcomeButton}
                         >
-                            <Text
-                                style={[
-                                    styles.text,
-                                    {
-                                        fontFamily: "Dosis",
-                                        color: "#FFF",
-                                        fontWeight: "600",
-                                        fontSize: 16
-                                    }
-                                ]}
-                            >
-                                Dołącz
-                            </Text>
+                            <Text style={styles.welcomeButtonText}>Zaloguj się</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -167,7 +127,7 @@ const WelcomePage = ({navigation}) => {
                         justifyContent: "center"
                     }}>
                         <TouchableOpacity
-                            onPress={handleLoginNav}>
+                            onPress={handleRegisterNav}>
                             <Text
                                 style={[
                                     {
@@ -178,12 +138,12 @@ const WelcomePage = ({navigation}) => {
                                         marginTop: 12
                                     }
                                 ]}>
-                                Masz już konto?
+                                Nie masz konta?
                                 <Text
                                     style={[styles.text, {marginTop: 20, color: '#1DB954',
                                         fontSize: 14,
                                         fontWeight: "500"}]}
-                                >  Zaloguj się</Text>
+                                >  Zarejestruj się</Text>
                             </Text>
                         </TouchableOpacity>
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, SafeAreaView, Image, ScrollView, ActivityIndicator, StyleSheet} from "react-native";
+import {Text, View, SafeAreaView, Image, ScrollView, ActivityIndicator} from "react-native";
 import {getMyProfileDetails, getMyProfileMeals} from "../services/UserService";
 import {styles} from '../styles/ProfileStyles'
 import {Button} from "react-native-elements";

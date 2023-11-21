@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { View, Text, Animated, Easing } from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, Animated, Easing} from 'react-native';
 
 class WelcomeScreen extends Component {
     constructor(props) {
@@ -8,15 +8,16 @@ class WelcomeScreen extends Component {
             witajAnim: new Animated.Value(0),
             wAnim: new Animated.Value(0),
             naszejAnim: new Animated.Value(0),
-            kuchniiAnim: new Animated.Value(0),
+            kuchniAnim: new Animated.Value(0),
         };
     }
+
     componentDidMount() {
         this.startAnimations();
     }
 
     startAnimations() {
-        const duration = 600;
+        const duration = 450;
 
         Animated.sequence([
             Animated.parallel([
@@ -39,7 +40,7 @@ class WelcomeScreen extends Component {
                         easing: Easing.ease,
                         useNativeDriver: true,
                     }),
-                    Animated.timing(this.state.kuchniiAnim, {
+                    Animated.timing(this.state.kuchniAnim, {
                         toValue: 1,
                         duration: duration,
                         easing: Easing.ease,
@@ -69,7 +70,7 @@ class WelcomeScreen extends Component {
                     easing: Easing.ease,
                     useNativeDriver: true,
                 }),
-                Animated.timing(this.state.kuchniiAnim, {
+                Animated.timing(this.state.kuchniAnim, {
                     toValue: 0,
                     duration: duration,
                     easing: Easing.ease,
@@ -83,8 +84,8 @@ class WelcomeScreen extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <View style={{ flexDirection: 'row' }}>
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{flexDirection: 'row'}}>
                     <Animated.Text
                         style={{
                             fontSize: 30,
@@ -102,7 +103,7 @@ class WelcomeScreen extends Component {
                         Witaj
                     </Animated.Text>
                 </View>
-                <Animated.View style={{ flexDirection: 'row' }}>
+                <Animated.View style={{flexDirection: 'row'}}>
                     <Animated.Text
                         style={{
                             fontSize: 30,
@@ -120,7 +121,7 @@ class WelcomeScreen extends Component {
                         w
                     </Animated.Text>
                 </Animated.View>
-                <Animated.View style={{ flexDirection: 'row' }}>
+                <Animated.View style={{flexDirection: 'row'}}>
                     <Animated.Text
                         style={{
                             fontSize: 30,
@@ -147,10 +148,10 @@ class WelcomeScreen extends Component {
                     <Animated.Text
                         style={{
                             fontSize: 30,
-                            opacity: this.state.kuchniiAnim,
+                            opacity: this.state.kuchniAnim,
                             transform: [
                                 {
-                                    translateX: this.state.kuchniiAnim.interpolate({
+                                    translateX: this.state.kuchniAnim.interpolate({
                                         inputRange: [0, 1],
                                         outputRange: [100, 0],
                                     }),
