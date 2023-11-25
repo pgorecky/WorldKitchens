@@ -3,6 +3,7 @@ import {Text, View, SafeAreaView, Image, ScrollView, ActivityIndicator} from "re
 import {getMyProfileDetails, getMyProfileMeals} from "../services/UserService";
 import {styles} from '../styles/ProfileStyles'
 import {Button} from "react-native-elements";
+import {MealCard} from "../components/MealCard";
 
 const ProfileScreen = ({navigation}) => {
     const [profileDetails, setProfileDetails] = useState(null);
@@ -69,18 +70,7 @@ const ProfileScreen = ({navigation}) => {
                             użytkownika</Text>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             {profileMeals.map((meal) => (
-                                <View key={meal.id} style={styles.mediaImageContainer}>
-                                    <Image
-                                        source={require("../assets/profile/media1.jpg")}
-                                        style={styles.image}
-                                        resizeMode="cover"
-                                    />
-                                    <View style={styles.cardTransparency}>
-                                        <Text style={styles.cardMealName}>{meal.name}</Text>
-                                        <Text style={styles.cardMealDetails}>Kalorie: {meal.calories}</Text>
-                                        <Text style={styles.cardMealDetails}>Kuchnia: {mapRegionToText(meal.region)}</Text>
-                                    </View>
-                                </View>
+                                <MealCard key={meal.id} meal={meal} />
                             ))}
                         </ScrollView>
                     </View>
