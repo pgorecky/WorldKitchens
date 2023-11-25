@@ -25,7 +25,6 @@ export const styles = StyleSheet.create({
         fontWeight: "500"
     },
     profileImage: {
-        marginTop: 50,
         width: 200,
         height: 200,
         borderRadius: 100,

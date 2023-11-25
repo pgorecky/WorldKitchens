@@ -18,6 +18,8 @@ const ProfileScreen = ({navigation}) => {
                 return 'Meksykańska';
             case 'AMERICAN':
                 return 'Amerykańska';
+            case 'ASIAN':
+                return 'Azjatycka';
             default:
                 return region;
         }
@@ -59,7 +61,7 @@ const ProfileScreen = ({navigation}) => {
 
                     <View style={styles.infoContainer}>
                         <Text style={[styles.text, {fontWeight: "200", fontSize: 40}]}>{profileDetails.firstName}</Text>
-                        <Text style={[styles.text, {color: "#AEB5BC", fontSize: 18}]}>{profileDetails.login}</Text>
+                        <Text style={[styles.text, {color: "#AEB5BC", fontSize: 18}]}>{'@' + profileDetails.login}</Text>
                     </View>
 
                     <View style={{marginTop: 32}}>

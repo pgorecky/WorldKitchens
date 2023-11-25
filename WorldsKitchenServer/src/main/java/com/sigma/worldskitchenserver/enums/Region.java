@@ -4,5 +4,6 @@ public enum Region {
     ITALIAN,
     POLISH,
     MEXICAN,
-    AMERICAN
+    AMERICAN,
+    ASIAN
 }

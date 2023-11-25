@@ -60,7 +60,7 @@ INSERT INTO comments (dish_id, user_id, content)
 VALUES (1, 1, 'Wspaniałe spaghetti carbonara, uwielbiam! 🍝');
 
 INSERT INTO dishes (name, calories, region, user_id)
-VALUES ('Chicken Alfredo Pasta', 700, 'AMERICAN', 1);
+VALUES ('Chicken Alfredo Pasta', 700, 'ITALIAN', 1);
 
 INSERT INTO preparation_steps (dish_id, step)
 VALUES (3, 'Cook pasta');

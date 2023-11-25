@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text } from 'react-native';
 import {styles} from '../styles/styles'
 
-export default function HomeScreen({ navigation }) {
+export default function Dishes({ navigation }) {
     return (
         <View
             style={styles.container}

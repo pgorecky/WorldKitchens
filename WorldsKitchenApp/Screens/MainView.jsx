@@ -2,32 +2,93 @@ import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import DetailsScreen from "./DetailsScreen";
-import HomeScreen from "./HomeScreen";
+import Favourites from "./Favourites";
+import Dishes from "./Dishes";
 import ProfileScreen from "./ProfileScreen";
+import {Alert, View} from "react-native";
+import {NavigationContainer, useNavigation} from "@react-navigation/native";
+import {removeAuthHeader} from "../services/axios_config";
 
-const homeName = "Przepisy";
-const detailsName = "Ulubione";
+const dishes = "Przepisy";
+const favourites = "Ulubione";
 const profilName = "Profil";
 
 const Tab = createBottomTabNavigator();
 
-function MainView() {
+const MainView = ({navigation}) => {
+    const handleLogout = async () => {
+        try {
+            Alert.alert(
+                'Potwierdzenie',
+                'Czy na pewno chcesz się wylogować?',
+                [
+                    {
+                        text: 'Anuluj',
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'Wyloguj',
+                        onPress: async () => {
+                            await removeAuthHeader();
+                            navigation.navigate('WelcomePage');
+                        },
+                    },
+                ],
+                { cancelable: false }
+            );
+        } catch (error) {
+            console.error('Error during logout:', error);
+        }
+    };
+    const TopBarNav = () => {
+        const navigate = useNavigation();
+
+        return (
+            <View style={{
+                backgroundColor: '#282828',
+                paddingTop: 30,
+                paddingLeft: 15,
+                paddingRight: 15,
+                paddingBottom: 5,
+                flexDirection: 'row',
+                justifyContent: 'space-between'
+            }}>
+                <Ionicons
+                    name="chevron-back-outline"
+                    size={35}
+                    color="#1DB954"
+                    onPress={() => navigate.goBack()}
+                />
+                <Ionicons
+                    name="enter-outline"
+                    size={35}
+                    color="#1DB954"
+                    onPress={handleLogout}
+                />
+            </View>
+
+        );
+    };
     return (
-        <Tab.Navigator
-            initialRouteName={homeName}
-            screenOptions={
-                ({route}) => ({
+        <NavigationContainer
+            independent={true}>
+            <View>
+                <TopBarNav/>
+            </View>
+
+            <Tab.Navigator
+                initialRouteName={dishes}
+                screenOptions={({route}) => ({
 
                     tabBarIcon: ({focused, color, size}) => {
 
                         let iconName;
                         let rn = route.name;
 
-                        if (rn === homeName) {
+                        if (rn === dishes) {
                             iconName = focused ? 'restaurant' : 'restaurant-outline';
 
-                        } else if (rn === detailsName) {
+                        } else if (rn === favourites) {
                             iconName = focused ? 'star' : 'star-outline';
 
                         } else if (rn === profilName) {
@@ -52,19 +113,20 @@ function MainView() {
                         null
                     ]
                 })}>
+                <Tab.Screen
+                    options={{headerShown: false}}
+                    name={dishes} component={Dishes}/>
+                <Tab.Screen
+                    options={{headerShown: false}}
+                    name={favourites} component={Favourites}/>
+                <Tab.Screen
+                    options={{headerShown: false}}
+                    name={profilName} component={ProfileScreen}/>
 
-            <Tab.Screen
-                options={{headerShown: false}}
-                name={homeName} component={HomeScreen}/>
-            <Tab.Screen
-                options={{headerShown: false}}
-                name={detailsName} component={DetailsScreen}/>
-            <Tab.Screen
-                options={{headerShown: false}}
-                name={profilName} component={ProfileScreen}/>
-
-        </Tab.Navigator>
+            </Tab.Navigator>
+        </NavigationContainer>
     );
 }
+
 
 export default MainView;
