@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/dishes")
@@ -35,10 +36,12 @@ public class DishController {
     public ResponseEntity<?> getAllDishes() {
         List<Dish> allDishes = dishRepository.findAll();
         List<DishDto> dtoDishes = new ArrayList<>();
-        for (Dish dish : allDishes) {
+
+        allDishes.forEach(dish -> {
             var dishDto = dishMapper.toDishDto(dish);
             dtoDishes.add(dishDto);
-        }
+        });
+
         return ResponseEntity.ok(dtoDishes);
     }
 
@@ -46,12 +49,15 @@ public class DishController {
     public ResponseEntity<?> getMyDishes() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDto user = (UserDto) authentication.getPrincipal();
+
         List<Dish> allDishes = dishRepository.findByAuthor_Id(user.getId());
         List<DishDto> dtoDishes = new ArrayList<>();
-        for (Dish dish : allDishes) {
+
+        allDishes.forEach(dish -> {
             var dishDto = dishMapper.toDishDto(dish);
             dtoDishes.add(dishDto);
-        }
+        });
+
         return ResponseEntity.ok(dtoDishes);
     }
 
@@ -59,10 +65,24 @@ public class DishController {
     public ResponseEntity<?> getDishesByRegion(@PathVariable Region region) {
         List<Dish> dishesByRegion = dishRepository.findByRegion(region);
         List<DishDto> dtoDishes = new ArrayList<>();
-        for (Dish dish : dishesByRegion) {
+
+        dishesByRegion.forEach(dish -> {
             var dishDto = dishMapper.toDishDto(dish);
             dtoDishes.add(dishDto);
-        }
+        });
+
         return ResponseEntity.ok(dtoDishes);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getDishDetails(@PathVariable Long id) {
+        Optional<Dish> dish = dishRepository.findById(id);
+
+        if (dish.isPresent()) {
+            DishDto dishDto = dishMapper.toDishDto(dish.get());
+            return ResponseEntity.ok(dishDto);
+        }
+
+         return ResponseEntity.notFound().build();
     }
 }

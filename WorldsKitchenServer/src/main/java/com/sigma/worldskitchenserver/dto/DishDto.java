@@ -1,7 +1,5 @@
 package com.sigma.worldskitchenserver.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sigma.worldskitchenserver.entity.Comment;
 import com.sigma.worldskitchenserver.enums.Region;
 import lombok.*;
 
@@ -21,13 +19,11 @@ public class DishDto {
 
     private Region region;
 
-    @JsonIgnore
-    private UserDto author;
+    private AuthorDto author;
 
     private List<String> ingredients;
 
     private List<String> preparationSteps;
 
-    @JsonIgnore
-    private List<Comment> comments;
+    private List<CommentDto> comments;
 }
