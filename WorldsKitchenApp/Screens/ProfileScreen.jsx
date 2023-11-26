@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, SafeAreaView, Image, ScrollView, ActivityIndicator} from "react-native";
+import {ActivityIndicator, Image, SafeAreaView, ScrollView, Text, View} from "react-native";
 import {getMyProfileDetails, getMyProfileMeals} from "../services/UserService";
 import {styles} from '../styles/ProfileStyles'
 import {Button} from "react-native-elements";
@@ -8,23 +8,6 @@ import {MealCard} from "../components/MealCard";
 const ProfileScreen = ({navigation}) => {
     const [profileDetails, setProfileDetails] = useState(null);
     const [profileMeals, setProfileMeals] = useState(null);
-
-    function mapRegionToText(region) {
-        switch (region) {
-            case 'ITALIAN':
-                return 'Włoska';
-            case 'POLISH':
-                return 'Polska';
-            case 'MEXICAN':
-                return 'Meksykańska';
-            case 'AMERICAN':
-                return 'Amerykańska';
-            case 'ASIAN':
-                return 'Azjatycka';
-            default:
-                return region;
-        }
-    }
 
     useEffect(() => {
         const fetchProfileDetails = async () => {
@@ -70,7 +53,7 @@ const ProfileScreen = ({navigation}) => {
                             użytkownika</Text>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             {profileMeals.map((meal) => (
-                                <MealCard key={meal.id} meal={meal} />
+                                <MealCard key={meal.id} meal={meal} containerWidth={200}/>
                             ))}
                         </ScrollView>
                     </View>
@@ -98,7 +81,7 @@ const ProfileScreen = ({navigation}) => {
                     </View>
                 </ScrollView>
             ) : (
-                <ActivityIndicator size="large" color="#0000ff"/>
+                <ActivityIndicator size="large" color='#1DB954'/>
             )}
         </SafeAreaView>
     );

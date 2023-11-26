@@ -1,7 +1,7 @@
 import React from "react";
 import {Image, StyleSheet, Text, View} from "react-native";
 
-export const MealCard = ({meal}) => {
+export const MealCard = ({meal, containerWidth}) => {
     function mapRegionToText(region) {
         switch (region) {
             case 'ITALIAN':
@@ -19,7 +19,7 @@ export const MealCard = ({meal}) => {
         }
     }
     return (
-        <View key={meal.id} style={styles.mediaImageContainer}>
+        <View key={meal.id} style={[styles.mediaImageContainer, {width: containerWidth}]}>
             <Image
                 source={require("../assets/profile/media1.jpg")}
                 style={styles.image}
@@ -36,7 +36,6 @@ export const MealCard = ({meal}) => {
 
 const styles = StyleSheet.create({
     mediaImageContainer: {
-        width: 180,
         height: 200,
         borderRadius: 12,
         overflow: "hidden",

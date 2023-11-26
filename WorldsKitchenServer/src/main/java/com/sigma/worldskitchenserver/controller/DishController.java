@@ -4,12 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sigma.worldskitchenserver.dto.DishDto;
 import com.sigma.worldskitchenserver.dto.UserDto;
 import com.sigma.worldskitchenserver.entity.Dish;
+import com.sigma.worldskitchenserver.enums.Region;
 import com.sigma.worldskitchenserver.mapper.DishMapper;
 import com.sigma.worldskitchenserver.repository.DishRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,6 +49,17 @@ public class DishController {
         List<Dish> allDishes = dishRepository.findByAuthor_Id(user.getId());
         List<DishDto> dtoDishes = new ArrayList<>();
         for (Dish dish : allDishes) {
+            var dishDto = dishMapper.toDishDto(dish);
+            dtoDishes.add(dishDto);
+        }
+        return ResponseEntity.ok(dtoDishes);
+    }
+
+    @GetMapping("/byRegion/{region}")
+    public ResponseEntity<?> getDishesByRegion(@PathVariable Region region) {
+        List<Dish> dishesByRegion = dishRepository.findByRegion(region);
+        List<DishDto> dtoDishes = new ArrayList<>();
+        for (Dish dish : dishesByRegion) {
             var dishDto = dishMapper.toDishDto(dish);
             dtoDishes.add(dishDto);
         }

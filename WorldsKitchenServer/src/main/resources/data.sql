@@ -88,3 +88,108 @@ VALUES (3, 1, 'Niezwykle smaczne!');
 
 INSERT INTO comments (dish_id, user_id, content)
 VALUES (3, 2, 'Fantastyczne danie, uwielbiam Alfredo!');
+
+-- Dodaj dania włoskie
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Spaghetti Bolognese', 700, 'ITALIAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Lasagna', 850, 'ITALIAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Risotto ai Funghi', 600, 'ITALIAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Tiramisu', 450, 'ITALIAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Caprese Salad', 300, 'ITALIAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+-- Dodaj dania polskie
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Bigos', 600, 'POLISH', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Pierogi', 450, 'POLISH', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Żurek', 500, 'POLISH', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Kotlet Schabowy', 700, 'POLISH', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Szarlotka', 350, 'POLISH', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+-- Dodaj dania meksykańskie
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Tacos', 550, 'MEXICAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Guacamole', 200, 'MEXICAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Enchiladas', 700, 'MEXICAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Chiles Rellenos', 600, 'MEXICAN', 2);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Salsa', 100, 'MEXICAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+-- Dodaj dania amerykańskie
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Hamburger', 700, 'AMERICAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Hot Dog', 400, 'AMERICAN', 2);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('BBQ Ribs', 850, 'AMERICAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Mac and Cheese', 600, 'AMERICAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Apple Pie', 350, 'AMERICAN', 2);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+-- Dodaj dania azjatyckie
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Sushi', 500, 'ASIAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Pad Thai', 650, 'ASIAN', 1);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Ramyeon', 450, 'ASIAN', 2);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Dim Sum', 400, 'ASIAN', 2);
+-- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO dishes (name, calories, region, user_id)
+VALUES ('Szechuan Chicken', 600, 'ASIAN', 2);
+-- Dodaj składniki, kroki i komentarze dla tego dania
