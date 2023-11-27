@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, Image, SafeAreaView, ScrollView, Text, View} from "react-native";
+import {ActivityIndicator, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import {getMyProfileDetails, getMyProfileMeals} from "../services/UserService";
 import {styles} from '../styles/ProfileStyles'
 import {Button} from "react-native-elements";
 import {MealCard} from "../components/MealCard";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {MealScreen} from "./MealScreen";
 
-const ProfileScreen = ({navigation}) => {
+export const ProfileScreen = ({navigation}) => {
     const [profileDetails, setProfileDetails] = useState(null);
     const [profileMeals, setProfileMeals] = useState(null);
 
@@ -20,6 +22,10 @@ const ProfileScreen = ({navigation}) => {
 
         fetchProfileDetails();
     }, []);
+
+    const navigateToMealDetails = (mealId) => {
+        navigation.navigate('MealDetails', { mealId });
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -53,7 +59,12 @@ const ProfileScreen = ({navigation}) => {
                             użytkownika</Text>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             {profileMeals.map((meal) => (
-                                <MealCard key={meal.id} meal={meal} containerWidth={200}/>
+                                <TouchableOpacity
+                                    key={meal.id}
+                                    onPress={() => navigateToMealDetails(meal.id)}
+                                >
+                                    <MealCard meal={meal} containerWidth={200}/>
+                                </TouchableOpacity>
                             ))}
                         </ScrollView>
                     </View>
@@ -87,4 +98,15 @@ const ProfileScreen = ({navigation}) => {
     );
 };
 
-export default ProfileScreen;
+const Stack = createNativeStackNavigator();
+ export const ProfileStack = () => {
+     return (
+         <Stack.Navigator
+             initialRouteName="Profile"
+             screenOptions={{ headerShown: false }}
+         >
+             <Stack.Screen name="Profile" component={ProfileScreen} />
+             <Stack.Screen name="MealDetails" component={MealScreen} />
+         </Stack.Navigator>
+     );
+ }

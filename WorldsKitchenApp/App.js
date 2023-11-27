@@ -3,7 +3,6 @@ import WelcomeScreen from "./Screens/WelcomeScreen";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import WelcomePage from "./Screens/WelcomePage";
 import LoginForm from "./Screens/LoginForm";
-import AuthContent from "./AuthContent";
 import MainView from "./Screens/MainView";
 import RegisterForm from "./Screens/RegisterForm";
 
@@ -19,7 +18,6 @@ export default function App() {
                 <Stack.Screen options={{headerShown: false}} name={'WelcomePage'} component={WelcomePage}/>
                 <Stack.Screen options={{headerShown: false}} name={'LoginForm'} component={LoginForm}/>
                 <Stack.Screen options={{headerShown: false}} name={'RegisterForm'} component={RegisterForm}/>
-                <Stack.Screen options={{headerShown: false}} name={'Test'} component={AuthContent}/>
                 <Stack.Screen options={{headerShown: false}} name={'MainView'} component={MainView}/>
             </Stack.Navigator>
         </NavigationContainer>

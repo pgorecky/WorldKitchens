@@ -23,6 +23,9 @@ public class Dish {
 
     private String name;
 
+    @Column(name = "description", length = 255)
+    private String description;
+
     @ElementCollection
     @CollectionTable(
             name = "ingredients",
@@ -30,7 +33,6 @@ public class Dish {
     )
     @Column(name = "ingredient", length = 255)
     private List<String> ingredients;
-
 
     private int calories;
 

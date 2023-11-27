@@ -15,6 +15,8 @@ public class DishDto {
 
     private String name;
 
+    private String description;
+
     private int calories;
 
     private Region region;

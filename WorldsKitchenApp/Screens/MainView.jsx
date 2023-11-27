@@ -1,11 +1,10 @@
 import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Alert, View} from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import Favourites from "./Favourites";
 import Dishes from "./Dishes";
-import ProfileScreen from "./ProfileScreen";
-import {Alert, View} from "react-native";
+import {ProfileStack} from "./ProfileScreen";
 import {NavigationContainer, useNavigation} from "@react-navigation/native";
 import {removeAuthHeader} from "../services/axios_config";
 
@@ -34,7 +33,7 @@ const MainView = ({navigation}) => {
                         },
                     },
                 ],
-                { cancelable: false }
+                {cancelable: false}
             );
         } catch (error) {
             console.error('Error during logout:', error);
@@ -121,8 +120,7 @@ const MainView = ({navigation}) => {
                     name={favourites} component={Favourites}/>
                 <Tab.Screen
                     options={{headerShown: false}}
-                    name={profilName} component={ProfileScreen}/>
-
+                    name={profilName} component={ProfileStack}/>
             </Tab.Navigator>
         </NavigationContainer>
     );

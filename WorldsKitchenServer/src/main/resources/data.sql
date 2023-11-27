@@ -5,11 +5,11 @@ INSERT INTO users (first_name, last_name, login, password)
 VALUES ('Patryk', 'Górecki','patryczek', '$2a$10$I2PjUfjqAUC2D8ebGwUhjO9.5bSKdPG5ECYq8Rhsyl/lF9fYBZv4.');
 
 -- Dodaj dania
-INSERT INTO dishes (name, calories, region, user_id)
-VALUES ('Spaghetti Carbonara', 600, 'ITALIAN', 1);
+INSERT INTO dishes (name, description, calories, region, user_id)
+VALUES ('Spaghetti Carbonara', 'potrawa kuchni włoskiej złożona z makaronu, jajek, pancetty lub guanciale, sera pecorino romano lub parmezanu oraz czarnego pieprzu. Niepoprawnym jest mówienie o „sosie carbonara”, ponieważ makaron i pozostałe składniki stanowią tu nierozerwalną całość',600, 'ITALIAN', 1);
 
-INSERT INTO dishes (name, calories, region, user_id)
-VALUES ('Margherita Pizza', 800, 'ITALIAN', 1);
+INSERT INTO dishes (name, description, calories, region, user_id)
+VALUES ('Margherita Pizza', 'potrawa kuchni włoskiej złożona z makaronu, jajek, pancetty lub guanciale, sera pecorino romano lub parmezanu oraz czarnego pieprzu. Niepoprawnym jest mówienie o „sosie carbonara”, ponieważ makaron i pozostałe składniki stanowią tu nierozerwalną całość' ,800, 'ITALIAN', 1);
 
 -- Dodaj kroki przygotowania
 INSERT INTO preparation_steps (dish_id, step)
