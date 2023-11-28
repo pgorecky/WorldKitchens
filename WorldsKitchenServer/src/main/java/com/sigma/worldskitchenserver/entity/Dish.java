@@ -30,13 +30,9 @@ public class Dish {
     @Column(name = "preparation_time", length = 255)
     private String preparationTime;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "ingredients",
-            joinColumns = @JoinColumn(name = "dish_id")
-    )
-    @Column(name = "ingredient", length = 255)
-    private List<String> ingredients;
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Ingredient> ingredients;
 
     private int calories;
 

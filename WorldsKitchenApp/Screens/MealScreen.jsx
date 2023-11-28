@@ -81,9 +81,9 @@ export const MealScreen = ({route}) => {
                         {mealDetails.ingredients.map((ingredient, index) => (
                             <View key={index} style={styles.ingredientsContainer}>
                                 <Text key={index} style={styles.ingredient}>
-                                    • {ingredient}
+                                    • {ingredient.ingredientName}
                                 </Text>
-                                <Text style={styles.ingredient}>100ml</Text>
+                                <Text style={styles.ingredient}>{ingredient.portion}</Text>
                             </View>
                         ))}
                     </View>

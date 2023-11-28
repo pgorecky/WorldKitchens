@@ -31,8 +31,10 @@ CREATE TABLE IF NOT EXISTS preparation_steps
 
 CREATE TABLE IF NOT EXISTS ingredients
 (
-    dish_id    INT,
-    ingredient VARCHAR(255),
+    id              INT PRIMARY KEY AUTO_INCREMENT,
+    dish_id         INT,
+    ingredient_name VARCHAR(255),
+    portion         VARCHAR(255),
     FOREIGN KEY (dish_id) REFERENCES dishes (id)
 );
 

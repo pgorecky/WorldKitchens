@@ -1,5 +1,6 @@
 package com.sigma.worldskitchenserver.dto;
 
+import com.sigma.worldskitchenserver.entity.Ingredient;
 import com.sigma.worldskitchenserver.enums.Level;
 import com.sigma.worldskitchenserver.enums.Region;
 import lombok.*;
@@ -20,6 +21,8 @@ public class DishDto {
 
     private String preparationTime;
 
+    private List<IngredientDto> ingredients;
+
     private int calories;
 
     private int portionSize;
@@ -29,8 +32,6 @@ public class DishDto {
     private Level level;
 
     private AuthorDto author;
-
-    private List<String> ingredients;
 
     private List<String> preparationSteps;
 

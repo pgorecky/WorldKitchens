@@ -31,26 +31,26 @@ INSERT INTO preparation_steps (dish_id, step)
 VALUES (2, 'Bake');
 
 -- Dodaj składniki
-INSERT INTO ingredients (dish_id, ingredient)
-VALUES (1, 'Spaghetti');
+INSERT INTO ingredients (dish_id, ingredient_name, portion)
+VALUES (1, 'Spaghetti', '100g');
 
-INSERT INTO ingredients (dish_id, ingredient)
-VALUES (1, 'Eggs');
+INSERT INTO ingredients (dish_id, ingredient_name, portion)
+VALUES (1, 'Eggs', 'x3');
 
-INSERT INTO ingredients (dish_id, ingredient)
-VALUES (1, 'Pancetta');
+INSERT INTO ingredients (dish_id, ingredient_name, portion)
+VALUES (1, 'Pancetta', '150g');
 
-INSERT INTO ingredients (dish_id, ingredient)
-VALUES (1, 'Parmesan cheese');
+INSERT INTO ingredients (dish_id, ingredient_name, portion)
+VALUES (1, 'Parmesan cheese', '100g');
 
-INSERT INTO ingredients (dish_id, ingredient)
-VALUES (2, 'Pizza dough');
+INSERT INTO ingredients (dish_id, ingredient_name, portion)
+VALUES (2, 'Pizza dough', '100g');
 
-INSERT INTO ingredients (dish_id, ingredient)
-VALUES (2, 'Tomato sauce');
+INSERT INTO ingredients (dish_id, ingredient_name, portion)
+VALUES (2, 'Tomato sauce', '250g');
 
-INSERT INTO ingredients (dish_id, ingredient)
-VALUES (2, 'Mozzarella cheese');
+INSERT INTO ingredients (dish_id, ingredient_name, portion)
+VALUES (2, 'Mozzarella cheese', '75g');
 
 -- Dodaj komentarze
 INSERT INTO comments (dish_id, user_id, content)
@@ -74,14 +74,14 @@ VALUES (3, 'Cook chicken');
 INSERT INTO preparation_steps (dish_id, step)
 VALUES (3, 'Combine everything');
 
-INSERT INTO ingredients (dish_id, ingredient)
-VALUES (3, 'Pasta');
+INSERT INTO ingredients (dish_id, ingredient_name, portion)
+VALUES (3, 'Pasta', '250g');
 
-INSERT INTO ingredients (dish_id, ingredient)
-VALUES (3, 'Cream');
+INSERT INTO ingredients (dish_id, ingredient_name, portion)
+VALUES (3, 'Cream', '80g');
 
-INSERT INTO ingredients (dish_id, ingredient)
-VALUES (3, 'Chicken');
+INSERT INTO ingredients (dish_id, ingredient_name, portion)
+VALUES (3, 'Chicken', '500g');
 
 INSERT INTO comments (dish_id, user_id, content)
 VALUES (3, 1, 'Niezwykle smaczne!');
