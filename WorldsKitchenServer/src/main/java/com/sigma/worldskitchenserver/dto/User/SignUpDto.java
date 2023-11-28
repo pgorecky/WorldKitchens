@@ -1,19 +1,27 @@
-package com.sigma.worldskitchenserver.dto;
+package com.sigma.worldskitchenserver.dto.User;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
-public class UserDto {
+public class SignUpDto {
 
-    private Long id;
+    @NotEmpty
     private String firstName;
+
+    @NotEmpty
     private String lastName;
+
+    @NotEmpty
     private String login;
-    private String token;
+
+    @NotEmpty
+    private char[] password;
+
 }

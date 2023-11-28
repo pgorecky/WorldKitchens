@@ -1,6 +1,5 @@
-package com.sigma.worldskitchenserver.dto;
+package com.sigma.worldskitchenserver.dto.User;
 
-import com.sigma.worldskitchenserver.entity.Dish;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,11 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class IngredientDto {
+public class AuthorDto {
 
     private Long id;
 
-    private String ingredientName;
+    private String firstName;
 
-    private String portion;
+    private String lastName;
 }

@@ -4,7 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.sigma.worldskitchenserver.dto.UserDto;
+import com.sigma.worldskitchenserver.dto.User.UserDto;
 import com.sigma.worldskitchenserver.service.UserService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;

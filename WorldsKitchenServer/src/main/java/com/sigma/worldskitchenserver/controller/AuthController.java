@@ -1,9 +1,9 @@
 package com.sigma.worldskitchenserver.controller;
 
 import com.sigma.worldskitchenserver.config.UserAuthenticationProvider;
-import com.sigma.worldskitchenserver.dto.CredentialsDto;
-import com.sigma.worldskitchenserver.dto.SignUpDto;
-import com.sigma.worldskitchenserver.dto.UserDto;
+import com.sigma.worldskitchenserver.dto.User.CredentialsDto;
+import com.sigma.worldskitchenserver.dto.User.SignUpDto;
+import com.sigma.worldskitchenserver.dto.User.UserDto;
 import com.sigma.worldskitchenserver.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

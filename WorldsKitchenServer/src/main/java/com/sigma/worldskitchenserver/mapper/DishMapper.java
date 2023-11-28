@@ -1,6 +1,6 @@
 package com.sigma.worldskitchenserver.mapper;
 
-import com.sigma.worldskitchenserver.dto.DishDto;
+import com.sigma.worldskitchenserver.dto.Dish.DishDto;
 import com.sigma.worldskitchenserver.entity.Dish;
 import org.mapstruct.Mapper;
 

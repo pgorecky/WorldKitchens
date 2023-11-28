@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
 
     container: {
         alignItems: "center",
+        // backgroundColor: 'black'
     },
 
     mealName: {
@@ -81,8 +82,17 @@ export const styles = StyleSheet.create({
 
     ingredientsSection: {
         padding: 10,
+        paddingTop: 25,
+        paddingBottom: 25,
+        backgroundColor: 'black',
+        borderRadius: 40,
+        marginLeft: 7,
+        marginRight: 7,
     },
 
+    section: {
+        padding: 10,
+    },
     ingredientsContainer: {
         flex: 1,
         flexDirection: 'row',

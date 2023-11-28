@@ -1,19 +1,17 @@
-package com.sigma.worldskitchenserver.dto;
+package com.sigma.worldskitchenserver.dto.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
-public class CommentDto {
+public class CredentialsDto {
 
-    private Long id;
+    private String login;
+    private char[] password;
 
-    private AuthorDto author;
-
-    private String content;
 }

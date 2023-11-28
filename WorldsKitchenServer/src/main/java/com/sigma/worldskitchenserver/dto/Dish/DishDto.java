@@ -1,6 +1,6 @@
-package com.sigma.worldskitchenserver.dto;
+package com.sigma.worldskitchenserver.dto.Dish;
 
-import com.sigma.worldskitchenserver.entity.Ingredient;
+import com.sigma.worldskitchenserver.dto.User.AuthorDto;
 import com.sigma.worldskitchenserver.enums.Level;
 import com.sigma.worldskitchenserver.enums.Region;
 import lombok.*;

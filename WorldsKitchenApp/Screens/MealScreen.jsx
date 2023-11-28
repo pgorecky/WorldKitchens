@@ -42,7 +42,8 @@ export const MealScreen = ({route}) => {
                         <Text style={styles.mealDesc}>{mealDetails.description}</Text>
                         <View style={styles.authorContainer}>
                             <Text style={styles.authCall}>Autor przepisu:</Text>
-                            <Text style={styles.author}>{mealDetails.author.firstName} {mealDetails.author.lastName}</Text>
+                            <Text
+                                style={styles.author}>{mealDetails.author.firstName} {mealDetails.author.lastName}</Text>
                         </View>
                         <View style={styles.iconsContainer}>
                             <View style={styles.icon}>
@@ -55,7 +56,7 @@ export const MealScreen = ({route}) => {
                                 <Text style={[styles.iconText, {color: '#AEB5BC'}]}>{mealDetails.preparationTime}</Text>
                             </View>
                             <View style={styles.icon}>
-                            <Ionicons
+                                <Ionicons
                                     name="flame"
                                     size={35}
                                     color="#1DB954"
@@ -65,7 +66,7 @@ export const MealScreen = ({route}) => {
                                     style={[styles.iconText, {color: '#AEB5BC'}]}>{mapLevelToText(mealDetails.level)}</Text>
                             </View>
                             <View style={styles.icon}>
-                            <Ionicons
+                                <Ionicons
                                     name="people-outline"
                                     size={35}
                                     color="#1DB954"
@@ -87,30 +88,34 @@ export const MealScreen = ({route}) => {
                             </View>
                         ))}
                     </View>
-                    <View style={styles.ingredientsSection}>
+                    <View style={styles.section}>
                         <Text style={styles.sectionTitle}>Sposób przygotowania</Text>
                         {mealDetails.preparationSteps.map((step, index) => (
                             <Text
                                 key={index}
                                 style={styles.ingredient}>
-                                {index += 1}. {step}</Text>
+                                {index + 1}. {step}</Text>
                         ))}
                     </View>
 
-                    <View style={styles.ingredientsSection}>
-                        <Text style={styles.secondarySectionTitle}>Komentarze:</Text>
-                        {mealDetails.comments.map((comment, index) => (
-                            <View key={index} style={styles.commentContainer}>
-                                <View>
-                                    <Image source={require("../assets/profile/t-image2.jpg")} style={styles.profileImage}></Image>
-                                </View>
+                    <View style={{marginBottom: 20}}>
+                        <View style={styles.ingredientsSection}>
+                            <Text style={styles.secondarySectionTitle}>Komentarze:</Text>
+                            {mealDetails.comments.map((comment, index) => (
+                                <View key={index} style={styles.commentContainer}>
+                                    <View>
+                                        <Image source={require("../assets/profile/t-image2.jpg")}
+                                               style={styles.profileImage}></Image>
+                                    </View>
 
-                                <View style={{paddingLeft: 10, paddingTop: 3}}>
-                                    <Text style={styles.commentAuthor}>{comment.author.firstName} {comment.author.lastName}</Text>
-                                    <Text style={styles.commentContent}>{comment.content}</Text>
+                                    <View style={{paddingLeft: 10, paddingTop: 3}}>
+                                        <Text
+                                            style={styles.commentAuthor}>{comment.author.firstName} {comment.author.lastName}</Text>
+                                        <Text style={styles.commentContent}>{comment.content}</Text>
+                                    </View>
                                 </View>
-                            </View>
-                        ))}
+                            ))}
+                        </View>
                     </View>
 
                 </ScrollView>
