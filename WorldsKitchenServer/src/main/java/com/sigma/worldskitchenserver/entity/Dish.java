@@ -1,6 +1,7 @@
 package com.sigma.worldskitchenserver.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sigma.worldskitchenserver.enums.Level;
 import com.sigma.worldskitchenserver.enums.Region;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,9 @@ public class Dish {
     @Column(name = "description", length = 255)
     private String description;
 
+    @Column(name = "preparation_time", length = 255)
+    private String preparationTime;
+
     @ElementCollection
     @CollectionTable(
             name = "ingredients",
@@ -36,8 +40,13 @@ public class Dish {
 
     private int calories;
 
+    private int portionSize;
+
     @Enumerated(EnumType.STRING)
     private Region region;
+
+    @Enumerated(EnumType.STRING)
+    private Level level;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

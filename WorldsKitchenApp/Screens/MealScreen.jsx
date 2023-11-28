@@ -8,6 +8,19 @@ export const MealScreen = ({route}) => {
     const {mealId} = route.params;
     const [mealDetails, setMealDetails] = useState(null);
 
+    function mapLevelToText(level) {
+        switch (level) {
+            case 'EASY':
+                return 'Łatwe';
+            case 'MEDIUM':
+                return 'Średnie';
+            case 'HARD':
+                return 'Trudne';
+            default:
+                return level;
+        }
+    }
+
     useEffect(() => {
         const fetchMealDetails = getMealById(mealId);
         fetchMealDetails.then(meal => {
@@ -39,7 +52,7 @@ export const MealScreen = ({route}) => {
                                     color="#1DB954"
                                 />
                                 <Text style={styles.iconText}>Czas przygotowania</Text>
-                                <Text style={[styles.iconText, {color: '#AEB5BC'}]}>30min</Text>
+                                <Text style={[styles.iconText, {color: '#AEB5BC'}]}>{mealDetails.preparationTime}</Text>
                             </View>
                             <View style={styles.icon}>
                             <Ionicons
@@ -48,7 +61,8 @@ export const MealScreen = ({route}) => {
                                     color="#1DB954"
                                 />
                                 <Text style={styles.iconText}>Poziom trudności</Text>
-                                <Text style={[styles.iconText, {color: '#AEB5BC'}]}>Łatwy</Text>
+                                <Text
+                                    style={[styles.iconText, {color: '#AEB5BC'}]}>{mapLevelToText(mealDetails.level)}</Text>
                             </View>
                             <View style={styles.icon}>
                             <Ionicons
@@ -57,7 +71,8 @@ export const MealScreen = ({route}) => {
                                     color="#1DB954"
                                 />
                                 <Text style={styles.iconText}>Porcja dla</Text>
-                                <Text style={[styles.iconText, {color: '#AEB5BC'}]}>3 osób</Text>
+                                <Text
+                                    style={[styles.iconText, {color: '#AEB5BC'}]}>{mealDetails.portionSize} osób</Text>
                             </View>
                         </View>
                     </View>

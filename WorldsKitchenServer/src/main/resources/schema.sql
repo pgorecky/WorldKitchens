@@ -9,12 +9,15 @@ CREATE TABLE IF NOT EXISTS users
 
 CREATE TABLE IF NOT EXISTS dishes
 (
-    id          INT PRIMARY KEY AUTO_INCREMENT,
-    name        VARCHAR(255),
-    description VARCHAR(255),
-    calories    INT,
-    region      VARCHAR(50),
-    user_id     INT,
+    id               INT PRIMARY KEY AUTO_INCREMENT,
+    name             VARCHAR(255),
+    description      VARCHAR(255),
+    preparation_time VARCHAR(255),
+    calories         INT,
+    portion_size     INT,
+    region           VARCHAR(50),
+    level            VARCHAR(50),
+    user_id          INT,
     FOREIGN KEY (user_id) REFERENCES users (id),
     UNIQUE (name, region)
 );
