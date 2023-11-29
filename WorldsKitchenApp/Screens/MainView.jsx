@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Alert, View} from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Favourites from "./Favourites";
-import Dishes from "./Dishes";
+import {DishesStack} from "./Dishes";
 import {ProfileStack} from "./ProfileScreen";
 import {NavigationContainer, useNavigation} from "@react-navigation/native";
 import {removeAuthHeader} from "../services/axios_config";
@@ -114,7 +114,7 @@ const MainView = ({navigation}) => {
                 })}>
                 <Tab.Screen
                     options={{headerShown: false}}
-                    name={dishes} component={Dishes}/>
+                    name={dishes} component={DishesStack}/>
                 <Tab.Screen
                     options={{headerShown: false}}
                     name={favourites} component={Favourites}/>

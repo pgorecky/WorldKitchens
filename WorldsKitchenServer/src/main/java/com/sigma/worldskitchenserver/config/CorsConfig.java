@@ -34,7 +34,7 @@ public class CorsConfig implements WebMvcConfigurer {
                 HttpMethod.PUT.name(),
                 HttpMethod.DELETE.name()
         ));
-        config.setMaxAge(3600L);
+        config.setMaxAge(7200L);
         source.registerCorsConfiguration("/**", config);
 
         FilterRegistrationBean<?> bean = new FilterRegistrationBean<>(new CorsFilter(source));

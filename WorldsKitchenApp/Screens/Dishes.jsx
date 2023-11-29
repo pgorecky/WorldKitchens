@@ -1,14 +1,16 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {ActivityIndicator, Image, SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {ActivityIndicator, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {styles} from '../styles/RegionStyles'
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {getMealsByRegion} from "../services/MealsService";
 import {MealCard} from "../components/MealCard";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {MealScreen} from "./MealScreen";
 
 const Tab = createMaterialTopTabNavigator();
 
-const RegionScreen = ({route}) => {
+const RegionScreen = ({route, navigation}) => {
     const {region} = route.params;
     const [regionMeals, setRegionMeals] = useState(null);
 
@@ -46,6 +48,10 @@ const RegionScreen = ({route}) => {
                 return region;
         }
     }
+
+    const navigateToMealDetails = (mealId) => {
+        navigation.navigate('MealDetails', {mealId});
+    };
 
     function regionDescription(region) {
         switch (region) {
@@ -86,9 +92,13 @@ const RegionScreen = ({route}) => {
                                 style={{paddingBottom: 20}}>
                         <Text style={styles.textDiscover}>Odkrywaj posiłki</Text>
                         {regionMeals.map((meal) => (
-                            <View key={meal.id} style={styles.cardContainer}>
+                            <TouchableOpacity
+                                key={meal.id}
+                                style={styles.cardContainer}
+                                onPress={() => navigateToMealDetails(meal.id)}
+                            >
                                 <MealCard containerWidth={360} meal={meal}/>
-                            </View>
+                            </TouchableOpacity>
                         ))}
                     </ScrollView>
                 ) : (
@@ -103,7 +113,7 @@ const RegionScreen = ({route}) => {
     );
 };
 
-export default function Dishes({navigation}) {
+function Dishes() {
     return (
         <Tab.Navigator
             tabBarScrollEnabled={true}
@@ -146,5 +156,18 @@ export default function Dishes({navigation}) {
                 component={RegionScreen}
                 initialParams={{region: 'ASIAN'}}/>
         </Tab.Navigator>
+    );
+}
+
+const Stack = createNativeStackNavigator();
+export const DishesStack = () => {
+    return (
+        <Stack.Navigator
+            initialRouteName="Dishes"
+            screenOptions={{headerShown: false}}
+        >
+            <Stack.Screen name="Dishes" component={Dishes}/>
+            <Stack.Screen name="MealDetails" component={MealScreen}/>
+        </Stack.Navigator>
     );
 }
