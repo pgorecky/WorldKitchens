@@ -1,6 +1,5 @@
-package com.sigma.worldskitchenserver.entity;
+package com.sigma.worldskitchenserver.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sigma.worldskitchenserver.enums.Level;
 import com.sigma.worldskitchenserver.enums.Region;
 import jakarta.persistence.*;
@@ -31,7 +30,7 @@ public class Dish {
     private String preparationTime;
 
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
-    @JsonManagedReference
+//    @JsonManagedReference
     private List<Ingredient> ingredients;
 
     private int calories;
@@ -49,7 +48,7 @@ public class Dish {
     private User author;
 
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
-    @JsonManagedReference
+//    @JsonManagedReference
     private List<Comment> comments;
 
     @ElementCollection

@@ -3,7 +3,7 @@ package com.sigma.worldskitchenserver.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sigma.worldskitchenserver.dto.Dish.DishDto;
 import com.sigma.worldskitchenserver.dto.User.UserDto;
-import com.sigma.worldskitchenserver.entity.Dish;
+import com.sigma.worldskitchenserver.model.Dish;
 import com.sigma.worldskitchenserver.enums.Region;
 import com.sigma.worldskitchenserver.mapper.DishMapper;
 import com.sigma.worldskitchenserver.repository.DishRepository;

@@ -1,6 +1,5 @@
-package com.sigma.worldskitchenserver.entity;
+package com.sigma.worldskitchenserver.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +19,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "dish_id")
-    @JsonBackReference
+//    @JsonBackReference
     private Dish dish;
 
     @ManyToOne

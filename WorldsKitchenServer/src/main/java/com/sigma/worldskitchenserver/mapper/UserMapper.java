@@ -3,7 +3,7 @@ package com.sigma.worldskitchenserver.mapper;
 import com.sigma.worldskitchenserver.dto.User.AuthorDto;
 import com.sigma.worldskitchenserver.dto.User.SignUpDto;
 import com.sigma.worldskitchenserver.dto.User.UserDto;
-import com.sigma.worldskitchenserver.entity.User;
+import com.sigma.worldskitchenserver.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -1,4 +1,4 @@
-package com.sigma.worldskitchenserver.entity;
+package com.sigma.worldskitchenserver.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

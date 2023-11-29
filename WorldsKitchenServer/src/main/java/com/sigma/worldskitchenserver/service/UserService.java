@@ -3,7 +3,7 @@ package com.sigma.worldskitchenserver.service;
 import com.sigma.worldskitchenserver.dto.User.CredentialsDto;
 import com.sigma.worldskitchenserver.dto.User.SignUpDto;
 import com.sigma.worldskitchenserver.dto.User.UserDto;
-import com.sigma.worldskitchenserver.entity.User;
+import com.sigma.worldskitchenserver.model.User;
 import com.sigma.worldskitchenserver.exception.AppException;
 import com.sigma.worldskitchenserver.mapper.UserMapper;
 import com.sigma.worldskitchenserver.repository.UserRepository;

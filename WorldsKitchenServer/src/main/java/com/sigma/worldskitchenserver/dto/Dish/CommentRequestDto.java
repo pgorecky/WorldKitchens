@@ -5,15 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
-public class IngredientDto {
+public class CommentRequestDto {
 
-    private Long id;
+    private Long dishId;
 
-    private String ingredientName;
-
-    private String portion;
+    private String content;
 }
