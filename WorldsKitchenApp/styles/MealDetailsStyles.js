@@ -143,5 +143,23 @@ export const styles = StyleSheet.create({
     commentAuthor: {
         fontFamily: 'Dosis',
         color: secondColor
+    },
+
+    newCommentContainer: {
+        borderWidth: 1,
+        borderColor: thirdColor,
+    },
+
+    submitContainer: {
+        backgroundColor: secondColor,
+        borderRadius: 4,
+        paddingVertical: 4,
+        marginTop: 4,
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#FFF",
+        width: 70,
+        alignSelf: 'flex-end',
+        marginRight: 10
     }
 });

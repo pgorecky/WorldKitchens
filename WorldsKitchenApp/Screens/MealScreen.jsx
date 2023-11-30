@@ -1,12 +1,24 @@
-import React, {useEffect, useState} from "react";
-import {ActivityIndicator, Image, SafeAreaView, ScrollView, Text, View} from "react-native";
+import React, {useEffect, useRef, useState} from "react";
+import {
+    ActivityIndicator,
+    Image,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
 import {getMealById} from "../services/MealsService";
 import {styles} from "../styles/MealDetailsStyles";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import {request} from "../services/axios_config";
 
 export const MealScreen = ({route}) => {
     const {mealId} = route.params;
     const [mealDetails, setMealDetails] = useState(null);
+    const [content, setContent] = React.useState('');
+    const textInputRef = useRef(null);
 
     function mapLevelToText(level) {
         switch (level) {
@@ -29,6 +41,27 @@ export const MealScreen = ({route}) => {
             console.error('Error fetching meals:', error);
         });
     }, []);
+
+    const handleAddComment = async () => {
+        try {
+            console.log('Dodano komentarz o treści: ' + content)
+            await request(
+                'POST',
+                '/comment/add',
+                {
+                    dishId: mealId,
+                    content: content,
+                }
+            );
+
+            const updatedMealDetails = await getMealById(mealId);
+            setMealDetails(updatedMealDetails);
+            textInputRef.current.clear();
+            setContent('');
+        } catch (error) {
+            console.error('Adding comment failed', error.message);
+        }
+    };
 
     return (
         <SafeAreaView>
@@ -101,6 +134,41 @@ export const MealScreen = ({route}) => {
                     <View style={{marginBottom: 20}}>
                         <View style={styles.ingredientsSection}>
                             <Text style={styles.secondarySectionTitle}>Komentarze:</Text>
+                            <View style={{
+                                paddingRight: 7,
+                                paddingLeft: 7,
+                                paddingTop: 10,
+                            }}>
+                                <View style={styles.newCommentContainer}>
+                                    <TextInput
+                                        ref={textInputRef}
+                                        placeholder='Dodaj komentarz'
+                                        placeholderTextColor='#285943'
+                                        style={{
+                                            color: '#1DB954',
+                                            fontSize: 14,
+                                            fontFamily: "Dosis",
+                                            padding: 7
+                                        }}
+                                        onChangeText={(text) => setContent(text)}/>
+                                </View>
+                                <View>
+                                    <TouchableOpacity
+                                        style={styles.submitContainer}
+                                        onPress={handleAddComment}>
+                                        <Text
+                                            style={{
+                                                fontFamily: "Dosis",
+                                                color: "#FFF",
+                                                fontWeight: "600",
+                                                fontSize: 16
+                                            }}>
+                                            Dodaj
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+
                             {mealDetails.comments.map((comment, index) => (
                                 <View key={index} style={styles.commentContainer}>
                                     <View>
