@@ -58,5 +58,23 @@ export const styles = StyleSheet.create({
         fontSize: 30,
         padding: 15,
         color: secondColor
+    },
+
+    floatButton: {
+        backgroundColor: secondColor,
+        borderRadius: 30,
+        width: 50,
+        height: 50,
+        position: "absolute",
+        alignItems: "center",
+        justifyContent: "center",
+        right: 30,
+        bottom: 30,
+        resizeMode: 'cover',
+    },
+
+    floatButtonText: {
+        color: 'white',
+        fontSize: 25,
     }
 });

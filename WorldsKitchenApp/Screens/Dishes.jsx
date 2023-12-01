@@ -7,6 +7,7 @@ import {getMealsByRegion} from "../services/MealsService";
 import {MealCard} from "../components/MealCard";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {MealScreen} from "./MealScreen";
+import AddMealScreen from "./AddMealScreen";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -113,49 +114,65 @@ const RegionScreen = ({route, navigation}) => {
     );
 };
 
-function Dishes() {
-    return (
-        <Tab.Navigator
-            tabBarScrollEnabled={true}
-            screenOptions={{
-                tabBarScrollEnabled: true,
-                tabBarItemStyle: {
-                    width: "auto",
+function Dishes({navigation}) {
+    const navigateToAddMealScreen = () => {
+        navigation.navigate('AddMealScreen');
+    };
 
-                },
-                tabBarActiveTintColor: '#1DB954',
-                tabBarInactiveTintColor: '#AEB5BC',
-                tabBarIndicatorStyle: {
-                    backgroundColor: '#1DB954'
-                },
-                tabBarLabelStyle: {
-                    fontFamily: 'Dosis'
-                },
-                tabBarStyle: {
-                    backgroundColor: '#282828',
-                },
-            }}
-        >
-            <Tab.Screen name="Włoska"
-                        component={RegionScreen}
-                        initialParams={{region: 'ITALIAN'}}/>
-            <Tab.Screen
-                name="Polska"
-                component={RegionScreen}
-                initialParams={{region: 'POLISH'}}/>
-            <Tab.Screen
-                name="Meksykańska"
-                component={RegionScreen}
-                initialParams={{region: 'MEXICAN'}}/>
-            <Tab.Screen
-                name="Amerykańska"
-                component={RegionScreen}
-                initialParams={{region: 'AMERICAN'}}/>
-            <Tab.Screen
-                name="Azjatycka"
-                component={RegionScreen}
-                initialParams={{region: 'ASIAN'}}/>
-        </Tab.Navigator>
+    return (
+        <View style={{flex: 1}}>
+            <Tab.Navigator
+                tabBarScrollEnabled={true}
+                screenOptions={{
+                    tabBarScrollEnabled: true,
+                    tabBarItemStyle: {
+                        width: 'auto',
+                    },
+                    tabBarActiveTintColor: '#1DB954',
+                    tabBarInactiveTintColor: '#AEB5BC',
+                    tabBarIndicatorStyle: {
+                        backgroundColor: '#1DB954',
+                    },
+                    tabBarLabelStyle: {
+                        fontFamily: 'Dosis',
+                    },
+                    tabBarStyle: {
+                        backgroundColor: '#282828',
+                    },
+                }}
+            >
+                <Tab.Screen
+                    name="Włoska"
+                    component={RegionScreen}
+                    initialParams={{region: 'ITALIAN'}}
+                />
+                <Tab.Screen
+                    name="Polska"
+                    component={RegionScreen}
+                    initialParams={{region: 'POLISH'}}
+                />
+                <Tab.Screen
+                    name="Meksykańska"
+                    component={RegionScreen}
+                    initialParams={{region: 'MEXICAN'}}
+                />
+                <Tab.Screen
+                    name="Amerykańska"
+                    component={RegionScreen}
+                    initialParams={{region: 'AMERICAN'}}
+                />
+                <Tab.Screen
+                    name="Azjatycka"
+                    component={RegionScreen}
+                    initialParams={{region: 'ASIAN'}}
+                />
+            </Tab.Navigator>
+            <TouchableOpacity
+                style={styles.floatButton}
+                onPress={navigateToAddMealScreen}>
+                <Text style={styles.floatButtonText}>+</Text>
+            </TouchableOpacity>
+        </View>
     );
 }
 
@@ -168,6 +185,7 @@ export const DishesStack = () => {
         >
             <Stack.Screen name="Dishes" component={Dishes}/>
             <Stack.Screen name="MealDetails" component={MealScreen}/>
+            <Stack.Screen name="AddMealScreen" component={AddMealScreen}/>
         </Stack.Navigator>
     );
 }
