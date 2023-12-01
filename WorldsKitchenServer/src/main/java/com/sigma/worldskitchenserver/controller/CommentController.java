@@ -22,7 +22,6 @@ public class CommentController {
     CommentRepository commentRepository;
     DishRepository dishRepository;
     CommentMapper commentMapper;
-
     UserRepository userRepository;
 
     public CommentController(CommentRepository commentRepository, DishRepository dishRepository, CommentMapper commentMapper, UserRepository userRepository) {

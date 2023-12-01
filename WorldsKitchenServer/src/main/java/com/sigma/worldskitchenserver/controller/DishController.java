@@ -1,35 +1,42 @@
 package com.sigma.worldskitchenserver.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sigma.worldskitchenserver.dto.Dish.DishAddRequest;
 import com.sigma.worldskitchenserver.dto.Dish.DishDto;
 import com.sigma.worldskitchenserver.dto.User.UserDto;
 import com.sigma.worldskitchenserver.model.Dish;
 import com.sigma.worldskitchenserver.enums.Region;
 import com.sigma.worldskitchenserver.mapper.DishMapper;
+import com.sigma.worldskitchenserver.model.Ingredient;
+import com.sigma.worldskitchenserver.model.User;
 import com.sigma.worldskitchenserver.repository.DishRepository;
+import com.sigma.worldskitchenserver.repository.IngredientRepository;
+import com.sigma.worldskitchenserver.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/dishes")
 public class DishController {
     DishRepository dishRepository;
+    UserRepository userRepository;
+    IngredientRepository ingredientRepository;
     DishMapper dishMapper;
     ObjectMapper objectMapper;
 
-    public DishController(DishRepository dishRepository, ObjectMapper objectMapper, DishMapper dishMapper) {
+    public DishController(DishRepository dishRepository, ObjectMapper objectMapper, DishMapper dishMapper, UserRepository userRepository, IngredientRepository ingredientRepository) {
         this.dishRepository = dishRepository;
         this.objectMapper = objectMapper;
         this.dishMapper = dishMapper;
+        this.userRepository = userRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
     @GetMapping("/all")
@@ -84,5 +91,32 @@ public class DishController {
         }
 
          return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<?> createNewMeal(@RequestBody DishAddRequest dish) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDto userDto = (UserDto) authentication.getPrincipal();
+
+        Optional<User> user = userRepository.findById(userDto.getId());
+
+        Dish newDish = dishMapper.toDish(dish);
+        user.ifPresent(newDish::setAuthor);
+
+        dishRepository.save(newDish);
+
+        List<Ingredient> ingredients = dish.getIngredients().stream()
+                .map(ingredient -> {
+                    Ingredient newIngredient = new Ingredient();
+                    newIngredient.setDish(newDish);
+                    newIngredient.setIngredientName(ingredient.getIngredientName());
+                    newIngredient.setPortion(ingredient.getPortion());
+                    return newIngredient;
+                })
+                .collect(Collectors.toList());
+
+        ingredientRepository.saveAll(ingredients);
+
+        return ResponseEntity.ok(dishMapper.toDishDto(newDish));
     }
 }

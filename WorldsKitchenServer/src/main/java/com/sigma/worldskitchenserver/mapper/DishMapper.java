@@ -1,5 +1,6 @@
 package com.sigma.worldskitchenserver.mapper;
 
+import com.sigma.worldskitchenserver.dto.Dish.DishAddRequest;
 import com.sigma.worldskitchenserver.dto.Dish.DishDto;
 import com.sigma.worldskitchenserver.model.Dish;
 import org.mapstruct.Mapper;
@@ -8,4 +9,6 @@ import org.mapstruct.Mapper;
 public interface DishMapper {
 
     DishDto toDishDto(Dish dish);
+
+    Dish toDish(DishAddRequest dishAddRequest);
 }
