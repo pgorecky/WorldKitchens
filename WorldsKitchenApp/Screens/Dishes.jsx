@@ -8,6 +8,7 @@ import {MealCard} from "../components/MealCard";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {MealScreen} from "./MealScreen";
 import AddMealScreen from "./AddMealScreen";
+import {useFocusEffect} from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -24,6 +25,16 @@ const RegionScreen = ({route, navigation}) => {
         });
     }, []);
 
+    useFocusEffect(
+        React.useCallback(() => {
+            const fetchData = async () => {
+                const updatedMeals = await getMealsByRegion(region);
+                setRegionMeals(updatedMeals);
+            };
+
+            fetchData();
+        }, [])
+    );
 
     const regionImageMap = {
         ITALIAN: require('../assets/regions/ITALIAN.jpg'),

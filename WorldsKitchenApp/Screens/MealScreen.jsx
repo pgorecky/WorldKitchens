@@ -9,15 +9,16 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
-import {getMealById} from "../services/MealsService";
+import {checkIfIsLiked, getMealById} from "../services/MealsService";
 import {styles} from "../styles/MealDetailsStyles";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {request} from "../services/axios_config";
 
-export const MealScreen = ({route}) => {
+export const MealScreen = ({route, navigation}) => {
     const {mealId} = route.params;
     const [mealDetails, setMealDetails] = useState(null);
     const [content, setContent] = React.useState('');
+    const [isLiked, setIsLiked] = React.useState(false);
     const textInputRef = useRef(null);
 
     function mapLevelToText(level) {
@@ -35,8 +36,16 @@ export const MealScreen = ({route}) => {
 
     useEffect(() => {
         const fetchMealDetails = getMealById(mealId);
+        const fetchLike = checkIfIsLiked(mealId);
+
         fetchMealDetails.then(meal => {
             setMealDetails(meal);
+        }).catch(error => {
+            console.error('Error fetching meals:', error);
+        });
+
+        fetchLike.then(value => {
+            setIsLiked(value);
         }).catch(error => {
             console.error('Error fetching meals:', error);
         });
@@ -63,6 +72,27 @@ export const MealScreen = ({route}) => {
         }
     };
 
+    const handleLikeAction = async () => {
+        if (isLiked) {
+            await request(
+                'POST',
+                `/dishes/${mealId}/unlike`,
+                {}
+            );
+        } else {
+            await request(
+                'POST',
+                `/dishes/${mealId}/like`,
+                {}
+            );
+        }
+
+        const updatedLikeState = await checkIfIsLiked(mealId);
+        setIsLiked(updatedLikeState);
+
+        // navigation.navigate('Profile', { refreshLikedMeals: true });
+    }
+
     return (
         <SafeAreaView>
             {mealDetails ? (
@@ -70,14 +100,49 @@ export const MealScreen = ({route}) => {
                     showsVerticalScrollIndicator={false}
                     style={styles.background}>
                     <View style={styles.container}>
-                        <Text style={styles.mealName}>{mealDetails.name}</Text>
+                        <View style={{flex: 1, flexDirection: 'row'}}>
+                            <Text style={styles.mealName}>{mealDetails.name}</Text>
+                            {isLiked ? (
+                                    <TouchableOpacity
+                                        style={{paddingTop: 20}}
+                                        onPress={handleLikeAction}>
+                                        <Ionicons
+                                            name="heart"
+                                            size={25}
+                                            color="red"
+                                        />
+                                    </TouchableOpacity>
+                                ) :
+                                (<TouchableOpacity
+                                        style={{paddingTop: 20}}
+                                        onPress={handleLikeAction}>
+                                        <Ionicons
+                                            name="heart-outline"
+                                            size={25}
+                                            color="red"
+                                        />
+                                    </TouchableOpacity>
+                                )}
+
+                        </View>
+
                         <Image source={require("../assets/profile/media1.jpg")} style={styles.mealImage}></Image>
                         <Text style={styles.mealDesc}>{mealDetails.description}</Text>
+
                         <View style={styles.authorContainer}>
+                            {/*<View style={{paddingTop: 5, paddingRight: 120}}>*/}
+                            {/*    <Ionicons*/}
+                            {/*        // name="heart-outline"*/}
+                            {/*        name="heart"*/}
+                            {/*        size={20}*/}
+                            {/*        color="red"*/}
+                            {/*    />*/}
+                            {/*</View>*/}
                             <Text style={styles.authCall}>Autor przepisu:</Text>
                             <Text
                                 style={styles.author}>{mealDetails.author.firstName} {mealDetails.author.lastName}</Text>
                         </View>
+
                         <View style={styles.iconsContainer}>
                             <View style={styles.icon}>
                                 <Ionicons
