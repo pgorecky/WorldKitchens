@@ -4,9 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sigma.worldskitchenserver.dto.Dish.DishAddRequest;
 import com.sigma.worldskitchenserver.dto.Dish.DishDto;
 import com.sigma.worldskitchenserver.dto.User.UserDto;
-import com.sigma.worldskitchenserver.model.Dish;
 import com.sigma.worldskitchenserver.enums.Region;
 import com.sigma.worldskitchenserver.mapper.DishMapper;
+import com.sigma.worldskitchenserver.model.Dish;
 import com.sigma.worldskitchenserver.model.Ingredient;
 import com.sigma.worldskitchenserver.model.User;
 import com.sigma.worldskitchenserver.repository.DishRepository;
@@ -61,6 +61,24 @@ public class DishController {
         List<DishDto> dtoDishes = new ArrayList<>();
 
         allDishes.forEach(dish -> {
+            var dishDto = dishMapper.toDishDto(dish);
+            dtoDishes.add(dishDto);
+        });
+
+        return ResponseEntity.ok(dtoDishes);
+    }
+
+    @GetMapping("/likedDishes")
+    public ResponseEntity<?> getLikedDishes() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDto userDto = (UserDto) authentication.getPrincipal();
+
+        User user = userRepository.findById(userDto.getId()).get();
+
+        List<Dish> likedDishes = dishRepository.findByLikedByUsersContaining(user);
+        List<DishDto> dtoDishes = new ArrayList<>();
+
+        likedDishes.forEach(dish -> {
             var dishDto = dishMapper.toDishDto(dish);
             dtoDishes.add(dishDto);
         });

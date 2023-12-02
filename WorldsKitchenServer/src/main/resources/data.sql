@@ -1,15 +1,19 @@
 INSERT INTO users (first_name, last_name, login, password)
-VALUES ('Weronika', 'Jankowska','werka', '$2a$10$I2PjUfjqAUC2D8ebGwUhjO9.5bSKdPG5ECYq8Rhsyl/lF9fYBZv4.');
+VALUES ('Weronika', 'Jankowska', 'werka', '$2a$10$I2PjUfjqAUC2D8ebGwUhjO9.5bSKdPG5ECYq8Rhsyl/lF9fYBZv4.');
 
 INSERT INTO users (first_name, last_name, login, password)
-VALUES ('Patryk', 'Górecki','patryczek', '$2a$10$I2PjUfjqAUC2D8ebGwUhjO9.5bSKdPG5ECYq8Rhsyl/lF9fYBZv4.');
+VALUES ('Patryk', 'Górecki', 'patryczek', '$2a$10$I2PjUfjqAUC2D8ebGwUhjO9.5bSKdPG5ECYq8Rhsyl/lF9fYBZv4.');
 
 -- Dodaj dania
 INSERT INTO dishes (name, description, preparation_time, calories, portion_size, region, level, user_id)
-VALUES ('Spaghetti Carbonara', 'potrawa kuchni włoskiej złożona z makaronu, jajek, pancetty lub guanciale, sera pecorino romano lub parmezanu oraz czarnego pieprzu. Niepoprawnym jest mówienie o „sosie carbonara”, ponieważ makaron i pozostałe składniki stanowią tu nierozerwalną całość', '30min' , 600, 3, 'ITALIAN', 'MEDIUM', 1);
+VALUES ('Spaghetti Carbonara',
+        'potrawa kuchni włoskiej złożona z makaronu, jajek, pancetty lub guanciale, sera pecorino romano lub parmezanu oraz czarnego pieprzu. Niepoprawnym jest mówienie o „sosie carbonara”, ponieważ makaron i pozostałe składniki stanowią tu nierozerwalną całość',
+        '30min', 600, 3, 'ITALIAN', 'MEDIUM', 1);
 
 INSERT INTO dishes (name, description, calories, portion_size, region, level, user_id)
-VALUES ('Margherita Pizza', 'potrawa kuchni włoskiej złożona z makaronu, jajek, pancetty lub guanciale, sera pecorino romano lub parmezanu oraz czarnego pieprzu. Niepoprawnym jest mówienie o „sosie carbonara”, ponieważ makaron i pozostałe składniki stanowią tu nierozerwalną całość' ,800, 3, 'ITALIAN', 'EASY', 1);
+VALUES ('Margherita Pizza',
+        'potrawa kuchni włoskiej złożona z makaronu, jajek, pancetty lub guanciale, sera pecorino romano lub parmezanu oraz czarnego pieprzu. Niepoprawnym jest mówienie o „sosie carbonara”, ponieważ makaron i pozostałe składniki stanowią tu nierozerwalną całość',
+        800, 3, 'ITALIAN', 'EASY', 1);
 
 -- Dodaj kroki przygotowania
 INSERT INTO preparation_steps (dish_id, step)
@@ -193,3 +197,6 @@ VALUES ('Dim Sum', 400, 2, 'ASIAN', 2);
 INSERT INTO dishes (name, calories, portion_size, region, user_id)
 VALUES ('Szechuan Chicken', 600, 2, 'ASIAN', 2);
 -- Dodaj składniki, kroki i komentarze dla tego dania
+
+INSERT INTO liked_dishes (user_id, dish_id)
+VALUES (1, 1);

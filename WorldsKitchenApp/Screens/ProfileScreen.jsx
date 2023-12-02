@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
-import {getMyProfileDetails, getMyProfileMeals} from "../services/UserService";
+import {getLikedMeals, getMyProfileDetails, getMyProfileMeals} from "../services/UserService";
 import {styles} from '../styles/ProfileStyles'
 import {Button} from "react-native-elements";
 import {MealCard} from "../components/MealCard";
@@ -10,6 +10,7 @@ import {MealScreen} from "./MealScreen";
 export const ProfileScreen = ({navigation}) => {
     const [profileDetails, setProfileDetails] = useState(null);
     const [profileMeals, setProfileMeals] = useState(null);
+    const [likedMeals, setLikedMeals] = useState(null);
 
     useEffect(() => {
         const fetchProfileDetails = async () => {
@@ -18,6 +19,9 @@ export const ProfileScreen = ({navigation}) => {
 
             const meals = await getMyProfileMeals();
             setProfileMeals(meals);
+
+            const liked = await getLikedMeals();
+            setLikedMeals(liked);
         };
 
         fetchProfileDetails();
@@ -29,7 +33,7 @@ export const ProfileScreen = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            {profileDetails && profileMeals ? (
+            {profileDetails && profileMeals && likedMeals ? (
                 <ScrollView showsVerticalScrollIndicator={false}>
 
                     <View style={{alignSelf: "center"}}>
@@ -55,10 +59,24 @@ export const ProfileScreen = ({navigation}) => {
                     </View>
 
                     <View style={{marginTop: 32}}>
-                        <Text style={[styles.text, {color: "#AEB5BC", fontSize: 14, marginLeft: 5}]}>Przepisy
-                            użytkownika</Text>
+                        <Text style={[styles.text, {color: "#AEB5BC", fontSize: 14, marginLeft: 5}]}>
+                            Przepisy użytkownika</Text>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             {profileMeals.map((meal) => (
+                                <TouchableOpacity
+                                    key={meal.id}
+                                    onPress={() => navigateToMealDetails(meal.id)}
+                                >
+                                    <MealCard meal={meal} containerWidth={200}/>
+                                </TouchableOpacity>
+                            ))}
+                        </ScrollView>
+                    </View>
+                    <View style={{marginTop: 15}}>
+                        <Text style={[styles.text, {color: "#AEB5BC", fontSize: 14, marginLeft: 5}]}>
+                            Ulubione przepisy użytkownika</Text>
+                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                            {likedMeals.map((meal) => (
                                 <TouchableOpacity
                                     key={meal.id}
                                     onPress={() => navigateToMealDetails(meal.id)}
@@ -74,7 +92,7 @@ export const ProfileScreen = ({navigation}) => {
                             <View style={styles.activityIndicator}></View>
                             <View style={{width: 250}}>
                                 <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
-                                    Użytkownik Weronika <Text style={{fontWeight: "400"}}>zamieścił</Text> komentarz <Text
+                                    Użytkownik {profileDetails.firstName} <Text style={{fontWeight: "400"}}>zamieścił</Text> komentarz <Text
                                     style={{fontWeight: "400"}}>pod posiłkiem: bla bla</Text>
                                 </Text>
                             </View>
@@ -84,7 +102,7 @@ export const ProfileScreen = ({navigation}) => {
                             <View style={styles.activityIndicator}></View>
                             <View style={{width: 250}}>
                                 <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
-                                    Użytkownik Weronika <Text style={{fontWeight: "400"}}>zamieścił</Text> komentarz <Text
+                                    Użytkownik {profileDetails.firstName} <Text style={{fontWeight: "400"}}>zamieścił</Text> komentarz <Text
                                     style={{fontWeight: "400"}}>pod posiłkiem: bla bla</Text>
                                 </Text>
                             </View>

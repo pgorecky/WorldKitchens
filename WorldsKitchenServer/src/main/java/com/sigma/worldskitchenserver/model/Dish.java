@@ -59,4 +59,7 @@ public class Dish {
     @Column(name = "step", length = 255)
     private List<String> preparationSteps;
 
+    @ManyToMany(mappedBy = "likedDishes")
+    private List<User> likedByUsers;
+
 }

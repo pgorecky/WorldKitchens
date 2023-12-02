@@ -47,3 +47,12 @@ CREATE TABLE IF NOT EXISTS comments
     FOREIGN KEY (dish_id) REFERENCES dishes (id),
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
+
+CREATE TABLE IF NOT EXISTS liked_dishes
+(
+    user_id INT,
+    dish_id INT,
+    PRIMARY KEY (user_id, dish_id),
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (dish_id) REFERENCES dishes (id)
+);
