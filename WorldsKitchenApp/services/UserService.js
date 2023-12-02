@@ -25,3 +25,16 @@ export const getMyProfileMeals = async () => {
         throw error;
     }
 };
+
+export const getLikedMeals = async () => {
+    try {
+        const response = await request(
+            'GET',
+            '/dishes/likedDishes',
+            {});
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching profile details:', error);
+        throw error;
+    }
+};

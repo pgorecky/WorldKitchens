@@ -2,7 +2,6 @@ import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Alert, View} from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Favourites from "./Favourites";
 import {DishesStack} from "./Dishes";
 import {ProfileStack} from "./ProfileScreen";
 import {NavigationContainer, useNavigation} from "@react-navigation/native";
@@ -115,9 +114,9 @@ const MainView = ({navigation}) => {
                 <Tab.Screen
                     options={{headerShown: false}}
                     name={dishes} component={DishesStack}/>
-                <Tab.Screen
-                    options={{headerShown: false}}
-                    name={favourites} component={Favourites}/>
+                {/*<Tab.Screen*/}
+                {/*    options={{headerShown: false}}*/}
+                {/*    name={favourites} component={Favourites}/>*/}
                 <Tab.Screen
                     options={{headerShown: false}}
                     name={profilName} component={ProfileStack}/>
