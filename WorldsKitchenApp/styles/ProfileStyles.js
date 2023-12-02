@@ -41,6 +41,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
+
     infoContainer: {
         alignSelf: "center",
         alignItems: "center",

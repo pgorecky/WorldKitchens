@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
 
     container: {
         alignItems: "center",
-        // backgroundColor: 'black'
     },
 
     mealName: {
@@ -161,5 +160,54 @@ export const styles = StyleSheet.create({
         width: 70,
         alignSelf: 'flex-end',
         marginRight: 10
+    },
+
+    addPhotoContainer: {
+        position: "absolute",
+        bottom: 0,
+        right: 0,
+        width: 50,
+        height: 50,
+        borderRadius: 100,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+
+    addPhotoButton: {
+        backgroundColor: '#1DB954',
+        borderRadius: 30,
+        width: 40,
+        height: 40
+    },
+
+    pickerItem: {
+        fontFamily: 'Dosis',
+        fontSize: 12,
+        backgroundColor: mainColor,
+        color: secondColor,
+        borderWidth: 1,
+        borderColor: secondColor,
+    },
+
+    addStepButton: {
+        backgroundColor: 'grey',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: "center"
+    },
+
+    submitButton: {
+        marginTop: 10,
+        backgroundColor: secondColor,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 100
+    },
+
+    submitButtonText: {
+        fontFamily: 'Dosis',
+        fontSize: 20,
+        color: 'white',
+        padding: 10
     }
 });
