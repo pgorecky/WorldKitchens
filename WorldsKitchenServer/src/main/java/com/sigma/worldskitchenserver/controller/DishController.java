@@ -86,6 +86,25 @@ public class DishController {
         return ResponseEntity.ok(dtoDishes);
     }
 
+    @PostMapping("/{mealId}/like")
+    public ResponseEntity<?> addToFavourite(@PathVariable Long mealId){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDto userDto = (UserDto) authentication.getPrincipal();
+
+        User user = userRepository.findById(userDto.getId()).get();
+
+        Optional<Dish> dish = dishRepository.findById(mealId);
+
+        dish.ifPresent(meal -> {
+            user.getLikedDishes().add(meal);
+            meal.getLikedByUsers().add(user);
+            userRepository.save(user);
+            dishRepository.save(meal);
+        });
+
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/byRegion/{region}")
     public ResponseEntity<?> getDishesByRegion(@PathVariable Region region) {
         List<Dish> dishesByRegion = dishRepository.findByRegion(region);
