@@ -6,8 +6,9 @@ import {Button} from "react-native-elements";
 import {MealCard} from "../components/MealCard";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {MealScreen} from "./MealScreen";
+import {useFocusEffect} from "@react-navigation/native";
 
-export const ProfileScreen = ({navigation}) => {
+export const ProfileScreen = ({route, navigation}) => {
     const [profileDetails, setProfileDetails] = useState(null);
     const [profileMeals, setProfileMeals] = useState(null);
     const [likedMeals, setLikedMeals] = useState(null);
@@ -26,6 +27,17 @@ export const ProfileScreen = ({navigation}) => {
 
         fetchProfileDetails();
     }, []);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const fetchData = async () => {
+                const liked = await getLikedMeals();
+                setLikedMeals(liked);
+            };
+
+            fetchData();
+        }, [])
+    );
 
     const navigateToMealDetails = (mealId) => {
         navigation.navigate('MealDetails', { mealId });

@@ -105,6 +105,24 @@ public class DishController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/{mealId}/unlike")
+    public ResponseEntity<?> deleteFromFavourite(@PathVariable Long mealId){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDto userDto = (UserDto) authentication.getPrincipal();
+
+        User user = userRepository.findById(userDto.getId()).get();
+
+        Optional<Dish> dish = dishRepository.findById(mealId);
+
+        dish.ifPresent(meal -> {
+            user.getLikedDishes().remove(meal);
+            meal.getLikedByUsers().remove(user);
+            userRepository.save(user);
+            dishRepository.save(meal);
+        });
+
+        return ResponseEntity.ok().build();
+    }
     @GetMapping("/byRegion/{region}")
     public ResponseEntity<?> getDishesByRegion(@PathVariable Region region) {
         List<Dish> dishesByRegion = dishRepository.findByRegion(region);
@@ -155,5 +173,21 @@ public class DishController {
         ingredientRepository.saveAll(ingredients);
 
         return ResponseEntity.ok(dishMapper.toDishDto(newDish));
+    }
+
+    @GetMapping("/{dishId}/isLiked")
+    public ResponseEntity<?> isDishLikedByCurrentUser(@PathVariable Long dishId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDto userDto = (UserDto) authentication.getPrincipal();
+
+        Optional<User> user = userRepository.findById(userDto.getId());
+        Optional<Dish> dish = dishRepository.findById(dishId);
+
+        if (user.isPresent() && dish.isPresent()) {
+            boolean isLiked = dish.get().getLikedByUsers().contains(user.get());
+            return ResponseEntity.ok(isLiked);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
