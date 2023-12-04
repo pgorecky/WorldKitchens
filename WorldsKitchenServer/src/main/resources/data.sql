@@ -200,3 +200,6 @@ VALUES ('Szechuan Chicken', 600, 2, 'ASIAN', 2);
 
 INSERT INTO liked_dishes (user_id, dish_id)
 VALUES (1, 1);
+
+INSERT INTO recent_activities (user_id, dish_id, activity_type, date)
+VALUES ( 1, 1 , 'ADD_MEAL', now())
