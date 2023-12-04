@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
-import {getLikedMeals, getMyProfileDetails, getMyProfileMeals} from "../services/UserService";
+import {getLikedMeals, getMyProfileDetails, getMyProfileMeals, getMyRecentActivity} from "../services/UserService";
 import {styles} from '../styles/ProfileStyles'
 import {Button} from "react-native-elements";
 import {MealCard} from "../components/MealCard";
@@ -12,6 +12,7 @@ export const ProfileScreen = ({route, navigation}) => {
     const [profileDetails, setProfileDetails] = useState(null);
     const [profileMeals, setProfileMeals] = useState(null);
     const [likedMeals, setLikedMeals] = useState(null);
+    const [recentActivity, setRecentActivity] = useState(null);
 
     useEffect(() => {
         const fetchProfileDetails = async () => {
@@ -23,6 +24,9 @@ export const ProfileScreen = ({route, navigation}) => {
 
             const liked = await getLikedMeals();
             setLikedMeals(liked);
+
+            const activity = await getMyRecentActivity();
+            setRecentActivity(activity)
         };
 
         fetchProfileDetails();
@@ -33,6 +37,10 @@ export const ProfileScreen = ({route, navigation}) => {
             const fetchData = async () => {
                 const liked = await getLikedMeals();
                 setLikedMeals(liked);
+
+                const updatedActivity = await getMyRecentActivity();
+                setRecentActivity(updatedActivity)
+                console.log(updatedActivity)
             };
 
             fetchData();
@@ -40,12 +48,105 @@ export const ProfileScreen = ({route, navigation}) => {
     );
 
     const navigateToMealDetails = (mealId) => {
-        navigation.navigate('MealDetails', { mealId });
+        navigation.navigate('MealDetails', {mealId});
+    };
+
+    const RecentActivityComponent = ({recentActivity}) => {
+        const printRecentActivity = (activity) => {
+            const formatDate = (dateArray) => {
+                const [year, month, day, hours, minutes] = dateArray;
+                const formattedDate = `${padWithZero(day)}-${padWithZero(month)}-${year} ${padWithZero(hours)}:${padWithZero(minutes)}`;
+                return formattedDate;
+            };
+
+            const padWithZero = (number) => {
+                return number < 10 ? `0${number}` : number;
+            };
+
+            switch (activity.activityType) {
+                case 'ADD_COMMENT':
+                    return (
+                        <View style={{paddingBottom: 10}}>
+                            <View style={{flexDirection: 'row'}}>
+                                <View style={styles.activityIndicator}></View>
+                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
+                                    {formatDate(activity.date)}
+                                </Text>
+                            </View>
+                            <View style={{width: 250, marginLeft: 35}}>
+                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]} key={activity.id}>
+                                    Użytkownik {activity.user.firstName} zamieścił komentarz pod posiłkiem:
+                                    <Text style={{color: '#1DB954'}}> {activity.dish.name}</Text>
+                                </Text>
+                            </View>
+                        </View>
+                    );
+                case 'ADD_MEAL':
+                    return (
+                        <View style={{paddingBottom: 10}}>
+                            <View style={{flexDirection: 'row'}}>
+                                <View style={styles.activityIndicator}></View>
+                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
+                                    {formatDate(activity.date)}
+                                </Text>
+                            </View>
+                            <View style={{width: 250, marginLeft: 35}}>
+                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]} key={activity.id}>
+                                    Użytkownik {activity.user.firstName} dodał nowy posiłek:
+                                    <Text style={{color: '#1DB954'}}> {activity.dish.name}</Text>
+                                </Text>
+                            </View>
+                        </View>
+                    );
+                case 'LIKE_MEAL':
+                    return (
+                        <View style={{paddingBottom: 10}}>
+                            <View style={{flexDirection: 'row'}}>
+                                <View style={styles.activityIndicator}></View>
+                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
+                                    {formatDate(activity.date)}
+                                </Text>
+                            </View>
+                            <View style={{width: 250, marginLeft: 35}}>
+                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]} key={activity.id}>
+                                    Użytkownik {activity.user.firstName} polubił posiłek:
+                                    <Text style={{color: '#1DB954'}}> {activity.dish.name}</Text>
+                                </Text>
+                            </View>
+                        </View>
+                    );
+                case 'UNLIKE_MEAL':
+                    return (
+                        <View style={{paddingBottom: 10}}>
+                            <View style={{flexDirection: 'row'}}>
+                                <View style={styles.activityIndicator}></View>
+                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
+                                    {formatDate(activity.date)}
+                                </Text>
+                            </View>
+                            <View style={{width: 250, marginLeft: 35}}>
+                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]} key={activity.id}>
+                                    Użytkownik {activity.user.firstName} usunął z ulubionych posiłek:
+                                    <Text style={{color: '#1DB954'}}> {activity.dish.name}</Text>
+                                </Text>
+                            </View>
+                        </View>
+                    );
+                default:
+                    return null;
+            }
+        };
+
+        return (
+            <View style={{alignItems: 'center'}}>
+                {recentActivity.slice(0, 5).reverse().map((activity) => printRecentActivity(activity))}
+            </View>
+        );
     };
 
     return (
         <SafeAreaView style={styles.container}>
-            {profileDetails && profileMeals && likedMeals ? (
+            {profileDetails && profileMeals && likedMeals && recentActivity ? (
                 <ScrollView showsVerticalScrollIndicator={false}>
 
                     <View style={{alignSelf: "center"}}>
@@ -67,7 +168,8 @@ export const ProfileScreen = ({route, navigation}) => {
 
                     <View style={styles.infoContainer}>
                         <Text style={[styles.text, {fontWeight: "200", fontSize: 40}]}>{profileDetails.firstName}</Text>
-                        <Text style={[styles.text, {color: "#AEB5BC", fontSize: 18}]}>{'@' + profileDetails.login}</Text>
+                        <Text
+                            style={[styles.text, {color: "#AEB5BC", fontSize: 18}]}>{'@' + profileDetails.login}</Text>
                     </View>
 
                     <View style={{marginTop: 32}}>
@@ -99,27 +201,7 @@ export const ProfileScreen = ({route, navigation}) => {
                         </ScrollView>
                     </View>
                     <Text style={[styles.subText, {color: '#1DB954'}, styles.recent]}>Ostatnia aktywność</Text>
-                    <View style={{alignItems: "center"}}>
-                        <View style={styles.recentItem}>
-                            <View style={styles.activityIndicator}></View>
-                            <View style={{width: 250}}>
-                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
-                                    Użytkownik {profileDetails.firstName} <Text style={{fontWeight: "400"}}>zamieścił</Text> komentarz <Text
-                                    style={{fontWeight: "400"}}>pod posiłkiem: bla bla</Text>
-                                </Text>
-                            </View>
-                        </View>
-
-                        <View style={styles.recentItem}>
-                            <View style={styles.activityIndicator}></View>
-                            <View style={{width: 250}}>
-                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
-                                    Użytkownik {profileDetails.firstName} <Text style={{fontWeight: "400"}}>zamieścił</Text> komentarz <Text
-                                    style={{fontWeight: "400"}}>pod posiłkiem: bla bla</Text>
-                                </Text>
-                            </View>
-                        </View>
-                    </View>
+                    <RecentActivityComponent recentActivity={recentActivity}/>
                 </ScrollView>
             ) : (
                 <ActivityIndicator size="large" color='#1DB954'/>
@@ -129,14 +211,14 @@ export const ProfileScreen = ({route, navigation}) => {
 };
 
 const Stack = createNativeStackNavigator();
- export const ProfileStack = () => {
-     return (
-         <Stack.Navigator
-             initialRouteName="Profile"
-             screenOptions={{ headerShown: false }}
-         >
-             <Stack.Screen name="Profile" component={ProfileScreen} />
-             <Stack.Screen name="MealDetails" component={MealScreen} />
-         </Stack.Navigator>
-     );
- }
+export const ProfileStack = () => {
+    return (
+        <Stack.Navigator
+            initialRouteName="Profile"
+            screenOptions={{headerShown: false}}
+        >
+            <Stack.Screen name="Profile" component={ProfileScreen}/>
+            <Stack.Screen name="MealDetails" component={MealScreen}/>
+        </Stack.Navigator>
+    );
+}

@@ -56,3 +56,14 @@ CREATE TABLE IF NOT EXISTS liked_dishes
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (dish_id) REFERENCES dishes (id)
 );
+
+CREATE TABLE IF NOT EXISTS recent_activities
+(
+    id            INT AUTO_INCREMENT PRIMARY KEY,
+    user_id       INT,
+    dish_id       INT,
+    activity_type VARCHAR(250),
+    date          DATE,
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (dish_id) REFERENCES dishes (id)
+);

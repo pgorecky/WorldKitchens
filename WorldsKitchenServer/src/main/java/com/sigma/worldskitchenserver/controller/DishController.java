@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sigma.worldskitchenserver.dto.Dish.DishAddRequest;
 import com.sigma.worldskitchenserver.dto.Dish.DishDto;
 import com.sigma.worldskitchenserver.dto.User.UserDto;
+import com.sigma.worldskitchenserver.enums.ActivityType;
 import com.sigma.worldskitchenserver.enums.Region;
 import com.sigma.worldskitchenserver.mapper.DishMapper;
 import com.sigma.worldskitchenserver.model.Dish;
@@ -12,6 +13,7 @@ import com.sigma.worldskitchenserver.model.User;
 import com.sigma.worldskitchenserver.repository.DishRepository;
 import com.sigma.worldskitchenserver.repository.IngredientRepository;
 import com.sigma.worldskitchenserver.repository.UserRepository;
+import com.sigma.worldskitchenserver.service.RecentActivityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,13 +32,16 @@ public class DishController {
     IngredientRepository ingredientRepository;
     DishMapper dishMapper;
     ObjectMapper objectMapper;
+    RecentActivityService recentActivityService;
 
-    public DishController(DishRepository dishRepository, ObjectMapper objectMapper, DishMapper dishMapper, UserRepository userRepository, IngredientRepository ingredientRepository) {
+
+    public DishController(DishRepository dishRepository, ObjectMapper objectMapper, DishMapper dishMapper, UserRepository userRepository, IngredientRepository ingredientRepository, RecentActivityService recentActivityService) {
         this.dishRepository = dishRepository;
         this.objectMapper = objectMapper;
         this.dishMapper = dishMapper;
         this.userRepository = userRepository;
         this.ingredientRepository = ingredientRepository;
+        this.recentActivityService = recentActivityService;
     }
 
     @GetMapping("/all")
@@ -102,6 +107,8 @@ public class DishController {
             dishRepository.save(meal);
         });
 
+        recentActivityService.addActivity(user, dish.get(), ActivityType.LIKE_MEAL);
+
         return ResponseEntity.ok().build();
     }
 
@@ -120,6 +127,8 @@ public class DishController {
             userRepository.save(user);
             dishRepository.save(meal);
         });
+
+        recentActivityService.addActivity(user, dish.get(), ActivityType.UNLIKE_MEAL);
 
         return ResponseEntity.ok().build();
     }
@@ -171,6 +180,8 @@ public class DishController {
                 .collect(Collectors.toList());
 
         ingredientRepository.saveAll(ingredients);
+
+        recentActivityService.addActivity(user.get(), newDish, ActivityType.ADD_MEAL);
 
         return ResponseEntity.ok(dishMapper.toDishDto(newDish));
     }
