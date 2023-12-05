@@ -65,7 +65,9 @@ export const ProfileScreen = ({route, navigation}) => {
             switch (activity.activityType) {
                 case 'ADD_COMMENT':
                     return (
-                        <View style={{paddingBottom: 10}}>
+                        <View
+                            key={activity.id}
+                            style={{paddingBottom: 10}}>
                             <View style={{flexDirection: 'row'}}>
                                 <View style={styles.activityIndicator}></View>
                                 <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
@@ -82,7 +84,9 @@ export const ProfileScreen = ({route, navigation}) => {
                     );
                 case 'ADD_MEAL':
                     return (
-                        <View style={{paddingBottom: 10}}>
+                        <View
+                            key={activity.id}
+                            style={{paddingBottom: 10}}>
                             <View style={{flexDirection: 'row'}}>
                                 <View style={styles.activityIndicator}></View>
                                 <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
@@ -99,7 +103,9 @@ export const ProfileScreen = ({route, navigation}) => {
                     );
                 case 'LIKE_MEAL':
                     return (
-                        <View style={{paddingBottom: 10}}>
+                        <View
+                            key={activity.id}
+                            style={{paddingBottom: 10}}>
                             <View style={{flexDirection: 'row'}}>
                                 <View style={styles.activityIndicator}></View>
                                 <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
@@ -116,7 +122,9 @@ export const ProfileScreen = ({route, navigation}) => {
                     );
                 case 'UNLIKE_MEAL':
                     return (
-                        <View style={{paddingBottom: 10}}>
+                        <View
+                            key={activity.id}
+                            style={{paddingBottom: 10}}>
                             <View style={{flexDirection: 'row'}}>
                                 <View style={styles.activityIndicator}></View>
                                 <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
