@@ -40,7 +40,6 @@ export const ProfileScreen = ({route, navigation}) => {
 
                 const updatedActivity = await getMyRecentActivity();
                 setRecentActivity(updatedActivity)
-                console.log(updatedActivity)
             };
 
             fetchData();
@@ -139,7 +138,7 @@ export const ProfileScreen = ({route, navigation}) => {
 
         return (
             <View style={{alignItems: 'center'}}>
-                {recentActivity.slice(0, 5).reverse().map((activity) => printRecentActivity(activity))}
+                {recentActivity.reverse().slice(0, 5).map((activity) => printRecentActivity(activity))}
             </View>
         );
     };
