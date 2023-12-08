@@ -1,18 +1,74 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, Alert, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import {getLikedMeals, getMyProfileDetails, getMyProfileMeals, getMyRecentActivity} from "../services/UserService";
 import {styles} from '../styles/ProfileStyles'
-import {Button} from "react-native-elements";
 import {MealCard} from "../components/MealCard";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {MealScreen} from "./MealScreen";
 import {useFocusEffect} from "@react-navigation/native";
+import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
+import {firebase} from "../firebase";
 
 export const ProfileScreen = ({route, navigation}) => {
     const [profileDetails, setProfileDetails] = useState(null);
     const [profileMeals, setProfileMeals] = useState(null);
     const [likedMeals, setLikedMeals] = useState(null);
     const [recentActivity, setRecentActivity] = useState(null);
+    const [image, setImage] = useState(null);
+    const [uploading, setUploading] = useState(null);
+    const [uriPhoto, setUriPhoto] = useState(null)
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 4],
+            quality: 1
+        })
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri)
+            uploadMedia();
+        }
+    }
+
+    const uploadMedia = async () => {
+        setUploading(true);
+
+        try {
+            const {uri} = await FileSystem.getInfoAsync(image);
+            const blob = await new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+
+                xhr.onload = () => {
+                    resolve(xhr.response);
+                }
+
+                xhr.onerror = () => {
+                    reject(new TypeError('Request Failed'))
+                }
+
+                xhr.responseType = 'blob';
+
+                xhr.open('GET', uri, true)
+                xhr.send(null);
+            })
+
+            const fileName = image.substring(image.lastIndexOf('/') + 1);
+            const ref = firebase.storage().ref().child(fileName);
+
+            await ref.put(blob);
+            setUploading(false);
+            Alert.alert('Zdjęcie dodane pomyślnie');
+            setImage(null);
+            setUriPhoto(uri.valueOf().toString());
+            console.log('sieeemsa' + uriPhoto);
+        } catch (error) {
+            console.error(error);
+            setUploading(false)
+        }
+    };
 
     useEffect(() => {
         const fetchProfileDetails = async () => {
@@ -158,18 +214,25 @@ export const ProfileScreen = ({route, navigation}) => {
 
                     <View style={{alignSelf: "center"}}>
                         <View style={styles.profileImage}>
-                            <Image source={require("../assets/profile/t-image2.jpg")} style={styles.image}
+                            <Image source={{
+                                uri: profileDetails.imageUrl
+                            }}
+                                   style={styles.image}
                                    resizeMode="center"></Image>
                         </View>
                         <View style={styles.add}>
-                            <Button
-                                title={'+'}
-                                buttonStyle={{
+                            <TouchableOpacity
+                                style={{
                                     backgroundColor: '#1DB954',
                                     borderRadius: 30,
                                     width: 40,
-                                    height: 40
-                                }}></Button>
+                                    height: 40,
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}
+                                onPress={pickImage}>
+                                <Text style={{color: 'white', fontSize: 20}}>+</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
 

@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS users
     first_name VARCHAR(50),
     last_name  VARCHAR(50),
     login      VARCHAR(50),
-    password   VARCHAR(225)
+    password   VARCHAR(225),
+    image_url  VARCHAR(225)
 );
 
 CREATE TABLE IF NOT EXISTS dishes

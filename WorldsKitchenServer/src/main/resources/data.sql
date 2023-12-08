@@ -1,14 +1,17 @@
-INSERT INTO users (first_name, last_name, login, password)
-VALUES ('Weronika', 'Jankowska', 'werka', '$2a$10$I2PjUfjqAUC2D8ebGwUhjO9.5bSKdPG5ECYq8Rhsyl/lF9fYBZv4.');
+-- Użytkownicy
+INSERT INTO users (first_name, last_name, login, password, image_url)
+VALUES ('Weronika', 'Jankowska', 'werka', '$2a$10$I2PjUfjqAUC2D8ebGwUhjO9.5bSKdPG5ECYq8Rhsyl/lF9fYBZv4.', 'https://firebasestorage.googleapis.com/v0/b/worldskitchenstorage.appspot.com/o/t-image2.jpg?alt=media&token=73897eab-47fd-44b6-b988-4db61e13a7b8');
 
-INSERT INTO users (first_name, last_name, login, password)
-VALUES ('Patryk', 'Górecki', 'patryczek', '$2a$10$I2PjUfjqAUC2D8ebGwUhjO9.5bSKdPG5ECYq8Rhsyl/lF9fYBZv4.');
+INSERT INTO users (first_name, last_name, login, password, image_url)
+VALUES ('Patryk', 'Górecki', 'patryczek', '$2a$10$I2PjUfjqAUC2D8ebGwUhjO9.5bSKdPG5ECYq8Rhsyl/lF9fYBZv4.', 'https://firebasestorage.googleapis.com/v0/b/worldskitchenstorage.appspot.com/o/t-image1.png?alt=media&token=cb2145ba-0b48-4deb-8805-ff52ca049522');
 
 -- Dodaj dania
+-- ITA1
 INSERT INTO dishes (name, description, preparation_time, calories, portion_size, region, level, user_id)
 VALUES ('Spaghetti Carbonara',
         'potrawa kuchni włoskiej złożona z makaronu, jajek, pancetty lub guanciale, sera pecorino romano lub parmezanu oraz czarnego pieprzu. Niepoprawnym jest mówienie o „sosie carbonara”, ponieważ makaron i pozostałe składniki stanowią tu nierozerwalną całość',
         '30min', 600, 3, 'ITALIAN', 'MEDIUM', 1);
+
 
 INSERT INTO dishes (name, description, calories, portion_size, region, level, user_id)
 VALUES ('Margherita Pizza',
