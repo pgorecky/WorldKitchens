@@ -89,8 +89,6 @@ export const MealScreen = ({route, navigation}) => {
 
         const updatedLikeState = await checkIfIsLiked(mealId);
         setIsLiked(updatedLikeState);
-
-        // navigation.navigate('Profile', { refreshLikedMeals: true });
     }
 
     return (
@@ -237,7 +235,9 @@ export const MealScreen = ({route, navigation}) => {
                             {mealDetails.comments.map((comment, index) => (
                                 <View key={index} style={styles.commentContainer}>
                                     <View>
-                                        <Image source={require("../assets/profile/t-image2.jpg")}
+                                        <Image source={{
+                                            uri: comment.author.imageUrl
+                                        }}
                                                style={styles.profileImage}></Image>
                                     </View>
 
