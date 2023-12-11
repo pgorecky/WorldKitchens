@@ -47,15 +47,15 @@ const RegionScreen = ({route, navigation}) => {
     function mapRegionToTitle(region) {
         switch (region) {
             case 'ITALIAN':
-                return 'Kuchnia Włoska';
+                return 'Kuchnia włoska';
             case 'POLISH':
-                return 'Kuchnia Polska';
+                return 'Kuchnia polska';
             case 'MEXICAN':
-                return 'Kuchnia Meksykańska';
+                return 'Kuchnia meksykańska';
             case 'AMERICAN':
-                return 'Kuchnia Amerykańska';
+                return 'Kuchnia amerykańska';
             case 'ASIAN':
-                return 'Kuchnia Azjatycka';
+                return 'Kuchnia azjatycka';
             default:
                 return region;
         }

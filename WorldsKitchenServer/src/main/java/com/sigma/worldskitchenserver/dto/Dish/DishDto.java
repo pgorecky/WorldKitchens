@@ -36,4 +36,6 @@ public class DishDto {
     private List<String> preparationSteps;
 
     private List<CommentDto> comments;
+
+    private String imageUrl;
 }

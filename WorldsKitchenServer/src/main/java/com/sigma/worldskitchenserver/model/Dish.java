@@ -62,4 +62,6 @@ public class Dish {
     @ManyToMany(mappedBy = "likedDishes")
     private List<User> likedByUsers;
 
+    @Column(name = "image_url")
+    private String imageUrl;
 }

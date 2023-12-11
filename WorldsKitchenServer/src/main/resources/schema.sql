@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS dishes
 (
     id               INT PRIMARY KEY AUTO_INCREMENT,
     name             VARCHAR(255),
+    image_url        VARCHAR(225),
     description      VARCHAR(255),
     preparation_time VARCHAR(255),
     calories         INT,

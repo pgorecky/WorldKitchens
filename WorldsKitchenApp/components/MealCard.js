@@ -5,15 +5,15 @@ export const MealCard = ({meal, containerWidth}) => {
     function mapRegionToText(region) {
         switch (region) {
             case 'ITALIAN':
-                return 'Włoska';
+                return 'włoska';
             case 'POLISH':
-                return 'Polska';
+                return 'polska';
             case 'MEXICAN':
-                return 'Meksykańska';
+                return 'meksykańska';
             case 'AMERICAN':
-                return 'Amerykańska';
+                return 'amerykańska';
             case 'ASIAN':
-                return 'Azjatycka';
+                return 'azjatycka';
             default:
                 return region;
         }
@@ -21,7 +21,9 @@ export const MealCard = ({meal, containerWidth}) => {
     return (
         <View key={meal.id} style={[styles.mediaImageContainer, {width: containerWidth}]}>
             <Image
-                source={require("../assets/profile/media1.jpg")}
+                source={{
+                    uri: meal.imageUrl
+                }}
                 style={styles.image}
                 resizeMode="cover"
             />

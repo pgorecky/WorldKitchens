@@ -124,19 +124,14 @@ export const MealScreen = ({route, navigation}) => {
 
                         </View>
 
-                        <Image source={require("../assets/profile/media1.jpg")} style={styles.mealImage}></Image>
+                        <Image source={{
+                            uri: mealDetails.imageUrl
+                        }} style={styles.mealImage}></Image>
                         <Text style={styles.mealDesc}>{mealDetails.description}</Text>
 
                         <View style={styles.authorContainer}>
-                            {/*<View style={{paddingTop: 5, paddingRight: 120}}>*/}
-                            {/*    <Ionicons*/}
-                            {/*        // name="heart-outline"*/}
-                            {/*        name="heart"*/}
-                            {/*        size={20}*/}
-                            {/*        color="red"*/}
-                            {/*    />*/}
-                            {/*</View>*/}
-                            <Text style={styles.authCall}>Autor przepisu:</Text>
+
+                        <Text style={styles.authCall}>Autor przepisu:</Text>
                             <Text
                                 style={styles.author}>{mealDetails.author.firstName} {mealDetails.author.lastName}</Text>
                         </View>
