@@ -1,11 +1,14 @@
 import * as React from 'react';
-import {useRef} from 'react';
+import {useRef, useState} from 'react';
 import {Image, ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {styles} from "../styles/MealDetailsStyles";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import {Button} from "react-native-elements";
 import {Picker} from "@react-native-picker/picker";
 import {request} from "../services/axios_config";
+import * as ImagePicker from "expo-image-picker";
+import * as FileSystem from "expo-file-system";
+import {firebase} from "../firebase";
+
 
 export default function AddMealScreen({navigation}) {
 
@@ -20,6 +23,9 @@ export default function AddMealScreen({navigation}) {
     const [ingredient, setIngredient] = React.useState('');
     const [portion, setPortion] = React.useState('');
     const [ingredients, setIngredients] = React.useState([]);
+    const [image, setImage] = useState(null);
+    const [uploading, setUploading] = useState(null);
+    const [uriPhoto, setUriPhoto] = useState(null)
 
     const stepInputRef = useRef(null);
     const ingredientInputRef = useRef(null);
@@ -47,6 +53,7 @@ export default function AddMealScreen({navigation}) {
 
     const handleAddMeal = async () => {
         try {
+            console.log('wysylam' + uriPhoto)
             const response = await request(
                 'POST',
                 '/dishes/add',
@@ -60,6 +67,7 @@ export default function AddMealScreen({navigation}) {
                     level: selectedLevel,
                     preparationSteps: preparationSteps,
                     region: selectedRegion,
+                    imageUrl: uriPhoto
                 }
             );
 
@@ -74,6 +82,69 @@ export default function AddMealScreen({navigation}) {
             console.error('Adding meal failed', error.message);
         }
     }
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 4],
+            quality: 1
+        })
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri)
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            if (image) {
+                uploadMedia();
+            } else {
+                console.error("Error: Image URI is undefined or empty.");
+            }
+        }
+    }
+
+    const uploadMedia = async () => {
+        setUploading(true);
+
+        let uri;
+
+        try {
+            if (image) {
+                const {uri: imageUri} = await FileSystem.getInfoAsync(image);
+                console.log('siema' + imageUri.valueOf().toString())
+                uri = imageUri;
+            }
+
+            const blob = await new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+
+                xhr.onload = () => {
+                    resolve(xhr.response);
+                }
+
+                xhr.onerror = () => {
+                    reject(new TypeError('Request Failed'))
+                }
+
+                xhr.responseType = 'blob';
+
+                xhr.open('GET', uri, true)
+                xhr.send(null);
+            })
+
+            const fileName = image.substring(image.lastIndexOf('/') + 1);
+            const ref = firebase.storage().ref().child(fileName);
+            const uploadTaskSnapshot = await ref.put(blob);
+            const downloadURL = await uploadTaskSnapshot.ref.getDownloadURL();
+            console.log(downloadURL)
+            setUriPhoto(downloadURL);
+            setUploading(false);
+            setImage(null);
+        } catch (error) {
+            console.error(error);
+            setUploading(false)
+        }
+    };
 
 
     return (
@@ -132,9 +203,18 @@ export default function AddMealScreen({navigation}) {
                         <Image source={require("../assets/profile/DEFAULT_PHOTO.jpg")} style={styles.mealImage}></Image>
                     </View>
                     <View style={styles.addPhotoContainer}>
-                        <Button
-                            title={'+'}
-                            buttonStyle={styles.addPhotoButton}></Button>
+                        <TouchableOpacity
+                            style={{
+                                backgroundColor: '#1DB954',
+                                borderRadius: 30,
+                                width: 40,
+                                height: 40,
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}
+                            onPress={pickImage}>
+                            <Text style={{color: 'white', fontSize: 20}}>+</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
 
