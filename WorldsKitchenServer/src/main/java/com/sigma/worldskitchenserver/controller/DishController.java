@@ -167,6 +167,9 @@ public class DishController {
         Dish newDish = dishMapper.toDish(dish);
         user.ifPresent(newDish::setAuthor);
 
+        newDish.setImageUrl(dish.getImageUrl());
+        System.out.println("URI: " + newDish.getImageUrl());
+
         dishRepository.save(newDish);
 
         List<Ingredient> ingredients = dish.getIngredients().stream()

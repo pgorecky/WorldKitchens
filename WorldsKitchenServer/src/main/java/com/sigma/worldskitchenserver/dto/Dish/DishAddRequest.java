@@ -34,4 +34,5 @@ public class DishAddRequest {
 
     private List<String> preparationSteps;
 
+    private String imageUrl;
 }
