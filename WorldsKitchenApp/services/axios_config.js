@@ -1,6 +1,9 @@
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+axios.defaults.baseURL = 'http://192.168.1.23:8080';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+
 export const getAuthToken = async () => {
     try {
         return await AsyncStorage.getItem('auth_token');
@@ -25,9 +28,6 @@ export const removeAuthHeader = async () => {
         console.error('Error removing auth token')
     }
 }
-
-axios.defaults.baseURL = 'http://192.168.1.23:8080';
-axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export const request = async (method, url, data) => {
     let headers = {};

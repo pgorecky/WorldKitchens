@@ -3,12 +3,14 @@ package com.sigma.worldskitchenserver.service;
 import com.sigma.worldskitchenserver.dto.User.CredentialsDto;
 import com.sigma.worldskitchenserver.dto.User.SignUpDto;
 import com.sigma.worldskitchenserver.dto.User.UserDto;
-import com.sigma.worldskitchenserver.model.User;
 import com.sigma.worldskitchenserver.exception.AppException;
 import com.sigma.worldskitchenserver.mapper.UserMapper;
+import com.sigma.worldskitchenserver.model.User;
 import com.sigma.worldskitchenserver.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -54,5 +56,13 @@ public class UserService {
         return userMapper.toUserDto(user);
     }
 
+    public Optional<User> getCurrentUser() {
+        UserDto userDto = getCurrentUserDto();
+        return userRepository.findById(userDto.getId());
+    }
 
+    public UserDto getCurrentUserDto() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (UserDto) authentication.getPrincipal();
+    }
 }
