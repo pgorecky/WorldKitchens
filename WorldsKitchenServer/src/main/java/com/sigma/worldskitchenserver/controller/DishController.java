@@ -6,24 +6,20 @@ import com.sigma.worldskitchenserver.enums.Region;
 import com.sigma.worldskitchenserver.mapper.DishMapper;
 import com.sigma.worldskitchenserver.repository.DishRepository;
 import com.sigma.worldskitchenserver.service.DishService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/dishes")
 public class DishController {
-    DishMapper dishMapper;
-    DishService dishService;
-    DishRepository dishRepository;
 
-
-    public DishController(DishMapper dishMapper, DishService dishService, DishRepository dishRepository) {
-        this.dishMapper = dishMapper;
-        this.dishService = dishService;
-        this.dishRepository = dishRepository;
-    }
+    private final DishMapper dishMapper;
+    private final DishService dishService;
+    private final DishRepository dishRepository;
 
     @GetMapping("/my")
     public ResponseEntity<List<DishDto>> getMyDishes() {

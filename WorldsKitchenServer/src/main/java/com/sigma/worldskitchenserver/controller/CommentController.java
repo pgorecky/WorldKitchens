@@ -6,6 +6,7 @@ import com.sigma.worldskitchenserver.mapper.CommentMapper;
 import com.sigma.worldskitchenserver.model.Comment;
 import com.sigma.worldskitchenserver.service.CommentService;
 import com.sigma.worldskitchenserver.service.RecentActivityService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,17 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/comment")
 public class CommentController {
-    CommentMapper commentMapper;
-    RecentActivityService recentActivityService;
-    CommentService commentService;
 
-    public CommentController(CommentMapper commentMapper, RecentActivityService recentActivityService, CommentService commentService) {
-        this.commentMapper = commentMapper;
-        this.recentActivityService = recentActivityService;
-        this.commentService = commentService;
-    }
+    private final CommentMapper commentMapper;
+    private final RecentActivityService recentActivityService;
+    private final CommentService commentService;
 
     @PostMapping("/add")
     public ResponseEntity<?> addComment(@RequestBody CommentRequestDto comment) {
