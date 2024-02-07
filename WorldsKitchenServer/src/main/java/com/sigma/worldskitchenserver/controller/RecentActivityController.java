@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/activity")
 public class RecentActivityController {
-
     RecentActivityService recentActivityService;
 
     public RecentActivityController(RecentActivityService recentActivityService) {
@@ -20,7 +19,7 @@ public class RecentActivityController {
     }
 
     @GetMapping("/my")
-    public ResponseEntity<?> getUsersRecentActivity() {
+    public ResponseEntity<List<RecentActivityDto>> getUsersRecentActivity() {
         List<RecentActivityDto> activities = recentActivityService.getCurrentUserRecentActivitiesList();
 
         return ResponseEntity.ok(activities);

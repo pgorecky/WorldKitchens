@@ -11,9 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -24,24 +23,18 @@ public class RecentActivityService {
     private final RecentActivityMapper recentActivityMapper;
 
     public void addActivity(User user, Dish dish, ActivityType activityType) {
-        RecentActivity activity = new RecentActivity();
-
-        activity.setUser(user);
-        activity.setDish(dish);
-        activity.setActivityType(activityType);
-        activity.setDate(LocalDateTime.now());
-
+        RecentActivity activity = new RecentActivity(user, dish, activityType, LocalDateTime.now());
         recentActivityRepository.save(activity);
     }
 
     public List<RecentActivityDto> getCurrentUserRecentActivitiesList() {
-        Optional<User> user = userService.getCurrentUser();
+        User currentUser = userService.getCurrentUser()
+                .orElseThrow(() -> new IllegalStateException("User not found"));
 
-        List<RecentActivity> activities = recentActivityRepository.findByUser(user.get());
-        List<RecentActivityDto> activitiesDto = new ArrayList<>();
+        List<RecentActivity> activities = recentActivityRepository.findByUser(currentUser);
 
-        activities.forEach(activity -> activitiesDto.add(recentActivityMapper.toRecentActivityDto(activity)));
-
-        return activitiesDto;
+        return activities.stream()
+                .map(recentActivityMapper::toRecentActivityDto)
+                .collect(Collectors.toList());
     }
 }

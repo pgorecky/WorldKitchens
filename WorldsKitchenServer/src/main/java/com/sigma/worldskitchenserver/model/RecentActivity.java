@@ -34,4 +34,11 @@ public class RecentActivity {
 
     @Column(name = "date")
     private LocalDateTime date;
+
+    public RecentActivity(User user, Dish dish, ActivityType activityType, LocalDateTime date) {
+        this.user = user;
+        this.dish = dish;
+        this.activityType = activityType;
+        this.date = date;
+    }
 }

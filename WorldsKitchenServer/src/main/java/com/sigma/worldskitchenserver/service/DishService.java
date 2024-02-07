@@ -15,7 +15,6 @@ import com.sigma.worldskitchenserver.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,34 +31,22 @@ public class DishService {
     private final IngredientRepository ingredientRepository;
 
     public List<DishDto> mapDishesToDishesDto(List<Dish> dishes) {
-        List<DishDto> dtoDishes = new ArrayList<>();
-
-        dishes.forEach(dish -> {
-            DishDto dishDto = dishMapper.toDishDto(dish);
-            dtoDishes.add(dishDto);
-        });
-
-        return dtoDishes;
+        return dishes.stream()
+                .map(dishMapper::toDishDto)
+                .collect(Collectors.toList());
     }
 
     public List<DishDto> getCurrentUserDishes() {
         UserDto user = userService.getCurrentUserDto();
-
         List<Dish> allDishes = dishRepository.findByAuthor_Id(user.getId());
 
         return mapDishesToDishesDto(allDishes);
-
     }
 
     public List<DishDto> getUserLikedDishes() {
-        Optional<User> user = userService.getCurrentUser();
-        List<Dish> likedDishes = new ArrayList<>();
-
-        if (user.isPresent()) {
-            likedDishes = dishRepository.findByLikedByUsersContaining(user.get());
-        }
-
-        return mapDishesToDishesDto(likedDishes);
+        Optional<User> currentUser = userService.getCurrentUser();
+        return currentUser.map(user -> mapDishesToDishesDto(dishRepository.findByLikedByUsersContaining(user)))
+                .orElseGet(List::of);
     }
 
     public void likeDishById(Long dishId) {
@@ -89,33 +76,33 @@ public class DishService {
     }
 
     public List<DishDto> getDishesByRegion(Region region) {
-        List<Dish> dishesByRegion = dishRepository.findByRegion(region);
-
-        return mapDishesToDishesDto(dishesByRegion);
+        return mapDishesToDishesDto(dishRepository.findByRegion(region));
     }
 
     public Boolean checkIsDishLiked(Long dishId) {
-        Optional<User> user = userService.getCurrentUser();
-        Optional<Dish> dish = dishRepository.findById(dishId);
-        if (user.isPresent() && dish.isPresent()) {
-            return dish.get().getLikedByUsers().contains(user.get());
+        User currentUser = userService.getCurrentUser().orElse(null);
+        if (currentUser != null) {
+            return dishRepository.findById(dishId)
+                    .map(dish -> dish.getLikedByUsers().contains(currentUser))
+                    .orElse(false);
         }
         return false;
     }
 
     public DishDto createDish(DishAddRequest dish) {
         Dish newDish = dishMapper.toDish(dish);
+
         userService.getCurrentUser().ifPresent(user -> {
             newDish.setAuthor(user);
             recentActivityService.addActivity(user, newDish, ActivityType.ADD_MEAL);
         });
 
-        dishRepository.save(newDish);
+        Dish savedDish = dishRepository.save(newDish);
 
         List<Ingredient> ingredients = dish.getIngredients().stream()
                 .map(ingredient -> {
                     Ingredient newIngredient = new Ingredient();
-                    newIngredient.setDish(newDish);
+                    newIngredient.setDish(savedDish);
                     newIngredient.setIngredientName(ingredient.getIngredientName());
                     newIngredient.setPortion(ingredient.getPortion());
                     return newIngredient;
@@ -124,6 +111,6 @@ public class DishService {
 
         ingredientRepository.saveAll(ingredients);
 
-        return dishMapper.toDishDto(newDish);
+        return dishMapper.toDishDto(savedDish);
     }
 }

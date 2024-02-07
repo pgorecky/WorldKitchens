@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController {
-
     UserService userService;
 
     public UserController(UserService userService) {
@@ -16,7 +15,7 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<?> getPrincipleDetails() {
+    public ResponseEntity<UserDto> getPrincipleDetails() {
         UserDto currentUser = userService.getCurrentUserDto();
 
         return ResponseEntity.ok(currentUser);

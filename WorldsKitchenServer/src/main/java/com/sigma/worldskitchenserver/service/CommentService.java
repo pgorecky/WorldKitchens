@@ -9,8 +9,6 @@ import com.sigma.worldskitchenserver.repository.DishRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @RequiredArgsConstructor
 @Service
 public class CommentService {
@@ -20,16 +18,17 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     public Comment addNewComment(CommentRequestDto comment) {
-        Optional<User> user = userService.getCurrentUser();
-        Optional<Dish> dish = dishRepository.findById(comment.getDishId());
+        User currentUser = userService.getCurrentUser()
+                .orElseThrow(() -> new IllegalStateException("User not found"));
+
+        Dish dish = dishRepository.findById(comment.getDishId())
+                .orElseThrow(() -> new IllegalArgumentException("Dish not found"));
 
         Comment newComment = new Comment();
-
-        user.ifPresent(newComment::setAuthor);
-        dish.ifPresent(newComment::setDish);
+        newComment.setAuthor(currentUser);
+        newComment.setDish(dish);
         newComment.setContent(comment.getContent());
 
-        commentRepository.save(newComment);
-        return newComment;
+        return commentRepository.save(newComment);
     }
 }
