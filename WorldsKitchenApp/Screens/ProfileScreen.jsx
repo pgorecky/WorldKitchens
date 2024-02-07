@@ -10,7 +10,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 import {firebase} from "../firebase";
 
-export const ProfileScreen = ({route, navigation}) => {
+export const ProfileScreen = ({navigation}) => {
     const [profileDetails, setProfileDetails] = useState(null);
     const [profileMeals, setProfileMeals] = useState(null);
     const [likedMeals, setLikedMeals] = useState(null);
@@ -110,8 +110,7 @@ export const ProfileScreen = ({route, navigation}) => {
         const printRecentActivity = (activity) => {
             const formatDate = (dateArray) => {
                 const [year, month, day, hours, minutes] = dateArray;
-                const formattedDate = `${padWithZero(day)}-${padWithZero(month)}-${year} ${padWithZero(hours)}:${padWithZero(minutes)}`;
-                return formattedDate;
+                return `${padWithZero(day)}-${padWithZero(month)}-${year} ${padWithZero(hours)}:${padWithZero(minutes)}`;
             };
 
             const padWithZero = (number) => {

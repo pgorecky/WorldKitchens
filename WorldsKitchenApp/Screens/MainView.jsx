@@ -114,9 +114,6 @@ const MainView = ({navigation}) => {
                 <Tab.Screen
                     options={{headerShown: false}}
                     name={dishes} component={DishesStack}/>
-                {/*<Tab.Screen*/}
-                {/*    options={{headerShown: false}}*/}
-                {/*    name={favourites} component={Favourites}/>*/}
                 <Tab.Screen
                     options={{headerShown: false}}
                     name={profilName} component={ProfileStack}/>
