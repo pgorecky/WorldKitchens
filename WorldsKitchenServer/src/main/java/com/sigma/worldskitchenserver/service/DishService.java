@@ -13,6 +13,8 @@ import com.sigma.worldskitchenserver.repository.DishRepository;
 import com.sigma.worldskitchenserver.repository.IngredientRepository;
 import com.sigma.worldskitchenserver.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class DishService {
+    private static final Logger logger = LoggerFactory.getLogger(DishService.class);
 
     private final UserService userService;
     private final DishRepository dishRepository;
@@ -58,6 +61,7 @@ public class DishService {
                 userRepository.save(user);
                 dishRepository.save(meal);
                 recentActivityService.addActivity(user, meal, ActivityType.LIKE_MEAL);
+                logger.info("User with id: {} liked dish {}", user.getId(), meal.getName());
             });
         });
     }
@@ -71,6 +75,7 @@ public class DishService {
                 userRepository.save(user);
                 dishRepository.save(meal);
                 recentActivityService.addActivity(user, meal, ActivityType.UNLIKE_MEAL);
+                logger.info("User with id: {} unliked dish {}", user.getId(), meal.getName());
             });
         });
     }
@@ -95,6 +100,7 @@ public class DishService {
         userService.getCurrentUser().ifPresent(user -> {
             newDish.setAuthor(user);
             recentActivityService.addActivity(user, newDish, ActivityType.ADD_MEAL);
+            logger.info("User with id: {} created new dish {}", user.getId(), newDish.getName());
         });
 
         Dish savedDish = dishRepository.save(newDish);

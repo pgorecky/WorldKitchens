@@ -8,6 +8,8 @@ import com.sigma.worldskitchenserver.mapper.UserMapper;
 import com.sigma.worldskitchenserver.model.User;
 import com.sigma.worldskitchenserver.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,18 +22,23 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
     public UserDto login(CredentialsDto credentialsDto) {
+        logger.info("Attempting login for user: {}", credentialsDto.getLogin());
         User user = userRepository.findByLogin(credentialsDto.getLogin())
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
 
         if (passwordEncoder.matches(CharBuffer.wrap(credentialsDto.getPassword()), user.getPassword())) {
+            logger.info("User login successful: {}", credentialsDto.getLogin());
             return userMapper.toUserDto(user);
         }
+
+        logger.warn("User login failed: {}", credentialsDto.getLogin());
         throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
     }
 
@@ -39,6 +46,7 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findByLogin(userDto.getLogin());
 
         if (optionalUser.isPresent()) {
+            logger.warn("Registration failed: Login already exists: {}", userDto.getLogin());
             throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
         }
 
@@ -47,6 +55,7 @@ public class UserService {
 
         User savedUser = userRepository.save(user);
 
+        logger.info("User registration successful: {}", userDto.getLogin());
         return userMapper.toUserDto(savedUser);
     }
 
