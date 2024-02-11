@@ -49,7 +49,6 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "dish_id")
     )
-
     private List<Dish> likedDishes;
 
     @Column(name = "image_url")

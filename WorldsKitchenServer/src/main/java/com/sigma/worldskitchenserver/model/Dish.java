@@ -23,14 +23,13 @@ public class Dish {
 
     private String name;
 
-    @Column(name = "description", length = 255)
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "preparation_time", length = 255)
+    @Column(name = "preparation_time")
     private String preparationTime;
 
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
-//    @JsonManagedReference
     private List<Ingredient> ingredients;
 
     private int calories;
@@ -48,7 +47,6 @@ public class Dish {
     private User author;
 
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
-//    @JsonManagedReference
     private List<Comment> comments;
 
     @ElementCollection
@@ -56,11 +54,8 @@ public class Dish {
             name = "preparation_steps",
             joinColumns = @JoinColumn(name = "dish_id")
     )
-    @Column(name = "step", length = 255)
+    @Column(name = "step")
     private List<String> preparationSteps;
-
-    @ManyToMany(mappedBy = "likedDishes")
-    private List<User> likedByUsers;
 
     @Column(name = "image_url")
     private String imageUrl;

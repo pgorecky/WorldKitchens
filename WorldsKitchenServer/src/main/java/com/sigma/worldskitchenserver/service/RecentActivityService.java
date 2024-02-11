@@ -28,8 +28,7 @@ public class RecentActivityService {
     }
 
     public List<RecentActivityDto> getCurrentUserRecentActivitiesList() {
-        User currentUser = userService.getCurrentUser()
-                .orElseThrow(() -> new IllegalStateException("User not found"));
+        User currentUser = userService.getCurrentUser();
 
         List<RecentActivity> activities = recentActivityRepository.findByUser(currentUser);
 

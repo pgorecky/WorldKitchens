@@ -4,6 +4,7 @@ import com.sigma.worldskitchenserver.dto.User.CredentialsDto;
 import com.sigma.worldskitchenserver.dto.User.SignUpDto;
 import com.sigma.worldskitchenserver.dto.User.UserDto;
 import com.sigma.worldskitchenserver.exception.AppException;
+import com.sigma.worldskitchenserver.exception.ResourceNotFoundException;
 import com.sigma.worldskitchenserver.mapper.UserMapper;
 import com.sigma.worldskitchenserver.model.User;
 import com.sigma.worldskitchenserver.repository.UserRepository;
@@ -65,9 +66,10 @@ public class UserService {
         return userMapper.toUserDto(user);
     }
 
-    public Optional<User> getCurrentUser() {
+    public User getCurrentUser() {
         UserDto userDto = getCurrentUserDto();
-        return userRepository.findById(userDto.getId());
+        Optional<User> user = userRepository.findById(userDto.getId());
+        return user.orElseThrow(() -> new ResourceNotFoundException("User", "id", user));
     }
 
     public UserDto getCurrentUserDto() {

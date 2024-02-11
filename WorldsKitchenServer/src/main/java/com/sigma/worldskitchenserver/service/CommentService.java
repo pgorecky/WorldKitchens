@@ -21,8 +21,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     public Comment addNewComment(CommentRequestDto comment) {
-        User currentUser = userService.getCurrentUser()
-                .orElseThrow(() -> new IllegalStateException("User not found"));
+        User currentUser = userService.getCurrentUser();
         Dish dish = dishRepository.findById(comment.getDishId())
                 .orElseThrow(() -> new IllegalArgumentException("Dish not found"));
 

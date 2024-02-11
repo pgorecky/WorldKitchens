@@ -47,36 +47,31 @@ public class DishService {
     }
 
     public List<DishDto> getUserLikedDishes() {
-        Optional<User> currentUser = userService.getCurrentUser();
-        return currentUser.map(user -> mapDishesToDishesDto(dishRepository.findByLikedByUsersContaining(user)))
-                .orElseGet(List::of);
+        User currentUser = userService.getCurrentUser();
+        return mapDishesToDishesDto(currentUser.getLikedDishes());
     }
 
     public void likeDishById(Long dishId) {
-        userService.getCurrentUser().ifPresent(user -> {
-            Optional<Dish> dish = dishRepository.findById(dishId);
-            dish.ifPresent(meal -> {
-                user.getLikedDishes().add(meal);
-                meal.getLikedByUsers().add(user);
-                userRepository.save(user);
-                dishRepository.save(meal);
-                recentActivityService.addActivity(user, meal, ActivityType.LIKE_MEAL);
-                logger.info("User with id: {} liked dish {}", user.getId(), meal.getName());
-            });
+        User user = userService.getCurrentUser();
+        Optional<Dish> dish = dishRepository.findById(dishId);
+        dish.ifPresent(meal -> {
+            user.getLikedDishes().add(meal);
+            userRepository.save(user);
+            dishRepository.save(meal);
+            recentActivityService.addActivity(user, meal, ActivityType.LIKE_MEAL);
+            logger.info("User with id: {} liked dish {}", user.getId(), meal.getName());
         });
     }
 
     public void unlikeDishById(Long dishId) {
-        userService.getCurrentUser().ifPresent(user -> {
-            Optional<Dish> dish = dishRepository.findById(dishId);
-            dish.ifPresent(meal -> {
-                user.getLikedDishes().remove(meal);
-                meal.getLikedByUsers().remove(user);
-                userRepository.save(user);
-                dishRepository.save(meal);
-                recentActivityService.addActivity(user, meal, ActivityType.UNLIKE_MEAL);
-                logger.info("User with id: {} unliked dish {}", user.getId(), meal.getName());
-            });
+        User user = userService.getCurrentUser();
+        Optional<Dish> dish = dishRepository.findById(dishId);
+        dish.ifPresent(meal -> {
+            user.getLikedDishes().remove(meal);
+            userRepository.save(user);
+            dishRepository.save(meal);
+            recentActivityService.addActivity(user, meal, ActivityType.UNLIKE_MEAL);
+            logger.info("User with id: {} unliked dish {}", user.getId(), meal.getName());
         });
     }
 
@@ -85,23 +80,19 @@ public class DishService {
     }
 
     public Boolean checkIsDishLiked(Long dishId) {
-        User currentUser = userService.getCurrentUser().orElse(null);
-        if (currentUser != null) {
-            return dishRepository.findById(dishId)
-                    .map(dish -> dish.getLikedByUsers().contains(currentUser))
-                    .orElse(false);
-        }
-        return false;
+        User currentUser = userService.getCurrentUser();
+        return dishRepository.findById(dishId)
+                .map(dish -> currentUser.getLikedDishes().contains(dish))
+                .orElse(false);
     }
 
     public DishDto createDish(DishAddRequest dish) {
         Dish newDish = dishMapper.toDish(dish);
 
-        userService.getCurrentUser().ifPresent(user -> {
-            newDish.setAuthor(user);
-            recentActivityService.addActivity(user, newDish, ActivityType.ADD_MEAL);
-            logger.info("User with id: {} created new dish {}", user.getId(), newDish.getName());
-        });
+        User user = userService.getCurrentUser();
+        newDish.setAuthor(user);
+        recentActivityService.addActivity(user, newDish, ActivityType.ADD_MEAL);
+        logger.info("User with id: {} created new dish {}", user.getId(), newDish.getName());
 
         Dish savedDish = dishRepository.save(newDish);
 
