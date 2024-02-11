@@ -22,9 +22,9 @@ public class Ingredient {
     @JoinColumn(name = "dish_id")
     private Dish dish;
 
-    @Column(name = "ingredient_name", length = 255)
+    @Column(name = "ingredient_name")
     private String ingredientName;
 
-    @Column(name = "portion", length = 255)
+    @Column(name = "portion")
     private String portion;
 }

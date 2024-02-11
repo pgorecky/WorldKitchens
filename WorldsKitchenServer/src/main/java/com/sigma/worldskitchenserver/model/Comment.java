@@ -19,7 +19,6 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "dish_id")
-//    @JsonBackReference
     private Dish dish;
 
     @ManyToOne
