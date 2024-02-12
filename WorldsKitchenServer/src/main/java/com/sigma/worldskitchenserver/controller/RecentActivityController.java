@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/activity")
+@RequestMapping("/api/activity")
 public class RecentActivityController {
 
     private final RecentActivityService recentActivityService;

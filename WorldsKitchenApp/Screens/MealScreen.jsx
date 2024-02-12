@@ -9,12 +9,12 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
-import {checkIfIsLiked, getMealById} from "../services/MealsService";
+import {checkIfIsLiked, getMealById, likeDish, unlikeDish} from "../services/MealsService";
 import {styles} from "../styles/MealDetailsStyles";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import {request} from "../services/axios_config";
+import {addCommentRequest} from "../services/CommentService";
 
-export const MealScreen = ({route, navigation}) => {
+export const MealScreen = ({route}) => {
     const {mealId} = route.params;
     const [mealDetails, setMealDetails] = useState(null);
     const [content, setContent] = React.useState('');
@@ -54,10 +54,7 @@ export const MealScreen = ({route, navigation}) => {
     const handleAddComment = async () => {
         try {
             console.log('Dodano komentarz o treści: ' + content)
-            await request(
-                'POST',
-                '/comment/add',
-                {
+            await addCommentRequest({
                     dishId: mealId,
                     content: content,
                 }
@@ -74,17 +71,9 @@ export const MealScreen = ({route, navigation}) => {
 
     const handleLikeAction = async () => {
         if (isLiked) {
-            await request(
-                'POST',
-                `/dishes/${mealId}/unlike`,
-                {}
-            );
+            await unlikeDish(mealId);
         } else {
-            await request(
-                'POST',
-                `/dishes/${mealId}/like`,
-                {}
-            );
+            await likeDish(mealId);
         }
 
         const updatedLikeState = await checkIfIsLiked(mealId);
@@ -131,7 +120,7 @@ export const MealScreen = ({route, navigation}) => {
 
                         <View style={styles.authorContainer}>
 
-                        <Text style={styles.authCall}>Autor przepisu:</Text>
+                            <Text style={styles.authCall}>Autor przepisu:</Text>
                             <Text
                                 style={styles.author}>{mealDetails.author.firstName} {mealDetails.author.lastName}</Text>
                         </View>

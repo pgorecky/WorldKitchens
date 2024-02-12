@@ -17,8 +17,7 @@ const RegionScreen = ({route, navigation}) => {
     const [regionMeals, setRegionMeals] = useState(null);
 
     useEffect(() => {
-        const fetchMeals = getMealsByRegion(region);
-        fetchMeals.then(meals => {
+        getMealsByRegion(region).then(meals => {
             setRegionMeals(meals);
         }).catch(error => {
             console.error('Error fetching meals:', error);
@@ -32,7 +31,7 @@ const RegionScreen = ({route, navigation}) => {
                 setRegionMeals(updatedMeals);
             };
 
-            fetchData();
+            fetchData().catch(e => console.error("An error occurred while fetching data:", e));
         }, [])
     );
 

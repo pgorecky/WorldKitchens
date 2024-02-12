@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/dishes")
+@RequestMapping("/api/dishes")
 public class DishController {
 
     private final DishMapper dishMapper;

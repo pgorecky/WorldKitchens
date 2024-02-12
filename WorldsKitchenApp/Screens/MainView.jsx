@@ -8,8 +8,7 @@ import {NavigationContainer, useNavigation} from "@react-navigation/native";
 import {removeAuthHeader} from "../services/axios_config";
 
 const dishes = "Przepisy";
-const favourites = "Ulubione";
-const profilName = "Profil";
+const profile = "Profil";
 
 const Tab = createBottomTabNavigator();
 
@@ -86,10 +85,7 @@ const MainView = ({navigation}) => {
                         if (rn === dishes) {
                             iconName = focused ? 'restaurant' : 'restaurant-outline';
 
-                        } else if (rn === favourites) {
-                            iconName = focused ? 'star' : 'star-outline';
-
-                        } else if (rn === profilName) {
+                        } else if (rn === profile) {
                             iconName = focused ? 'person' : 'person-outline';
                         }
 
@@ -116,11 +112,10 @@ const MainView = ({navigation}) => {
                     name={dishes} component={DishesStack}/>
                 <Tab.Screen
                     options={{headerShown: false}}
-                    name={profilName} component={ProfileStack}/>
+                    name={profile} component={ProfileStack}/>
             </Tab.Navigator>
         </NavigationContainer>
     );
 }
-
 
 export default MainView;

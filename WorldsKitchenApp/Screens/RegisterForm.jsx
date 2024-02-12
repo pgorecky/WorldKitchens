@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, Text, Alert, ScrollView, TouchableOpacity} from 'react-native';
-import {request, setAuthHeader} from "../services/axios_config";
+import {Alert, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {setAuthHeader} from "../services/axios_config";
 import {styles} from "../styles/LoginStyles";
 import InputTextField from "../components/InputTextField";
+import {registerRequest} from "../services/AuthService";
 
-const RegisterForm = ({ navigation }) => {
+const RegisterForm = ({navigation}) => {
 
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -13,19 +14,14 @@ const RegisterForm = ({ navigation }) => {
 
     const handleRegister = async () => {
         try {
-            const response = await request(
-                'POST',
-                '/register', {
-                    login: username,
-                    password: password,
-                    firstName: firstname,
-                    lastName: lastname,
-                }
-            );
-            if (response.data && response.data.token) {
-                await setAuthHeader(response.data.token);
-                navigation.navigate('LoginForm');
-            }
+            const response = registerRequest({
+                login: username,
+                password: password,
+                firstName: firstname,
+                lastName: lastname,
+            });
+            await setAuthHeader(response.data.token);
+            navigation.navigate('MainView');
         } catch (error) {
             console.error('Register failed', error.message);
             Alert.alert('Rejestracja nieudana', 'Wystąpił błąd podczas tworzenia użytkownika');
@@ -106,7 +102,7 @@ const RegisterForm = ({ navigation }) => {
                         ]}
                     >
                         Masz już konto?
-                        <Text style={[styles.text, styles.link, {marginTop: 20}]}>  Zaloguj się</Text>
+                        <Text style={[styles.text, styles.link, {marginTop: 20}]}> Zaloguj się</Text>
                     </Text>
                 </TouchableOpacity>
 

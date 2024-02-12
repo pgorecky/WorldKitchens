@@ -29,7 +29,7 @@ export const ProfileScreen = ({navigation}) => {
 
         if (!result.canceled) {
             setImage(result.assets[0].uri)
-            uploadMedia();
+            await uploadMedia();
         }
     }
 
