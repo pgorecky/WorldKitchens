@@ -8,23 +8,23 @@ import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
 import {firebase} from "../firebase";
 import {addMeal} from "../services/MealsService";
+import {APP_FONT, LIGHT_GRAY, MAIN_COLOR} from "../const/CONSTS";
 
 
 export default function AddMealScreen({navigation}) {
 
     const [name, setName] = React.useState('');
-    const [description, setDescription] = React.useState('');
-    const [selectedRegion, setSelectedRegion] = React.useState('');
-    const [selectedTime, setSelectedTime] = React.useState('');
-    const [selectedLevel, setSelectedLevel] = React.useState('');
-    const [selectedPortion, setSelectedPortion] = React.useState('');
+    const [description, setDescription] = React.useState('Opis');
+    const [selectedRegion, setSelectedRegion] = React.useState('ITALIAN');
+    const [selectedTime, setSelectedTime] = React.useState('5 min');
+    const [selectedLevel, setSelectedLevel] = React.useState('EASY');
+    const [selectedPortion, setSelectedPortion] = React.useState('1');
     const [step, setStep] = React.useState('');
     const [preparationSteps, setPreparationSteps] = React.useState([]);
     const [ingredient, setIngredient] = React.useState('');
     const [portion, setPortion] = React.useState('');
     const [ingredients, setIngredients] = React.useState([]);
     const [image, setImage] = useState(null);
-    const [uploading, setUploading] = useState(null);
     const [uriPhoto, setUriPhoto] = useState(null)
 
     const stepInputRef = useRef(null);
@@ -91,7 +91,7 @@ export default function AddMealScreen({navigation}) {
             await new Promise(resolve => setTimeout(resolve, 100));
 
             if (image) {
-                await uploadMedia();
+                uploadMedia();
             } else {
                 console.error("Error: Image URI is undefined or empty.");
             }
@@ -99,8 +99,6 @@ export default function AddMealScreen({navigation}) {
     }
 
     const uploadMedia = async () => {
-        setUploading(true);
-
         let uri;
 
         try {
@@ -132,11 +130,9 @@ export default function AddMealScreen({navigation}) {
             const downloadURL = await uploadTaskSnapshot.ref.getDownloadURL();
             console.log(downloadURL)
             setUriPhoto(downloadURL);
-            setUploading(false);
             setImage(null);
         } catch (error) {
             console.error(error);
-            setUploading(false)
         }
     };
 
@@ -152,9 +148,9 @@ export default function AddMealScreen({navigation}) {
                     placeholderTextColor='#285943'
                     style={{
                         textAlign: "center",
-                        color: '#1DB954',
+                        color: MAIN_COLOR,
                         fontSize: 34,
-                        fontFamily: "Dosis",
+                        fontFamily: APP_FONT,
                         padding: 10,
                     }}
                     onChangeText={(text) => setName(text)}/>
@@ -179,7 +175,7 @@ export default function AddMealScreen({navigation}) {
                         <Picker
                             selectedValue={selectedRegion}
                             onValueChange={(itemValue) => setSelectedRegion(itemValue)}
-                            style={{width: 140, color: '#AEB5BC', marginLeft: -15}}
+                            style={{width: 140, color: LIGHT_GRAY, marginLeft: -15}}
                             mode={'dropdown'}
                             dropdownIconColor='#1DB954'
                         >
@@ -199,7 +195,7 @@ export default function AddMealScreen({navigation}) {
                     <View style={styles.addPhotoContainer}>
                         <TouchableOpacity
                             style={{
-                                backgroundColor: '#1DB954',
+                                backgroundColor: MAIN_COLOR,
                                 borderRadius: 30,
                                 width: 40,
                                 height: 40,
@@ -222,9 +218,9 @@ export default function AddMealScreen({navigation}) {
                             borderWidth: 1,
                             borderColor: 'grey',
                             fontSize: 16,
-                            fontFamily: "Dosis",
+                            fontFamily: APP_FONT,
                             padding: 10,
-                            color: '#AEB5BC',
+                            color: LIGHT_GRAY,
                             marginLeft: 10,
                             marginRight: 10,
                             textAlignVertical: 'top',
@@ -250,7 +246,7 @@ export default function AddMealScreen({navigation}) {
                             onValueChange={(itemValue) => setSelectedTime(itemValue)}
                             style={{
                                 width: 120,
-                                color: '#AEB5BC',
+                                color: LIGHT_GRAY,
                                 flex: 0,
                             }}
                             mode={'dropdown'}
@@ -296,7 +292,7 @@ export default function AddMealScreen({navigation}) {
                             onValueChange={(itemValue) => setSelectedPortion(itemValue)}
                             style={{
                                 width: 125,
-                                color: '#AEB5BC',
+                                color: LIGHT_GRAY,
                             }}
                             mode={'dropdown'}
                             dropdownIconColor='#1DB954'
@@ -327,9 +323,9 @@ export default function AddMealScreen({navigation}) {
                                 placeholder='Dodaj składnik'
                                 placeholderTextColor='grey'
                                 style={{
-                                    color: '#AEB5BC',
+                                    color: LIGHT_GRAY,
                                     fontSize: 20,
-                                    fontFamily: "Dosis",
+                                    fontFamily: APP_FONT,
                                     padding: 10,
                                     borderWidth: 1,
                                     borderColor: 'grey',
@@ -342,9 +338,9 @@ export default function AddMealScreen({navigation}) {
                                 placeholder='ilość'
                                 placeholderTextColor='grey'
                                 style={{
-                                    color: '#AEB5BC',
+                                    color: LIGHT_GRAY,
                                     fontSize: 20,
-                                    fontFamily: "Dosis",
+                                    fontFamily: APP_FONT,
                                     padding: 10,
                                     borderWidth: 1,
                                     borderColor: 'grey',
@@ -387,9 +383,9 @@ export default function AddMealScreen({navigation}) {
                                 placeholder='Opisz następny krok przygotowania'
                                 placeholderTextColor='grey'
                                 style={{
-                                    color: '#AEB5BC',
+                                    color: LIGHT_GRAY,
                                     fontSize: 20,
-                                    fontFamily: "Dosis",
+                                    fontFamily: APP_FONT,
                                     padding: 10,
                                     borderWidth: 1,
                                     borderColor: 'grey',

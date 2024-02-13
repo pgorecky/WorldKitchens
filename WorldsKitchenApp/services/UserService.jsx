@@ -1,9 +1,10 @@
-import {getRequest} from "./axios_config";
+import {getRequest, patchRequest} from "./axios_config";
 
 const MY_PROFILE_DETAILS_ENDPOINT = '/me';
 const MY_DISHES_ENDPOINT = '/dishes/my';
 const MY_LIKED_DISHES_ENDPOINT = '/dishes/likedDishes';
 const MY_RECENT_ACTIVITY_ENDPOINT = '/activity/my';
+const UPDATE_PHOTO_ENDPOINT = '/me/updatePhoto';
 
 export const getMyProfileDetails = async () => {
     try {
@@ -44,3 +45,9 @@ export const getMyRecentActivity = async () => {
         throw error;
     }
 };
+
+export const updateProfilePicture = (imageURI) => {
+    return patchRequest(UPDATE_PHOTO_ENDPOINT, {
+        imageURI: imageURI
+    })
+}

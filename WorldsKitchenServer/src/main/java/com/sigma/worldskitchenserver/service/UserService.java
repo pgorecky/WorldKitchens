@@ -76,4 +76,14 @@ public class UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (UserDto) authentication.getPrincipal();
     }
+
+    public void updateUserPhoto(String photoURI) {
+        User user = getCurrentUser();
+
+        user.setImageUrl(photoURI);
+        userRepository.save(user);
+
+        logger.info("User {} successfully updated picture", user.getId());
+
+    }
 }

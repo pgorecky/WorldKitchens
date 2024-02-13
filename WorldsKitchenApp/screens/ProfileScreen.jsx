@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, Alert, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
-import {getLikedMeals, getMyProfileDetails, getMyProfileMeals, getMyRecentActivity} from "../services/UserService";
+import {ActivityIndicator, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
+import {
+    getLikedMeals,
+    getMyProfileDetails,
+    getMyProfileMeals,
+    getMyRecentActivity,
+    updateProfilePicture
+} from "../services/UserService";
 import {styles} from '../styles/ProfileStyles'
 import {MealCard} from "../components/MealCard";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
@@ -17,8 +23,15 @@ export const ProfileScreen = ({navigation}) => {
     const [likedMeals, setLikedMeals] = useState(null);
     const [recentActivity, setRecentActivity] = useState(null);
     const [image, setImage] = useState(null);
-    const [uploading, setUploading] = useState(null);
     const [uriPhoto, setUriPhoto] = useState(null)
+
+    const updateProfilePhoto = async () => {
+        await pickImage();
+        if (uriPhoto != null) {
+            console.log(uriPhoto)
+            await updateProfilePicture(uriPhoto);
+        }
+    }
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -29,16 +42,26 @@ export const ProfileScreen = ({navigation}) => {
         })
 
         if (!result.canceled) {
-            setImage(result.assets[0].uri)
-            await uploadMedia();
+            console.log("!!!!!" + result.assets[0])
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            if (image) {
+                uploadMedia();
+            } else {
+                console.error("Error: Image URI is undefined or empty.");
+            }
         }
     }
 
     const uploadMedia = async () => {
-        setUploading(true);
+        let uri;
 
         try {
-            const {uri} = await FileSystem.getInfoAsync(image);
+            if (image) {
+                const {uri: imageUri} = await FileSystem.getInfoAsync(image);
+                uri = imageUri;
+            }
+
             const blob = await new Promise((resolve, reject) => {
                 const xhr = new XMLHttpRequest();
 
@@ -58,15 +81,13 @@ export const ProfileScreen = ({navigation}) => {
 
             const fileName = image.substring(image.lastIndexOf('/') + 1);
             const ref = firebase.storage().ref().child(fileName);
-
-            await ref.put(blob);
-            setUploading(false);
-            Alert.alert('Zdjęcie dodane pomyślnie');
+            const uploadTaskSnapshot = await ref.put(blob);
+            const downloadURL = await uploadTaskSnapshot.ref.getDownloadURL();
+            console.log(downloadURL)
+            setUriPhoto(downloadURL);
             setImage(null);
-            setUriPhoto(uri.valueOf().toString());
         } catch (error) {
             console.error(error);
-            setUploading(false)
         }
     };
 
@@ -235,7 +256,7 @@ export const ProfileScreen = ({navigation}) => {
                                     justifyContent: 'center',
                                     alignItems: 'center'
                                 }}
-                                onPress={pickImage}>
+                                onPress={updateProfilePhoto}>
                                 <Text style={{color: 'white', fontSize: 20}}>+</Text>
                             </TouchableOpacity>
                         </View>

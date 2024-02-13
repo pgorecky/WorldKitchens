@@ -91,7 +91,6 @@ public class DishService {
 
         User user = userService.getCurrentUser();
         newDish.setAuthor(user);
-        recentActivityService.addActivity(user, newDish, ActivityType.ADD_MEAL);
         logger.info("User with id: {} created new dish {}", user.getId(), newDish.getName());
 
         Dish savedDish = dishRepository.save(newDish);
@@ -107,6 +106,7 @@ public class DishService {
                 .collect(Collectors.toList());
 
         ingredientRepository.saveAll(ingredients);
+        recentActivityService.addActivity(user, savedDish, ActivityType.ADD_MEAL);
 
         return dishMapper.toDishDto(savedDish);
     }

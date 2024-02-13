@@ -58,3 +58,7 @@ export const getRequest = (url: string, data: any) => {
 export const deleteRequest = (url: string, data: any) => {
     return request("DELETE", url, data);
 }
+
+export const patchRequest = (url: string, data: any) => {
+    return request("PATCH", url, data);
+}
