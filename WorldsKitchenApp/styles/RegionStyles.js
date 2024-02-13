@@ -1,7 +1,8 @@
 import {StyleSheet} from "react-native";
+import {APP_FONT, LIGHT_GRAY, MAIN_COLOR, SECONDARY_COLOR} from "../const/CONSTS";
 
-const mainColor = '#282828';
-const secondColor = '#1DB954';
+const secondaryColor = SECONDARY_COLOR;
+const mainColor = MAIN_COLOR;
 export const styles = StyleSheet.create({
 
     image: {
@@ -27,15 +28,15 @@ export const styles = StyleSheet.create({
     },
 
     regionTitle: {
-        color: '#AEB5BC',
-        fontFamily: 'Dosis',
+        color: LIGHT_GRAY,
+        fontFamily: APP_FONT,
         fontSize: 36,
         fontWeight: "bold"
     },
 
     regionDescription: {
-        color: '#AEB5BC',
-        fontFamily: 'Dosis',
+        color: LIGHT_GRAY,
+        fontFamily: APP_FONT,
         fontSize: 16,
         paddingLeft: 30,
         paddingRight: 30
@@ -43,7 +44,7 @@ export const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: mainColor,
+        backgroundColor: secondaryColor,
         justifyContent: 'center',
         alignItems: 'center',
         paddingBottom: 40
@@ -54,14 +55,14 @@ export const styles = StyleSheet.create({
     },
 
     textDiscover: {
-        fontFamily: 'Dosis',
+        fontFamily: APP_FONT,
         fontSize: 30,
         padding: 15,
-        color: secondColor
+        color: mainColor
     },
 
     floatButton: {
-        backgroundColor: secondColor,
+        backgroundColor: mainColor,
         borderRadius: 30,
         width: 50,
         height: 50,

@@ -1,11 +1,12 @@
 import {StyleSheet} from "react-native";
+import {APP_FONT, LIGHT_GRAY, MAIN_COLOR, SECONDARY_COLOR} from "../const/CONSTS";
 
-const mainColor = '#282828';
-const secondColor = '#1DB954';
-const thirdColor = '#AEB5BC';
+const mainColor = MAIN_COLOR;
+const secondaryColor = SECONDARY_COLOR;
+const thirdColor = LIGHT_GRAY;
 export const styles = StyleSheet.create({
     background: {
-        backgroundColor: mainColor,
+        backgroundColor: secondaryColor,
     },
 
     container: {
@@ -13,8 +14,8 @@ export const styles = StyleSheet.create({
     },
 
     mealName: {
-        fontFamily: 'Dosis',
-        color: secondColor,
+        fontFamily: APP_FONT,
+        color: mainColor,
         fontSize: 34,
         padding: 10,
         textTransform: "uppercase"
@@ -45,14 +46,14 @@ export const styles = StyleSheet.create({
     authCall: {
         paddingTop: 7,
         paddingRight: 5,
-        fontFamily: 'Dosis',
+        fontFamily: APP_FONT,
         color: thirdColor,
     },
 
     author: {
         paddingTop: 7,
-        color: secondColor,
-        fontFamily: 'Dosis',
+        color: mainColor,
+        fontFamily: APP_FONT,
         paddingRight: 10,
     },
 
@@ -74,8 +75,8 @@ export const styles = StyleSheet.create({
     },
 
     iconText: {
-        color: secondColor,
-        fontFamily: 'Dosis',
+        color: mainColor,
+        fontFamily: APP_FONT,
         fontSize: 12
     },
 
@@ -99,21 +100,21 @@ export const styles = StyleSheet.create({
     },
 
     sectionTitle: {
-        fontFamily: 'Dosis',
-        color: secondColor,
+        fontFamily: APP_FONT,
+        color: mainColor,
         fontSize: 30,
         marginLeft: 10
     },
 
     secondarySectionTitle: {
-        fontFamily: 'Dosis',
-        color: secondColor,
+        fontFamily: APP_FONT,
+        color: mainColor,
         fontSize: 15,
         marginLeft: 10
     },
 
     ingredient: {
-        fontFamily: 'Dosis',
+        fontFamily: APP_FONT,
         color: thirdColor,
         fontSize: 20,
         padding: 10,
@@ -135,13 +136,13 @@ export const styles = StyleSheet.create({
     },
 
     commentContent: {
-        fontFamily: 'Dosis',
+        fontFamily: APP_FONT,
         color: thirdColor,
     },
 
     commentAuthor: {
-        fontFamily: 'Dosis',
-        color: secondColor
+        fontFamily: APP_FONT,
+        color: mainColor
     },
 
     newCommentContainer: {
@@ -150,7 +151,7 @@ export const styles = StyleSheet.create({
     },
 
     submitContainer: {
-        backgroundColor: secondColor,
+        backgroundColor: mainColor,
         borderRadius: 4,
         paddingVertical: 4,
         marginTop: 4,
@@ -174,19 +175,19 @@ export const styles = StyleSheet.create({
     },
 
     addPhotoButton: {
-        backgroundColor: '#1DB954',
+        backgroundColor: mainColor,
         borderRadius: 30,
         width: 40,
         height: 40
     },
 
     pickerItem: {
-        fontFamily: 'Dosis',
+        fontFamily: APP_FONT,
         fontSize: 12,
-        backgroundColor: mainColor,
-        color: secondColor,
+        backgroundColor: secondaryColor,
+        color: mainColor,
         borderWidth: 1,
-        borderColor: secondColor,
+        borderColor: mainColor,
     },
 
     addStepButton: {
@@ -198,7 +199,7 @@ export const styles = StyleSheet.create({
 
     submitButton: {
         marginTop: 10,
-        backgroundColor: secondColor,
+        backgroundColor: mainColor,
         justifyContent: 'center',
         alignItems: 'center',
         width: 100

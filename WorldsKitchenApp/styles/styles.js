@@ -1,7 +1,8 @@
 import {StyleSheet} from "react-native";
+import {APP_FONT, MAIN_COLOR, SECONDARY_COLOR} from "../const/CONSTS";
 
-const mainColor = '#282828';
-const secondColor = '#1DB954';
+const mainColor = MAIN_COLOR;
+const secondColor = SECONDARY_COLOR;
 export const styles = StyleSheet.create({
     container: {
         backgroundColor: mainColor,
@@ -24,7 +25,7 @@ export const styles = StyleSheet.create({
         marginTop: 30,
         color: secondColor,
         fontSize: 55,
-        fontFamily: 'Dosis',
+        fontFamily: APP_FONT,
     },
     buttonContainer: {
         flex: 0.4,
@@ -60,19 +61,19 @@ export const styles = StyleSheet.create({
     },
 
     welcomeName: {
-        color: '#1DB954',
+        color: mainColor,
         fontSize: 55,
-        fontFamily: 'Dosis'
+        fontFamily: APP_FONT
     },
 
     welcomeText: {
         fontSize: 16,
         color: 'white',
-        fontFamily: 'Dosis'
+        fontFamily: APP_FONT
     },
 
     welcomeButton: {
-        backgroundColor: '#1DB954',
+        backgroundColor: mainColor,
         fontSize: 16,
         borderRadius: 4,
         paddingVertical: 12,
@@ -88,7 +89,7 @@ export const styles = StyleSheet.create({
     },
 
     welcomeButtonText: {
-        fontFamily: "Dosis",
+        fontFamily: APP_FONT,
         color: "#FFF",
         fontWeight: "600",
         fontSize: 16

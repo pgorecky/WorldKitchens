@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, Animated, Easing} from 'react-native';
+import {Animated, Easing, Text, View} from 'react-native';
 
 class WelcomeScreen extends Component {
     constructor(props) {

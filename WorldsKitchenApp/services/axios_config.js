@@ -34,7 +34,6 @@ export const removeAuthHeader = async () => {
 export const request = async (method, url, data) => {
     const authToken = await getAuthToken();
     const headers = authToken ? {'Authorization': `Bearer ${authToken}`} : {};
-    console.log("Użyte nagłówki: " + headers.Authorization)
     try {
         return await axios({
             method: method,

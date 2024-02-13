@@ -9,6 +9,7 @@ import {useFocusEffect} from "@react-navigation/native";
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 import {firebase} from "../firebase";
+import {LIGHT_GRAY, MAIN_COLOR} from "../const/CONSTS";
 
 export const ProfileScreen = ({navigation}) => {
     const [profileDetails, setProfileDetails] = useState(null);
@@ -63,7 +64,6 @@ export const ProfileScreen = ({navigation}) => {
             Alert.alert('Zdjęcie dodane pomyślnie');
             setImage(null);
             setUriPhoto(uri.valueOf().toString());
-            console.log('sieeemsa' + uriPhoto);
         } catch (error) {
             console.error(error);
             setUploading(false)
@@ -125,14 +125,14 @@ export const ProfileScreen = ({navigation}) => {
                             style={{paddingBottom: 10}}>
                             <View style={{flexDirection: 'row'}}>
                                 <View style={styles.activityIndicator}></View>
-                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
+                                <Text style={[styles.text, {color: LIGHT_GRAY, fontWeight: "300"}]}>
                                     {formatDate(activity.date)}
                                 </Text>
                             </View>
                             <View style={{width: 250, marginLeft: 35}}>
-                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]} key={activity.id}>
+                                <Text style={[styles.text, {color: LIGHT_GRAY, fontWeight: "300"}]} key={activity.id}>
                                     Użytkownik {activity.user.firstName} zamieścił komentarz pod posiłkiem:
-                                    <Text style={{color: '#1DB954'}}> {activity.dish.name}</Text>
+                                    <Text style={{color: MAIN_COLOR}}> {activity.dish.name}</Text>
                                 </Text>
                             </View>
                         </View>
@@ -144,14 +144,14 @@ export const ProfileScreen = ({navigation}) => {
                             style={{paddingBottom: 10}}>
                             <View style={{flexDirection: 'row'}}>
                                 <View style={styles.activityIndicator}></View>
-                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
+                                <Text style={[styles.text, {color: LIGHT_GRAY, fontWeight: "300"}]}>
                                     {formatDate(activity.date)}
                                 </Text>
                             </View>
                             <View style={{width: 250, marginLeft: 35}}>
-                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]} key={activity.id}>
+                                <Text style={[styles.text, {color: LIGHT_GRAY, fontWeight: "300"}]} key={activity.id}>
                                     Użytkownik {activity.user.firstName} dodał nowy posiłek:
-                                    <Text style={{color: '#1DB954'}}> {activity.dish.name}</Text>
+                                    <Text style={{color: MAIN_COLOR}}> {activity.dish.name}</Text>
                                 </Text>
                             </View>
                         </View>
@@ -163,14 +163,14 @@ export const ProfileScreen = ({navigation}) => {
                             style={{paddingBottom: 10}}>
                             <View style={{flexDirection: 'row'}}>
                                 <View style={styles.activityIndicator}></View>
-                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
+                                <Text style={[styles.text, {color: LIGHT_GRAY, fontWeight: "300"}]}>
                                     {formatDate(activity.date)}
                                 </Text>
                             </View>
                             <View style={{width: 250, marginLeft: 35}}>
-                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]} key={activity.id}>
+                                <Text style={[styles.text, {color: LIGHT_GRAY, fontWeight: "300"}]} key={activity.id}>
                                     Użytkownik {activity.user.firstName} polubił posiłek:
-                                    <Text style={{color: '#1DB954'}}> {activity.dish.name}</Text>
+                                    <Text style={{color: MAIN_COLOR}}> {activity.dish.name}</Text>
                                 </Text>
                             </View>
                         </View>
@@ -182,14 +182,14 @@ export const ProfileScreen = ({navigation}) => {
                             style={{paddingBottom: 10}}>
                             <View style={{flexDirection: 'row'}}>
                                 <View style={styles.activityIndicator}></View>
-                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]}>
+                                <Text style={[styles.text, {color: LIGHT_GRAY, fontWeight: "300"}]}>
                                     {formatDate(activity.date)}
                                 </Text>
                             </View>
                             <View style={{width: 250, marginLeft: 35}}>
-                                <Text style={[styles.text, {color: "#AEB5BC", fontWeight: "300"}]} key={activity.id}>
+                                <Text style={[styles.text, {color: LIGHT_GRAY, fontWeight: "300"}]} key={activity.id}>
                                     Użytkownik {activity.user.firstName} usunął z ulubionych posiłek:
-                                    <Text style={{color: '#1DB954'}}> {activity.dish.name}</Text>
+                                    <Text style={{color: MAIN_COLOR}}> {activity.dish.name}</Text>
                                 </Text>
                             </View>
                         </View>
@@ -213,16 +213,22 @@ export const ProfileScreen = ({navigation}) => {
 
                     <View style={{alignSelf: "center"}}>
                         <View style={styles.profileImage}>
-                            <Image source={{
-                                uri: profileDetails.imageUrl
-                            }}
-                                   style={styles.image}
-                                   resizeMode="center"></Image>
+                            {profileDetails.imageUrl ? (
+                                <Image source={{
+                                    uri: profileDetails.imageUrl
+                                }}
+                                       style={styles.image}
+                                       resizeMode="center">
+                                </Image>
+                            ) : (
+                                <Image source={require("../assets/meal/DEFAULT_PROFILE_PHOTO.jpg")}
+                                       style={styles.image}></Image>
+                            )}
                         </View>
                         <View style={styles.add}>
                             <TouchableOpacity
                                 style={{
-                                    backgroundColor: '#1DB954',
+                                    backgroundColor: MAIN_COLOR,
                                     borderRadius: 30,
                                     width: 40,
                                     height: 40,
@@ -238,11 +244,11 @@ export const ProfileScreen = ({navigation}) => {
                     <View style={styles.infoContainer}>
                         <Text style={[styles.text, {fontWeight: "200", fontSize: 40}]}>{profileDetails.firstName}</Text>
                         <Text
-                            style={[styles.text, {color: "#AEB5BC", fontSize: 18}]}>{'@' + profileDetails.login}</Text>
+                            style={[styles.text, {color: LIGHT_GRAY, fontSize: 18}]}>{'@' + profileDetails.login}</Text>
                     </View>
 
                     <View style={{marginTop: 32}}>
-                        <Text style={[styles.text, {color: "#AEB5BC", fontSize: 14, marginLeft: 5}]}>
+                        <Text style={[styles.text, {color: LIGHT_GRAY, fontSize: 14, marginLeft: 5}]}>
                             Przepisy użytkownika</Text>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             {profileMeals.map((meal) => (
@@ -256,7 +262,7 @@ export const ProfileScreen = ({navigation}) => {
                         </ScrollView>
                     </View>
                     <View style={{marginTop: 15}}>
-                        <Text style={[styles.text, {color: "#AEB5BC", fontSize: 14, marginLeft: 5}]}>
+                        <Text style={[styles.text, {color: LIGHT_GRAY, fontSize: 14, marginLeft: 5}]}>
                             Ulubione przepisy użytkownika</Text>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             {likedMeals.map((meal) => (
@@ -269,7 +275,7 @@ export const ProfileScreen = ({navigation}) => {
                             ))}
                         </ScrollView>
                     </View>
-                    <Text style={[styles.subText, {color: '#1DB954'}, styles.recent]}>Ostatnia aktywność</Text>
+                    <Text style={[styles.subText, {color: MAIN_COLOR}, styles.recent]}>Ostatnia aktywność</Text>
                     <RecentActivityComponent recentActivity={recentActivity}/>
                 </ScrollView>
             ) : (

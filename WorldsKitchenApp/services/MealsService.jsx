@@ -2,6 +2,7 @@ import {getRequest, postRequest} from "./axios_config";
 
 const BASE_MEALS_ENDPOINT = '/dishes'
 const MEALS_BY_REGION_ENDPOINT = BASE_MEALS_ENDPOINT + '/byRegion'
+const ADD_MEAL_ENDPOINT = BASE_MEALS_ENDPOINT + '/add'
 
 export const getMealsByRegion = async (region) => {
     try {
@@ -28,7 +29,7 @@ export const checkIfIsLiked = async (id) => {
         const response = await getRequest(BASE_MEALS_ENDPOINT + `/${id}/isLiked`, {});
         return response.data;
     } catch (error) {
-        console.error('Error fetching profile details:', error);
+        console.error('Error fetching meal details:', error);
         throw error;
     }
 }
@@ -39,4 +40,8 @@ export const likeDish = (id) => {
 
 export const unlikeDish = (id) => {
     return postRequest(BASE_MEALS_ENDPOINT + `/${id}/unlike`, {})
+}
+
+export const addMeal = (data) => {
+    return postRequest(ADD_MEAL_ENDPOINT, data)
 }

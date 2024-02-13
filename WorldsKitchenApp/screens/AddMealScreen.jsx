@@ -4,10 +4,10 @@ import {Image, ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-
 import {styles} from "../styles/MealDetailsStyles";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {Picker} from "@react-native-picker/picker";
-import {request} from "../services/axios_config";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
 import {firebase} from "../firebase";
+import {addMeal} from "../services/MealsService";
 
 
 export default function AddMealScreen({navigation}) {
@@ -53,23 +53,18 @@ export default function AddMealScreen({navigation}) {
 
     const handleAddMeal = async () => {
         try {
-            console.log('wysylam' + uriPhoto)
-            const response = await request(
-                'POST',
-                '/dishes/add',
-                {
-                    name: name,
-                    description: description,
-                    preparationTime: selectedTime,
-                    ingredients: ingredients,
-                    calories: 400,
-                    portionSize: selectedPortion,
-                    level: selectedLevel,
-                    preparationSteps: preparationSteps,
-                    region: selectedRegion,
-                    imageUrl: uriPhoto
-                }
-            );
+            const response = await addMeal({
+                name: name,
+                description: description,
+                preparationTime: selectedTime,
+                ingredients: ingredients,
+                calories: 400,
+                portionSize: selectedPortion,
+                level: selectedLevel,
+                preparationSteps: preparationSteps,
+                region: selectedRegion,
+                imageUrl: uriPhoto
+            });
 
             if (response && response.data.id) {
                 const newMealId = response.data.id;
@@ -96,7 +91,7 @@ export default function AddMealScreen({navigation}) {
             await new Promise(resolve => setTimeout(resolve, 100));
 
             if (image) {
-                uploadMedia();
+                await uploadMedia();
             } else {
                 console.error("Error: Image URI is undefined or empty.");
             }
@@ -111,7 +106,6 @@ export default function AddMealScreen({navigation}) {
         try {
             if (image) {
                 const {uri: imageUri} = await FileSystem.getInfoAsync(image);
-                console.log('siema' + imageUri.valueOf().toString())
                 uri = imageUri;
             }
 
@@ -200,7 +194,7 @@ export default function AddMealScreen({navigation}) {
 
                 <View>
                     <View style={{alignItems: 'center'}}>
-                        <Image source={require("../assets/profile/DEFAULT_PHOTO.jpg")} style={styles.mealImage}></Image>
+                        <Image source={require("../assets/meal/DEFAULT_PHOTO.jpg")} style={styles.mealImage}></Image>
                     </View>
                     <View style={styles.addPhotoContainer}>
                         <TouchableOpacity

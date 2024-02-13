@@ -1,5 +1,6 @@
 import React from "react";
 import {Image, StyleSheet, Text, View} from "react-native";
+import {APP_FONT, LIGHT_GRAY, MAIN_COLOR} from "../const/CONSTS";
 
 export const MealCard = ({meal, containerWidth}) => {
     function mapRegionToText(region) {
@@ -20,13 +21,18 @@ export const MealCard = ({meal, containerWidth}) => {
     }
     return (
         <View key={meal.id} style={[styles.mediaImageContainer, {width: containerWidth}]}>
-            <Image
-                source={{
-                    uri: meal.imageUrl
-                }}
-                style={styles.image}
-                resizeMode="cover"
-            />
+            {meal.imageUrl ? (
+                <Image
+                    source={{
+                        uri: meal.imageUrl
+                    }}
+                    style={styles.image}
+                    resizeMode="cover"
+                />
+            ) : (
+                <Image source={require("../assets/meal/DEFAULT_PHOTO.jpg")} style={styles.image}></Image>
+            )}
+
             <View style={styles.cardTransparency}>
                 <Text style={styles.cardMealName}>{meal.name}</Text>
                 <Text style={styles.cardMealDetails}>Kalorie: {meal.calories}</Text>
@@ -53,12 +59,12 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     cardMealName: {
-        color: '#1DB954',
-        fontFamily: 'Dosis'
+        color: MAIN_COLOR,
+        fontFamily: APP_FONT
     },
     cardMealDetails: {
-        color: '#AEB5BC',
-        fontFamily: 'Dosis'
+        color: LIGHT_GRAY,
+        fontFamily: APP_FONT
     },
     image: {
         flex: 1,

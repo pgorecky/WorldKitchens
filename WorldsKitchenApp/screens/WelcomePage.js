@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {useFonts} from "expo-font";
 import {styles} from "../styles/styles";
 import {removeAuthHeader} from "../services/axios_config";
+import {SECONDARY_COLOR} from "../const/CONSTS";
 
 const WelcomePage = ({navigation}) => {
 
@@ -27,7 +28,7 @@ const WelcomePage = ({navigation}) => {
     }
 
     return (
-        <View style={{flex: 1, backgroundColor: '#282828'}}>
+        <View style={{flex: 1, backgroundColor: SECONDARY_COLOR}}>
             <View style={{flex: 1}}>
                 <View>
                     <Image

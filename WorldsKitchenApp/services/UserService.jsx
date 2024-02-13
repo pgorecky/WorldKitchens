@@ -10,7 +10,7 @@ export const getMyProfileDetails = async () => {
         const response = await getRequest(MY_PROFILE_DETAILS_ENDPOINT, {});
         return response.data;
     } catch (error) {
-        console.error('Error fetching profile details:', error);
+        console.error('Error fetching meal details:', error);
         throw error;
     }
 };
@@ -20,7 +20,7 @@ export const getMyProfileMeals = async () => {
         const response = await getRequest(MY_DISHES_ENDPOINT, {});
         return response.data;
     } catch (error) {
-        console.error('Error fetching profile details:', error);
+        console.error('Error fetching meal details:', error);
         throw error;
     }
 };
@@ -30,7 +30,7 @@ export const getLikedMeals = async () => {
         const response = await getRequest(MY_LIKED_DISHES_ENDPOINT, {});
         return response.data;
     } catch (error) {
-        console.error('Error fetching profile details:', error);
+        console.error('Error fetching meal details:', error);
         throw error;
     }
 };
@@ -40,7 +40,7 @@ export const getMyRecentActivity = async () => {
         const response = await getRequest(MY_RECENT_ACTIVITY_ENDPOINT, {});
         return response.data;
     } catch (error) {
-        console.error('Error fetching profile details:', error);
+        console.error('Error fetching meal details:', error);
         throw error;
     }
 };

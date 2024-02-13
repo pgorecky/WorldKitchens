@@ -113,9 +113,15 @@ export const MealScreen = ({route}) => {
 
                         </View>
 
-                        <Image source={{
-                            uri: mealDetails.imageUrl
-                        }} style={styles.mealImage}></Image>
+                        {mealDetails.imageUrl ? (
+                            <Image source={{
+                                uri: mealDetails.imageUrl
+                            }} style={styles.mealImage}></Image>
+                        ) : (
+                            <Image source={require("../assets/meal/DEFAULT_PHOTO.jpg")}
+                                   style={styles.mealImage}></Image>
+                        )}
+
                         <Text style={styles.mealDesc}>{mealDetails.description}</Text>
 
                         <View style={styles.authorContainer}>

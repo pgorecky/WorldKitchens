@@ -1,16 +1,17 @@
 import {StyleSheet} from "react-native";
+import {APP_FONT, LIGHT_GRAY, MAIN_COLOR, SECONDARY_COLOR} from "../const/CONSTS";
 
-const mainColor = '#282828';
-const secondColor = '#1DB954';
+const secondaryColor = SECONDARY_COLOR;
+const mainColor = MAIN_COLOR;
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: mainColor
+        backgroundColor: secondaryColor
     },
     text: {
-        fontFamily: "Dosis",
-        color: secondColor
+        fontFamily: APP_FONT,
+        color: mainColor
     },
     image: {
         flex: 1,
@@ -20,7 +21,7 @@ export const styles = StyleSheet.create({
 
     subText: {
         fontSize: 12,
-        color: "#AEB5BC",
+        color: LIGHT_GRAY,
         textTransform: "uppercase",
         fontWeight: "500"
     },
@@ -86,11 +87,11 @@ export const styles = StyleSheet.create({
         padding: 10,
     },
     cardMealName: {
-        color: secondColor,
-        fontFamily: 'Dosis'
+        color: mainColor,
+        fontFamily: APP_FONT
     },
     cardMealDetails: {
-        color: '#AEB5BC',
-        fontFamily: 'Dosis'
+        color: LIGHT_GRAY,
+        fontFamily: APP_FONT
     }
 });

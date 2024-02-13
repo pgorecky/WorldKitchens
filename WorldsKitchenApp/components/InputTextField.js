@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, View, Text, TextInput } from "react-native";
+import {StyleSheet, Text, TextInput, View} from "react-native";
+import {APP_FONT, LIGHT_GRAY, MAIN_COLOR} from "../const/CONSTS";
 
 export default class InputTextField extends React.Component {
     render() {
@@ -13,7 +14,7 @@ export default class InputTextField extends React.Component {
                     style={styles.input}
                     onChangeText={onChangeText}
                 />
-                <View style={{ borderBottomColor: "#D8D8D8", borderBottomWidth: 1 }} />
+                <View style={{borderBottomColor: LIGHT_GRAY, borderBottomWidth: 1}}/>
             </View>
         );
     }
@@ -21,13 +22,13 @@ export default class InputTextField extends React.Component {
 
 const styles = StyleSheet.create({
     inputTitle: {
-        color: "#ABB4BD",
+        color: LIGHT_GRAY,
         fontSize: 14
     },
     input: {
         paddingVertical: 12,
-        color: '#1DB954',
+        color: MAIN_COLOR,
         fontSize: 14,
-        fontFamily: "Dosis"
+        fontFamily: APP_FONT
     }
 });

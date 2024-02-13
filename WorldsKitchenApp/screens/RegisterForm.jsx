@@ -4,6 +4,7 @@ import {setAuthHeader} from "../services/axios_config";
 import {styles} from "../styles/LoginStyles";
 import InputTextField from "../components/InputTextField";
 import {registerRequest} from "../services/AuthService";
+import {LIGHT_GRAY} from "../const/CONSTS";
 
 const RegisterForm = ({navigation}) => {
 
@@ -95,7 +96,7 @@ const RegisterForm = ({navigation}) => {
                             styles.text,
                             {
                                 fontSize: 14,
-                                color: "#ABB4BD",
+                                color: LIGHT_GRAY,
                                 textAlign: "center",
                                 marginTop: 36
                             }

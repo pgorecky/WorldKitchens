@@ -1,31 +1,31 @@
 import {StyleSheet} from "react-native";
+import {APP_FONT, MAIN_COLOR, SECONDARY_COLOR} from "../const/CONSTS";
 
-const mainColor = '#282828';
-const secondColor = '#1DB954';
+const secondaryColor = SECONDARY_COLOR;
+const mainColor = MAIN_COLOR;
 export const styles = StyleSheet.create({
     container: {
         paddingTop: 50,
         flex: 1,
-        backgroundColor: mainColor,
+        backgroundColor: secondaryColor,
         paddingHorizontal: 30
     },
     title: {
-        color: secondColor,
+        color: mainColor,
         fontSize: 55,
-        fontFamily: 'Dosis',
+        fontFamily: APP_FONT,
         paddingBottom: 40
     },
     text: {
-        fontFamily: "Dosis",
-        color: "#1D2029"
+        fontFamily: APP_FONT,
     },
     link: {
-        color: secondColor,
+        color: mainColor,
         fontSize: 14,
         fontWeight: "500"
     },
     submitContainer: {
-        backgroundColor: secondColor,
+        backgroundColor: mainColor,
         fontSize: 16,
         borderRadius: 4,
         paddingVertical: 12,

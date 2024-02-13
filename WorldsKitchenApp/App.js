@@ -1,10 +1,10 @@
 import {NavigationContainer} from '@react-navigation/native';
-import WelcomeScreen from "./Screens/WelcomeScreen";
+import WelcomeScreen from "./screens/WelcomeScreen";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import WelcomePage from "./Screens/WelcomePage";
-import LoginForm from "./Screens/LoginForm";
-import MainView from "./Screens/MainView";
-import RegisterForm from "./Screens/RegisterForm";
+import WelcomePage from "./screens/WelcomePage";
+import LoginForm from "./screens/LoginForm";
+import MainView from "./screens/MainView";
+import RegisterForm from "./screens/RegisterForm";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
