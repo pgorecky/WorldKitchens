@@ -1,0 +1,87 @@
+#HeroSection {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.hero-container {
+    padding: 10rem;
+}
+
+.hero {
+    font-size: 3.5vh;
+    animation: slideInFromLeft 1s ease forwards;
+}
+
+.hero-description {
+    font-size: 1.7vh;
+    max-width: 70vh;
+    margin: 0 auto;
+    text-align: left;
+    animation: slideInFromLeft 2s ease forwards;
+}
+
+.images-container {
+    padding: 1rem;
+    background-color: rgb(0, 0, 0, 0.3);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    animation: slideInFromRight 0.5s ease forwards;
+}
+
+.hero-image {
+    width: 28vh;
+    height: auto;
+}
+
+.images-container:has(img:hover) img:not(:hover) {
+    opacity: .5;
+}
+
+.hero-image:nth-child(1) {
+    animation: slideInFromTop 1s ease forwards;
+}
+
+.hero-image:nth-child(2) {
+    animation: slideInFromRight 1s ease forwards;
+}
+
+.hero-image:nth-child(3) {
+    animation: slideInFromLeft 1s ease forwards;
+}
+
+.hero-image:nth-child(4) {
+    animation: slideInFromBottom 1s ease forwards;
+}
+
+@media screen and (max-width: 768px) {
+    .hero-description {
+        display: none;
+    }
+
+    #HeroSection {
+        flex-direction: column;
+        max-width: 90vh;
+    }
+
+    .hero-container {
+        padding: 0;
+    }
+
+    .images-container {
+        padding: 5px;
+        grid-gap: 5px;
+    }
+
+    .hero-image {
+        width: 18vh;
+    }
+
+    .padding10 {
+        padding: 0;
+    }
+}

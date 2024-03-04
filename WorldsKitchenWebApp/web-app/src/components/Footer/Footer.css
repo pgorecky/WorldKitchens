@@ -1,0 +1,60 @@
+#Footer {
+    width: 100%;
+    color: var(--gray);
+    padding-top: 3rem;
+    animation: slideInFromBottom 2s ease forwards;
+}
+
+#Footer::before {
+    content: "";
+    display: block;
+    width: 70%;
+    height: 2px;
+    background-color: var(--gray);
+    position: absolute;
+    top: 0;
+    left: 15%;
+}
+
+.icons-container {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.footer-icon {
+    color: var(--gray);
+}
+
+.footer-icon:hover {
+    color: var(--clr-primary-gaslight);
+    cursor: pointer;
+}
+
+.rights-container {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.app-version {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    #Footer {
+        width: auto;
+        font-size: smaller;
+        padding-top: 1rem;
+    }
+
+    #Footer::before {
+        width: 80%;
+        left: 10%;
+    }
+}

@@ -1,38 +1,96 @@
+:root {
+  --clr-primary: #03a84e;
+  --clr-primary-gaslight: rgb(3, 168, 78, 0.3);
+  --clr-secondary-a60: hsla(249, 36%, 21%, 0.6);
+  --gray: gray;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  animation: backgroundAnimation 1s ease-in-out forwards;
 }
 
-.App-link {
-  color: #61dafb;
+.green-text {
+  color: var(--clr-primary);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.padding10 {
+  padding: 10rem;
+}
+
+@keyframes backgroundAnimation {
+  0% {
+    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at bottom, var(--clr-primary), black);
   }
-  to {
-    transform: rotate(360deg);
+  10% {
+    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 90%, var(--clr-primary), black);
+  }
+  20% {
+    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 80%, var(--clr-primary), black);
+  }
+  30% {
+    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 70%, var(--clr-primary), black);
+  }
+  40% {
+    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 60%, var(--clr-primary), black);
+  }
+  50% {
+    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle, var(--clr-primary), black);
+  }
+  60% {
+    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 40%, var(--clr-primary), black);
+  }
+  70% {
+    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 30%, var(--clr-primary), black);
+  }
+  80% {
+    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 20%, var(--clr-primary), black);
+  }
+  90% {
+    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 10%, var(--clr-primary), black);
+  }
+  100% {
+    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at top, var(--clr-primary), black);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

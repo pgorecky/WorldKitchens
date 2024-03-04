@@ -1,0 +1,45 @@
+#App-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: calc(25px + 2vmin);
+    color: white;
+    min-height: 5vh;
+    background-color: rgb(0, 0, 0, 0.3);
+    padding: 1rem;
+}
+
+.header-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    animation: slideInFromTop 1s ease forwards;
+}
+
+.header-menu li {
+    padding: 7px;
+    margin-right: 80px;
+    text-transform: uppercase;
+    font-size: large;
+    border-radius: 10px;
+}
+
+.header-menu li:hover {
+    background-color: var(--clr-primary);
+    cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    animation: slideInFromRight 1s ease forwards;
+}
+
+@media screen and (max-width: 768px) {
+    .button-container {
+        gap: 2px;
+    }
+}

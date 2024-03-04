@@ -1,0 +1,12 @@
+#logo {
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(to right, var(--clr-primary), white);
+    background-clip: text;
+    color: var(--clr-primary);
+    animation: slideInFromLeft 1s ease forwards;
+}
+
+#logo > text {
+    color: transparent;
+}
