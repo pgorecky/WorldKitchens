@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import SignIn from "./pages/SignPages/SignIn";
 import TODO from "./pages/TODO";
 import SignUp from "./pages/SignPages/SignUp";
+import {LANDING_PAGE, SIGN_IN_PAGE, SIGN_UP_PAGE, TODO_PAGE} from "./const/Consts";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -15,19 +16,19 @@ const router = createBrowserRouter([
 
         children: [
             {
-                path: "/",
+                path: LANDING_PAGE,
                 element: <App/>,
             },
             {
-                path: "/signin",
+                path: SIGN_IN_PAGE,
                 element: <SignIn/>,
             },
             {
-                path: "/signup",
+                path: SIGN_UP_PAGE,
                 element: <SignUp/>,
             },
             {
-                path: "/todo",
+                path: TODO_PAGE,
                 element: <TODO/>
             }
         ],

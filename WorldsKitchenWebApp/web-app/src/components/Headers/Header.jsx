@@ -2,6 +2,7 @@ import Button from "../Button/Button";
 import './Header.css'
 import Logo from "../Logo/Logo";
 import {useNavigate} from "react-router-dom";
+import {SIGN_IN_PAGE, SIGN_UP_PAGE} from "../../const/Consts";
 
 export default function Header({tabs}) {
     const navigate = useNavigate();
@@ -16,8 +17,8 @@ export default function Header({tabs}) {
                     <li key={tabIndex}>{tab}</li>)}
             </ol>
             <div className={'button-container'}>
-                <Button type={'outline'} onClick={() => navigate('/signin')}>Log in</Button>
-                <Button onClick={() => navigate('/signup')}>Sign up</Button>
+                <Button type={'outline'} onClick={() => navigate(SIGN_IN_PAGE)}>Log in</Button>
+                <Button onClick={() => navigate(SIGN_UP_PAGE)}>Sign up</Button>
             </div>
         </header>
     )

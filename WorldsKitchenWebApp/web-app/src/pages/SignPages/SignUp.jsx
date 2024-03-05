@@ -9,6 +9,7 @@ import {useCallback, useEffect, useState} from "react";
 import {removeAuthHeader} from "../../services/API_CONFIG";
 import {signupRequest} from "../../services/auth/AuthService";
 import Alert from "../../components/Alerts/Alert";
+import {SIGN_IN_PAGE} from "../../const/Consts";
 
 export default function SignUp() {
     const navigate = useNavigate();
@@ -60,7 +61,7 @@ export default function SignUp() {
     const handleAlertClose = () => {
         setMessage(null)
         if (alertType === 'success') {
-            navigate('/signin')
+            navigate(SIGN_IN_PAGE)
         }
     }
 
@@ -130,7 +131,7 @@ export default function SignUp() {
                 onClick={handleSubmit}
                 style={{marginTop: '5vh', marginBottom: '4vh'}}
             >Create account</Button>
-            <span style={{color: 'gray'}}>Already have an account? <a href={'/signin'}
+            <span style={{color: 'gray'}}>Already have an account? <a href={SIGN_IN_PAGE}
                                                                       className={'link'}>Log in</a></span>
         </SignForm>
     </>
