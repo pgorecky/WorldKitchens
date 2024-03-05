@@ -10,17 +10,27 @@
     color: white;
     font-weight: bold;
     transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
 .button:hover {
     transform: scale(0.95);
     background-color: var(--clr-primary-gaslight);
-    cursor: pointer;
+}
+
+.disabled {
+    transform: scale(0.95);
+    background-color: var(--clr-primary-gaslight);
+    width: 70%;
+    cursor: not-allowed;
+    border: solid 1px white;
+    transition: transform 1s ease;
 }
 
 .default-button {
     background-color: var(--clr-primary);
     border: var(--clr-primary);
+    transition: transform 0.5s ease;
 }
 
 .default-button:hover {
@@ -40,6 +50,7 @@
     background-color: var(--clr-primary);
     border: var(--clr-primary);
     width: 70%;
+    transition: transform 0.3s ease;
 }
 
 .form-button:hover {

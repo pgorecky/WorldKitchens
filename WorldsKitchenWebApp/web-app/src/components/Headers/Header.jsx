@@ -17,7 +17,7 @@ export default function Header({tabs}) {
             </ol>
             <div className={'button-container'}>
                 <Button type={'outline'} onClick={() => navigate('/signin')}>Log in</Button>
-                <Button onClick={() => navigate('/todo')}>Sign up</Button>
+                <Button onClick={() => navigate('/signup')}>Sign up</Button>
             </div>
         </header>
     )

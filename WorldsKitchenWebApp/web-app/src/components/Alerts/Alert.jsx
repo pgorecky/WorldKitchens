@@ -34,7 +34,7 @@ export default function Alert({type, title, message, onClose}) {
                 </div>
                 <h3>{message}</h3>
             </div>
-            <IoMdClose size={'3vh'} className={'close-button'} onClick={handleClose}/>
+            <IoMdClose size={'5vh'} className={'close-button'} onClick={handleClose}/>
         </div>
     )
 }
