@@ -36,6 +36,16 @@
     border: var(--clr-primary);
 }
 
+.form-button {
+    background-color: var(--clr-primary);
+    border: var(--clr-primary);
+    width: 70%;
+}
+
+.form-button:hover {
+    border: solid 1px white;
+}
+
 @media screen and (max-width: 768px) {
     .button {
         padding: 9px 19px;

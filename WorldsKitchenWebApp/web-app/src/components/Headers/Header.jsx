@@ -1,8 +1,11 @@
 import Button from "../Button/Button";
 import './Header.css'
 import Logo from "../Logo/Logo";
+import {useNavigate} from "react-router-dom";
 
 export default function Header({tabs}) {
+    const navigate = useNavigate();
+
     const TABS = tabs ? tabs : []
 
     return (
@@ -13,8 +16,8 @@ export default function Header({tabs}) {
                     <li key={tabIndex}>{tab}</li>)}
             </ol>
             <div className={'button-container'}>
-                <Button type={'outline'}>Log in</Button>
-                <Button>Sign up</Button>
+                <Button type={'outline'} onClick={() => navigate('/signin')}>Log in</Button>
+                <Button onClick={() => navigate('/todo')}>Sign up</Button>
             </div>
         </header>
     )

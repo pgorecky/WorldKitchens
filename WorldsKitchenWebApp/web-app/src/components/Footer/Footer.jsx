@@ -21,7 +21,7 @@ export default function Footer({style = undefined}) {
                 <span style={{color: "gray"}}>All right reserved © 2024</span>
                 <div className={'app-version'}>
                     <Logo color={'gray'}/>
-                    <span style={{color: "gray"}}>Version: Beta 0.12</span>
+                    <span style={{color: "gray"}}>Version: Beta 0.01</span>
                 </div>
             </div>
         </div>

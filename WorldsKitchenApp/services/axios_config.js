@@ -47,18 +47,18 @@ export const request = async (method, url, data) => {
     }
 };
 
-export const postRequest = (url: string, data: any) => {
+export const postRequest = (url, data) => {
     return request("POST", url, data);
 }
 
-export const getRequest = (url: string, data: any) => {
+export const getRequest = (url, data) => {
     return request("GET", url, data);
 }
 
-export const deleteRequest = (url: string, data: any) => {
+export const deleteRequest = (url, data) => {
     return request("DELETE", url, data);
 }
 
-export const patchRequest = (url: string, data: any) => {
+export const patchRequest = (url, data) => {
     return request("PATCH", url, data);
 }

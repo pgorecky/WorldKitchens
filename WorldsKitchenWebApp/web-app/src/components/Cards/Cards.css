@@ -1,0 +1,39 @@
+.image-card {
+    width: 28vh;
+    position: relative;
+}
+
+.image-card .image-box img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: 0.5s ease-in-out;
+}
+
+.image-card:hover img {
+    filter: grayscale(0.2) brightness(0.4);
+}
+
+.image-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid gray;
+    border-radius: 8px;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: 0.4s ease-in-out;
+}
+
+.image-description {
+    max-width: 23vh;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.image-content:hover {
+    opacity: 1;
+    inset: 20px;
+}

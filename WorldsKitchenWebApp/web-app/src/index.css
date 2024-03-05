@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  animation: backgroundAnimation 1s ease-in-out forwards;
+  min-height: 100vh;
 }
 
 code {

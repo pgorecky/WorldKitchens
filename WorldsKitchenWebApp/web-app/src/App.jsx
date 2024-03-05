@@ -4,12 +4,20 @@ import Footer from "./components/Footer/Footer";
 import HeroSection from "./components/HeroSection/HeroSection";
 
 function App() {
+    // const navigate = useNavigate();
+    //
+    // useEffect(() => {
+    //     if (getAuthToken()) {
+    //         navigate('/todo')
+    //     }
+    // }, []);
+
     return (
-        <div className="App">
+        <>
             <Header/>
             <HeroSection/>
             <Footer style={{position: "fixed", bottom: 0}}/>
-        </div>
+        </>
     );
 }
 

@@ -6,7 +6,7 @@ export default function Logo({color = ''}) {
     return (
         <div id={'logo'} >
             <GiKitchenKnives style={{marginRight: '10px', color: color}}/>
-            <text style={{color: color}}>{APP_NAME}</text>
+            <span style={{color: color}}>{APP_NAME}</span>
         </div>
     )
 }

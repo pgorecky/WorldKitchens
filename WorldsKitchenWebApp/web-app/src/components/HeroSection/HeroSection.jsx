@@ -3,6 +3,7 @@ import ItalianFood from './../../assets/images/LandingPage/ITALIAN.jpg'
 import AsianFood from './../../assets/images/LandingPage/ASIAN.jpg'
 import AmericanFood from './../../assets/images/LandingPage/AMERICAN.jpg'
 import PolishFood from './../../assets/images/LandingPage/POLISH.jpg'
+import ImageCard from "../Cards/ImageCard";
 
 export default function HeroSection() {
     return (
@@ -14,10 +15,26 @@ export default function HeroSection() {
             </div>
             <div className={'padding10'}>
                 <div className="images-container">
-                    <img src={ItalianFood} alt="Italian food" className={'hero-image'}/>
-                    <img src={AsianFood} alt="Asian food" className={'hero-image'}/>
-                    <img src={AmericanFood} alt="American food" className={'hero-image'}/>
-                    <img src={PolishFood} alt="Polish food" className={'hero-image'}/>
+                    <ImageCard
+                        image={ItalianFood}
+                        title={'Italian cuisine'}
+                        description={'Italian cuisine is renowned worldwide for its simplicity, fresh ingredients, and rich flavors. Pasta, pizza, and risotto are staples'}
+                    />
+                    <ImageCard
+                        image={AsianFood}
+                        title={'Asian cuisine'}
+                        description={'Asian cuisine encompasses a vast array of flavors, ingredients, and cooking styles from countries like China, Japan, Thailand, and India.'}
+                    />
+                    <ImageCard
+                        image={AmericanFood}
+                        title={'American cuisine'}
+                        description={'American cuisine is a melting pot of diverse influences from around the world. Classic dishes like hamburgers, hot dogs, and barbecue ribs are iconic, alongside regional specialties such as New England clam chowder and Southern fried chicken. '}
+                    />
+                    <ImageCard
+                        image={PolishFood}
+                        title={'Polish cuisine'}
+                        description={'Polish cuisine reflects a rich tapestry of history and tradition. Pierogi, stuffed dumplings, and hearty soups like żurek and barszcz are beloved staples.'}
+                    />
                 </div>
             </div>
         </div>

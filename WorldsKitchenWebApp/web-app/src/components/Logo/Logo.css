@@ -7,6 +7,6 @@
     animation: slideInFromLeft 1s ease forwards;
 }
 
-#logo > text {
+#logo > span {
     color: transparent;
 }
