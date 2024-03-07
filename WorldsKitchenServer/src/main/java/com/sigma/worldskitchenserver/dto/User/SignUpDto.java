@@ -1,5 +1,7 @@
 package com.sigma.worldskitchenserver.dto.User;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,13 +14,17 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SignUpDto {
 
-    @NotEmpty
+    @NotBlank
     private String firstName;
 
-    @NotEmpty
+    @NotBlank
     private String lastName;
 
-    @NotEmpty
+    @NotBlank
+    @Email
+    private String email;
+
+    @NotBlank
     private String login;
 
     @NotEmpty

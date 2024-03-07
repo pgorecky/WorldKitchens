@@ -32,7 +32,7 @@ export default function SignUp() {
             await signupRequest({
                 firstName: firstName,
                 lastName: lastName,
-                // email: email,
+                email: email,
                 login: username,
                 password: password
             })
