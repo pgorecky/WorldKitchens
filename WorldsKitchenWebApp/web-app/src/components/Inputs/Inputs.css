@@ -8,7 +8,7 @@
 
 .form-input {
     width: 70%;
-    height: 60px;
+    height: 4vh;
     background-color: transparent;
     border: none;
     border-bottom: solid 5px var(--gray);
@@ -31,4 +31,11 @@
 .input-icon {
     color: gray;
     margin-left: -2vh;
+}
+
+@media screen and (max-width: 768px) {
+    .form-input {
+        font-size: 18px;
+        border-bottom: solid 1px var(--gray);
+    }
 }

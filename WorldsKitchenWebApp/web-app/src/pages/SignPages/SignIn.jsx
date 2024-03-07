@@ -28,7 +28,9 @@ export default function SignIn() {
             navigate(TODO_PAGE)
         } catch (error) {
             setErrorMessage(() => {
-                if (error.response.status === 400) {
+                if (error.request.status === 0) {
+                    return 'Failed to connect to server'
+                } else if (error.response.status === 400) {
                     return 'Incorrect password! Try again, if you forgot your password try to restore it.'
                 } else if (error.response.status === 404) {
                     return 'There is no such user! Check the name you entered. If you dont have an account yet - create one.'
@@ -39,58 +41,59 @@ export default function SignIn() {
     }
 
     return <>
-            <SignForm title={'Login'}>
-                {errorMessage &&
-                    <Alert
-                        type={'danger'}
-                        title={'Login failed!'}
-                        message={errorMessage}
-                        onClose={() => setErrorMessage(null)}
-                    />}
-                <div className={'inputs-container'}>
-                    <FormInput
-                        id={'username'}
-                        placeholder={'Username or e-mail'}
-                        type={'text'}
-                        className={'form-input'}
-                        Icon={FaUserAlt}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <FormInput
-                        id={'password'}
-                        placeholder={'Enter your password'}
-                        type={'password'}
-                        className={'form-input'}
-                        Icon={RiLockPasswordFill}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
+        <SignForm title={'Login'}>
+            {errorMessage &&
+                <Alert
+                    type={'danger'}
+                    title={'Login failed!'}
+                    message={errorMessage}
+                    onClose={() => setErrorMessage(null)}
+                />}
+            <div className={'inputs-container'}>
+                <FormInput
+                    id={'username'}
+                    placeholder={'Username or e-mail'}
+                    type={'text'}
+                    className={'form-input'}
+                    Icon={FaUserAlt}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                <FormInput
+                    id={'password'}
+                    placeholder={'Enter your password'}
+                    type={'password'}
+                    className={'form-input'}
+                    Icon={RiLockPasswordFill}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </div>
 
-                <div className={'remind-password'}>
-                    <span>Forget password? <a href={TODO_PAGE} className={'link'}>Remind password</a></span>
-                </div>
+            <div className={'remind-password'}>
+                <span>Forget password? <a href={TODO_PAGE} className={'link'}>Remind password</a></span>
+            </div>
 
-                <Button
-                    type={'form'}
-                    onClick={handleSubmit}
-                >Log in</Button>
+            <Button
+                type={'form'}
+                onClick={handleSubmit}
+            >Log in</Button>
 
-                <div className={'divider'}>or</div>
-                <span style={{color: 'gray', margin: '2vh', fontSize: '1.5vh'}}>Sign in with:</span>
-                <div className={'icons-container'} style={{marginBottom: '5vh'}}>
-                    <a href={TODO_PAGE}>
-                        <div className={'icon-border facebook'}>
-                            <FaFacebookF size={'2vh'}/>
-                        </div>
-                    </a>
-                    <a href={TODO_PAGE}>
-                        <div className={'icon-border google'}>
-                            <FaGoogle size={'2vh'}/>
-                        </div>
-                    </a>
+            <div className={'divider'}>or</div>
+            <span style={{color: 'gray', margin: '2vh', fontSize: '1.5vh'}}>Sign in with:</span>
+            <div className={'icons-container'} style={{marginBottom: '5vh'}}>
+                <a href={TODO_PAGE}>
+                    <div className={'icon-border facebook'}>
+                        <FaFacebookF size={'2vh'}/>
+                    </div>
+                </a>
+                <a href={TODO_PAGE}>
+                    <div className={'icon-border google'}>
+                        <FaGoogle size={'2vh'}/>
+                    </div>
+                </a>
 
-                </div>
-                <span style={{color: 'gray'}}>Don't have an account? <a href={SIGN_UP_PAGE} className={'link'}>Sign up</a></span>
-            </SignForm>
-        </>
+            </div>
+            <span style={{color: 'gray'}}>Don't have an account? <a href={SIGN_UP_PAGE}
+                                                                    className={'link'}>Sign up</a></span>
+        </SignForm>
+    </>
 }

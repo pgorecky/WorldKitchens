@@ -23,12 +23,11 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 4rem;
-    gap: 4rem;
+    gap: 4vh;
 }
 
 .form-title {
-    margin-top: 5rem;
+    margin-top: 5vh;
     color: var(--gray);
     font-size: 64px;
 }
@@ -77,7 +76,7 @@
 
 .icon-border:hover {
     box-shadow: 0 0 7px inset, 0 0 7px;
-    animation: rotate 0.2s ease-in-out;
+    animation: rotate 0.4s ease-in-out;
 }
 
 .icon-border:hover > * {
@@ -90,10 +89,40 @@
 
 @keyframes rotate {
     0% {
+        transform: scaleX(1);
+    }
+
+    50% {
         transform: scaleX(-1);
     }
 
     100% {
         transform: scaleX(1);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #Footer {
+        display: none;
+    }
+    .form-container {
+        border-radius: 0;
+        min-height: 100vh;
+        min-width: 100%;
+        display: flex;
+    }
+
+    .inputs-container {
+        gap: 6vh;
+    }
+
+    .form-title {
+        margin-top: 0;
+        font-size: 48px;
+    }
+
+    .remind-password {
+        margin-top: 5vh;
+        padding-bottom: 4vh;
     }
 }
