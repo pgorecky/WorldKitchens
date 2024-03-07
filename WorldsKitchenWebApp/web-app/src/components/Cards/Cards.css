@@ -37,3 +37,9 @@
     opacity: 1;
     inset: 20px;
 }
+
+@media screen and (max-width: 768px) {
+    .image-card {
+        width: 20vh;
+    }
+}

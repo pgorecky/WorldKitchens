@@ -33,11 +33,6 @@
     animation: slideInFromRight 0.5s ease forwards;
 }
 
-.hero-image {
-    width: 28vh;
-    height: auto;
-}
-
 /*.images-container:has(div:hover) div:not(:hover) {*/
 /*    filter: grayscale(0.2);*/
 /*}*/
@@ -65,20 +60,16 @@
 
     #HeroSection {
         flex-direction: column;
-        max-width: 90vh;
     }
 
     .hero-container {
         padding: 0;
+        text-align: center;
     }
 
     .images-container {
         padding: 5px;
         grid-gap: 5px;
-    }
-
-    .hero-image {
-        width: 18vh;
     }
 
     .padding10 {
