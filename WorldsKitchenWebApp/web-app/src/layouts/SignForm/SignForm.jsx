@@ -8,7 +8,7 @@ export default function SignForm({title, children}) {
                 <h1 className={'form-title'}>{title}</h1>
                 {children}
             </div>
+            <Footer style={{position: "fixed", bottom: 0}}/>
         </div>
-        <Footer style={{position: "fixed", bottom: 0}}/>
     </>
 }

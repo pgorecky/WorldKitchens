@@ -2,18 +2,19 @@ import './Footer.css'
 import Logo from "../Logo/Logo";
 import {FaGithub, FaLinkedin} from "react-icons/fa";
 import {SiGmail} from "react-icons/si";
+import {EMAIL_ADDRESS, GITHUB_LINK, LINKEDIN_LINK} from "../../const/Consts";
 
 export default function Footer({style = undefined}) {
     return (
         <div id={'Footer'} style={style}>
             <div className={'icons-container'}>
-                <a href={'https://github.com/pgorecky'}>
+                <a href={GITHUB_LINK}>
                     <FaGithub className={'footer-icon'} size={'3vh'}/>
                 </a>
-                <a href={'https://linkedin.com'}>
+                <a href={LINKEDIN_LINK}>
                     <FaLinkedin className={'footer-icon'} size={'3vh'}/>
                 </a>
-                <a href={'mailto: patryk.gorecky@gmail.com'}>
+                <a href={`mailto: ${EMAIL_ADDRESS}`}>
                     <SiGmail className={'footer-icon'} size={'3vh'}/>
                 </a>
             </div>

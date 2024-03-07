@@ -36,7 +36,7 @@
 .remind-password {
     margin-top: 1vh;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     width: 70%;
     color: var(--gray);
     padding-bottom: 4vh;
