@@ -25,7 +25,7 @@ public class CommentService {
         Dish dish = dishRepository.findById(comment.getDishId())
                 .orElseThrow(() -> new IllegalArgumentException("Dish not found"));
 
-        logger.info("Adding new comment by user with id: {} for dish: {}", currentUser.getId(), dish.getName());
+        logger.info("Adding new comment by user with id: {} for dish: {}", currentUser.getId(), dish.getId());
 
         Comment newComment = new Comment();
         newComment.setAuthor(currentUser);

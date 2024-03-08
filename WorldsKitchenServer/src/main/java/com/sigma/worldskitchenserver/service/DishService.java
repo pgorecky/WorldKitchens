@@ -5,6 +5,7 @@ import com.sigma.worldskitchenserver.dto.Dish.DishDto;
 import com.sigma.worldskitchenserver.dto.User.UserDto;
 import com.sigma.worldskitchenserver.enums.ActivityType;
 import com.sigma.worldskitchenserver.enums.Region;
+import com.sigma.worldskitchenserver.exception.ResourceNotFoundException;
 import com.sigma.worldskitchenserver.mapper.DishMapper;
 import com.sigma.worldskitchenserver.model.Dish;
 import com.sigma.worldskitchenserver.model.Ingredient;
@@ -51,28 +52,31 @@ public class DishService {
         return mapDishesToDishesDto(currentUser.getLikedDishes());
     }
 
+    public Dish getDishById(Long dishId) {
+        Optional<Dish> dish = dishRepository.findById(dishId);
+        return dish.orElseThrow(() -> new ResourceNotFoundException("Dish", "id", dishId));
+    }
+
     public void likeDishById(Long dishId) {
         User user = userService.getCurrentUser();
-        Optional<Dish> dish = dishRepository.findById(dishId);
-        dish.ifPresent(meal -> {
-            user.getLikedDishes().add(meal);
-            userRepository.save(user);
-            dishRepository.save(meal);
-            recentActivityService.addActivity(user, meal, ActivityType.LIKE_MEAL);
-            logger.info("User with id: {} liked dish {}", user.getId(), meal.getName());
-        });
+        Dish dish = getDishById(dishId);
+
+        user.getLikedDishes().add(dish);
+        userRepository.save(user);
+        dishRepository.save(dish);
+        recentActivityService.addActivity(user, dish, ActivityType.LIKE_MEAL);
+        logger.info("User with id: {} liked dish {}", user.getId(), dish.getId());
     }
 
     public void unlikeDishById(Long dishId) {
         User user = userService.getCurrentUser();
-        Optional<Dish> dish = dishRepository.findById(dishId);
-        dish.ifPresent(meal -> {
-            user.getLikedDishes().remove(meal);
-            userRepository.save(user);
-            dishRepository.save(meal);
-            recentActivityService.addActivity(user, meal, ActivityType.UNLIKE_MEAL);
-            logger.info("User with id: {} unliked dish {}", user.getId(), meal.getName());
-        });
+        Dish dish = getDishById(dishId);
+
+        user.getLikedDishes().remove(dish);
+        userRepository.save(user);
+        dishRepository.save(dish);
+        recentActivityService.addActivity(user, dish, ActivityType.UNLIKE_MEAL);
+        logger.info("User with id: {} unliked dish {}", user.getId(), dish.getId());
     }
 
     public List<DishDto> getDishesByRegion(Region region) {
@@ -91,7 +95,6 @@ public class DishService {
 
         User user = userService.getCurrentUser();
         newDish.setAuthor(user);
-        logger.info("User with id: {} created new dish {}", user.getId(), newDish.getName());
 
         Dish savedDish = dishRepository.save(newDish);
 
@@ -107,6 +110,8 @@ public class DishService {
 
         ingredientRepository.saveAll(ingredients);
         recentActivityService.addActivity(user, savedDish, ActivityType.ADD_MEAL);
+
+        logger.info("User with id: {} created new dish {}", user.getId(), newDish.getId());
 
         return dishMapper.toDishDto(savedDish);
     }
