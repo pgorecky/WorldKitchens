@@ -30,25 +30,21 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public UserDto login(CredentialsDto credentialsDto) {
-        logger.info("Attempting login for user: {}", credentialsDto.getLogin());
-        User user = userRepository.findByLogin(credentialsDto.getLogin())
+        User user = userRepository.findByLoginOrEmail(credentialsDto.getLogin())
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
 
         if (passwordEncoder.matches(CharBuffer.wrap(credentialsDto.getPassword()), user.getPassword())) {
-            logger.info("User login successful: {}", credentialsDto.getLogin());
+            logger.info("User with id: {} logged in successfully!", user.getId());
             return userMapper.toUserDto(user);
         }
 
-        logger.warn("User login failed: {}", credentialsDto.getLogin());
-        throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
+        throw new AppException("Invalid password", HttpStatus.UNAUTHORIZED);
     }
 
     public UserDto register(SignUpDto userDto) {
-        Optional<User> optionalUser = userRepository.findByLogin(userDto.getLogin());
-
-        if (optionalUser.isPresent()) {
-            logger.warn("Registration failed: Login already exists: {}", userDto.getLogin());
-            throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
+        if (userRepository.existsByEmail(userDto.getLogin()) || userRepository.existsByLogin(userDto.getLogin())) {
+            logger.warn("Registration Failed. The user with the given login or email: {} already exists!", userDto.getLogin());
+            throw new AppException("User already exists", HttpStatus.CONFLICT);
         }
 
         User user = userMapper.signUpToUser(userDto);
@@ -56,7 +52,7 @@ public class UserService {
 
         User savedUser = userRepository.save(user);
 
-        logger.info("User registration successful: {}", userDto.getLogin());
+        logger.info("Registration successfully completed. New User ID: {}", savedUser.getId());
         return userMapper.toUserDto(savedUser);
     }
 
@@ -69,7 +65,7 @@ public class UserService {
     public User getCurrentUser() {
         UserDto userDto = getCurrentUserDto();
         Optional<User> user = userRepository.findById(userDto.getId());
-        return user.orElseThrow(() -> new ResourceNotFoundException("User", "id", user));
+        return user.orElseThrow(() -> new ResourceNotFoundException("User", "id", userDto.getId()));
     }
 
     public UserDto getCurrentUserDto() {
