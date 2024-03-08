@@ -6,6 +6,8 @@ import {useState} from "react";
 export default function Alert({type, title, message, onClose}) {
     let [classNames, setClassNames] = useState(' visible');
 
+    const iconSize = '2.5vh'
+    
     const addClass = () => {
         setClassNames(' non-visible')
     }
@@ -17,11 +19,11 @@ export default function Alert({type, title, message, onClose}) {
 
     const getIcon = () => {
         if (type === 'success') {
-            return <FaCircleCheck size={'3vh'}/>
+            return <FaCircleCheck size={iconSize}/>
         } else if (type === 'warning') {
-            return <IoMdWarning size={'3vh'}/>
+            return <IoMdWarning size={iconSize}/>
         } else if (type === 'danger') {
-            return <IoMdCloseCircle size={'3vh'}/>
+            return <IoMdCloseCircle size={iconSize}/>
         } else return null;
     }
 
@@ -34,7 +36,7 @@ export default function Alert({type, title, message, onClose}) {
                 </div>
                 <h3>{message}</h3>
             </div>
-            <IoMdClose size={'5vh'} className={'close-button'} onClick={handleClose}/>
+            <IoMdClose size={'3vh'} className={'close-button'} onClick={handleClose}/>
         </div>
     )
 }
