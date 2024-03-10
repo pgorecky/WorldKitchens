@@ -1,1 +1,19 @@
-spring.security.jwt.token.secret-key= my-secret-key
+spring:
+  datasource:
+    url: jdbc:h2:mem:kitchendb
+    username: user
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    defer-datasource-initialization: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+  sql:
+    init:
+      mode: always
+  security:
+    jwt:
+      token:
+        secret-key: my-secret-key
