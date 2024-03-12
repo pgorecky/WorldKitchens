@@ -3,6 +3,7 @@ package com.sigma.worldskitchenserver.service;
 import com.sigma.worldskitchenserver.dto.User.CredentialsDto;
 import com.sigma.worldskitchenserver.dto.User.SignUpDto;
 import com.sigma.worldskitchenserver.dto.User.UserDto;
+import com.sigma.worldskitchenserver.enums.AuthProvider;
 import com.sigma.worldskitchenserver.exception.AppException;
 import com.sigma.worldskitchenserver.exception.ResourceNotFoundException;
 import com.sigma.worldskitchenserver.mapper.UserMapper;
@@ -49,6 +50,7 @@ public class UserService {
 
         User user = userMapper.signUpToUser(userDto);
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.getPassword())));
+        user.setAuthProvider(AuthProvider.local);
 
         User savedUser = userRepository.save(user);
 

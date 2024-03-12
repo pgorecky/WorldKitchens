@@ -1,10 +1,10 @@
-INSERT INTO users (first_name, last_name,  login, email, password, image_url)
+INSERT INTO users (first_name, last_name,  login, email, password, image_url, auth_provider)
 VALUES ('Weronika', 'Jankowska', 'werka', 'user@mail.com' ,'$2a$10$I2PjUfjqAUC2D8ebGwUhjO9.5bSKdPG5ECYq8Rhsyl/lF9fYBZv4.',
-        'https://firebasestorage.googleapis.com/v0/b/worldskitchenstorage.appspot.com/o/t-image2.jpg?alt=media&token=73897eab-47fd-44b6-b988-4db61e13a7b8');
+        'https://firebasestorage.googleapis.com/v0/b/worldskitchenstorage.appspot.com/o/t-image2.jpg?alt=media&token=73897eab-47fd-44b6-b988-4db61e13a7b8', 'local');
 
-INSERT INTO users (first_name, last_name, login, email, password, image_url)
+INSERT INTO users (first_name, last_name, login, email, password, image_url, auth_provider)
 VALUES ('Patryk', 'Górecki', 'patryczek', 'admin@mail.com', '$2a$10$I2PjUfjqAUC2D8ebGwUhjO9.5bSKdPG5ECYq8Rhsyl/lF9fYBZv4.',
-        'https://firebasestorage.googleapis.com/v0/b/worldskitchenstorage.appspot.com/o/t-image1.png?alt=media&token=cb2145ba-0b48-4deb-8805-ff52ca049522');
+        'https://firebasestorage.googleapis.com/v0/b/worldskitchenstorage.appspot.com/o/t-image1.png?alt=media&token=cb2145ba-0b48-4deb-8805-ff52ca049522', 'local');
 
 INSERT INTO dishes (name, description, preparation_time, calories, portion_size, region, level, user_id, image_url)
 VALUES ('Spaghetti Carbonara',

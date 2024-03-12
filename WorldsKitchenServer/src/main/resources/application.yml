@@ -1,4 +1,25 @@
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 501111947017-i16mfdgv4kcdulcc45mfmm23pd9r7vrd.apps.googleusercontent.com
+            clientSecret: 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
+            redirectUri: "http://localhost:8080/api/oauth2/callback/google"
+            scope:
+              - email
+              - profile
+          facebook:
+            clientId: 1336155317277747
+            clientSecret: 7b0fd4ad5d4feb094789b5fe96df0220
+            redirectUri: "{baseUrl}/api/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - public_profile
+      jwt:
+        token:
+          secret-key: my-secret-key
   datasource:
     url: jdbc:h2:mem:kitchendb
     username: user
@@ -13,7 +34,17 @@ spring:
   sql:
     init:
       mode: always
-  security:
-    jwt:
-      token:
-        secret-key: my-secret-key
+app:
+  url: http://localhost:3000
+  commit:
+    sha: default-sha
+  auth:
+    tokenSecret: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    tokenExpirationMsec: 600000 # 10 minutes
+    refreshTokenExpirationMsec: 604800000 # 7 days
+  cors:
+    allowedOrigins: http://localhost:3000,http://localhost:8080,localhost:8080
+    maxAgeSecs: 3600
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:8080/oauth2/redirect
