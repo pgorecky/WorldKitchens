@@ -8,6 +8,8 @@ import SignIn from "./pages/SignPages/SignIn";
 import TODO from "./pages/TODO";
 import SignUp from "./pages/SignPages/SignUp";
 import {LANDING_PAGE, SIGN_IN_PAGE, SIGN_UP_PAGE, TODO_PAGE} from "./const/Consts";
+import {OAuth2Handler} from "./services/auth/OAuth2Handler";
+import Profile from "./pages/Profile";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
             {
                 path: TODO_PAGE,
                 element: <TODO/>
+            },
+            {
+                path: "/oauth2/redirect",
+                element: <OAuth2Handler/>,
+            },
+            {
+                path: "/profile",
+                element: <Profile/>,
             }
         ],
     },

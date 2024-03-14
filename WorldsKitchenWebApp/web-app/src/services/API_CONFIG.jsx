@@ -49,8 +49,8 @@ export const postRequest = (url, data) => {
     return request("POST", url, data);
 }
 
-export const getRequest = (url, data) => {
-    return request("GET", url, data);
+export const getRequest = (url) => {
+    return request("GET", url, {});
 }
 
 export const deleteRequest = (url, data) => {

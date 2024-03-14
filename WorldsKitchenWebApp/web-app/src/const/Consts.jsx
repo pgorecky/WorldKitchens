@@ -1,4 +1,6 @@
 export const APP_NAME = 'WorldlyEats'
+export const REACT_APP_HOST= 'http://localhost:8080'
+export const REACT_APP_API= 'http://localhost:8080/api'
 export const GITHUB_LINK = 'https://github.com/pgorecky'
 export const LINKEDIN_LINK = 'https://linkedin.com/'
 export const EMAIL_ADDRESS = 'patryk.gorecky@gmail.com'

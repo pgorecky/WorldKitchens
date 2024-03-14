@@ -1,5 +1,6 @@
 package com.sigma.worldskitchenserver.model;
 
+import com.sigma.worldskitchenserver.enums.AuthProvider;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -21,10 +22,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(nullable = false)
@@ -33,7 +34,7 @@ public class User {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column
     @Size(max = 100)
     private String password;
 
@@ -53,4 +54,10 @@ public class User {
 
     @Column(name = "image_url")
     private String imageUrl;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "auth_provider")
+    AuthProvider authProvider;
+
+    private String providerId;
 }

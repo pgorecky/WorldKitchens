@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {removeAuthHeader, setAuthHeader} from "../../services/API_CONFIG";
 import {loginRequest} from "../../services/auth/AuthService";
-import {SIGN_UP_PAGE, TODO_PAGE} from "../../const/Consts";
+import {REACT_APP_API, REACT_APP_HOST, SIGN_UP_PAGE, TODO_PAGE} from "../../const/Consts";
 
 export default function SignIn() {
     const navigate = useNavigate();
@@ -80,12 +80,12 @@ export default function SignIn() {
             <div className={'divider'}>or</div>
             <span style={{color: 'gray', margin: '2vh', fontSize: '1.5vh'}}>Sign in with:</span>
             <div className={'icons-container'} style={{marginBottom: '5vh'}}>
-                <a href={TODO_PAGE}>
+                <a href={REACT_APP_API + "/oauth2/authorize/facebook?redirect_uri=" + REACT_APP_HOST + "/oauth2/redirect"}>
                     <div className={'icon-border facebook'}>
                         <FaFacebookF size={'2vh'}/>
                     </div>
                 </a>
-                <a href={TODO_PAGE}>
+                <a href={REACT_APP_API + "/oauth2/authorize/google?redirect_uri=" + REACT_APP_HOST + "/oauth2/redirect"}>
                     <div className={'icon-border google'}>
                         <FaGoogle size={'2vh'}/>
                     </div>
