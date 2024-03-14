@@ -11,12 +11,13 @@ spring:
               - email
               - profile
           facebook:
-            clientId: 1336155317277747
-            clientSecret: 7b0fd4ad5d4feb094789b5fe96df0220
-            redirectUri: "{baseUrl}/api/oauth2/callback/{registrationId}"
+            clientId: 966574685076573
+            clientSecret: 91342c71c9229b2312c1c75e8cfd7420
+            redirectUri: "http://localhost:8080/api/oauth2/callback/facebook"
             scope:
               - email
               - public_profile
+              - user_photos
       jwt:
         token:
           secret-key: my-secret-key
@@ -35,16 +36,6 @@ spring:
     init:
       mode: always
 app:
-  url: http://localhost:3000
-  commit:
-    sha: default-sha
-  auth:
-    tokenSecret: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-    tokenExpirationMsec: 600000 # 10 minutes
-    refreshTokenExpirationMsec: 604800000 # 7 days
-  cors:
-    allowedOrigins: http://localhost:3000,http://localhost:8080,localhost:8080
-    maxAgeSecs: 3600
   oauth2:
     authorizedRedirectUris:
       - http://localhost:8080/oauth2/redirect

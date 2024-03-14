@@ -34,7 +34,7 @@ public class SecurityConfig {
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
     private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
 
-    @Value("http://localhost:3000/todo")
+    @Value("http://localhost:3000/")
     private String appUrl;
 
     @Bean

@@ -32,7 +32,24 @@ public class FacebookOAuth2UserInfo extends OAuth2UserInfo {
                     return (String) dataObj.get("url");
                 }
             }
+        } else {
+            String id = (String) attributes.get("id");
+            return "https://graph.facebook.com/" + id + "/picture?redirect=false";
         }
         return null;
+    }
+
+    public String getFirstName() {
+        return getName().split(" ")[0];
+    }
+
+    public String getLastName() {
+        String fullName = getName();
+        String[] parts = fullName.split(" ");
+        if (parts.length > 1) {
+            return parts[parts.length - 1];
+        } else {
+            return "";
+        }
     }
 }

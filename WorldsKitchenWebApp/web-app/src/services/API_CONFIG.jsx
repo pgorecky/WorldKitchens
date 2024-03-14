@@ -33,7 +33,6 @@ const request = (method, url, data) => {
     const authToken = getAuthToken();
     const headers = authToken ? {'Authorization': `Bearer ${authToken}`} : {};
 
-    console.log(headers)
     try {
         return axios({
             method,

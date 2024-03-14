@@ -2,6 +2,8 @@ package com.sigma.worldskitchenserver.security.oauth2;
 
 import com.sigma.worldskitchenserver.model.User;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,10 +16,13 @@ import java.util.Map;
 
 @Data
 public class UserPrincipal implements OAuth2User, UserDetails {
+    @Getter
     private Long id;
+    @Getter
     private String email;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
+    @Setter
     private Map<String, Object> attributes;
 
     public UserPrincipal(Long id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
@@ -43,14 +48,6 @@ public class UserPrincipal implements OAuth2User, UserDetails {
         UserPrincipal userPrincipal = UserPrincipal.create(user);
         userPrincipal.setAttributes(attributes);
         return userPrincipal;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     @Override
@@ -91,10 +88,6 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     @Override
     public Map<String, Object> getAttributes() {
         return attributes;
-    }
-
-    public void setAttributes(Map<String, Object> attributes) {
-        this.attributes = attributes;
     }
 
     @Override

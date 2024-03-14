@@ -7,12 +7,9 @@ export const OAuth2Handler = () => {
     const navigate = useNavigate();
     let token = searchParams.get("token");
     let error = searchParams.get("error");
-    console.log(token, error);
     if (token) {
-        console.log(token)
         setAuthHeader(token);
         return <Navigate to={"/profile"} />;
-
     }
     return <b>Auth error {error}</b>;
 };

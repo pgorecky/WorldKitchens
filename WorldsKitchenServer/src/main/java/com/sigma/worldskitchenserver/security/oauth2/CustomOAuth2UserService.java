@@ -5,6 +5,8 @@ import com.sigma.worldskitchenserver.enums.AuthProvider;
 import com.sigma.worldskitchenserver.exception.OAuth2AuthenticationProcessingException;
 import com.sigma.worldskitchenserver.model.User;
 import com.sigma.worldskitchenserver.repository.UserRepository;
+import com.sigma.worldskitchenserver.security.oauth2.user.FacebookOAuth2UserInfo;
+import com.sigma.worldskitchenserver.security.oauth2.user.GoogleOAuth2UserInfo;
 import com.sigma.worldskitchenserver.security.oauth2.user.OAuth2UserInfo;
 import com.sigma.worldskitchenserver.security.oauth2.user.OAuth2UserInfoFactory;
 import lombok.RequiredArgsConstructor;
@@ -64,15 +66,19 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private User registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
         User user = new User();
 
-        System.out.println(oAuth2UserInfo.getAttributes());
-        System.out.println(oAuth2UserRequest);
-
         user.setAuthProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
         user.setProviderId(oAuth2UserInfo.getId());
         user.setLogin(oAuth2UserInfo.getEmail());
-        user.setFirstName(oAuth2UserInfo.getName());
         user.setEmail(oAuth2UserInfo.getEmail());
         user.setImageUrl(oAuth2UserInfo.getImageUrl());
+        if (user.getAuthProvider().equals(AuthProvider.facebook)) {
+            if (oAuth2UserInfo instanceof FacebookOAuth2UserInfo facebookUserInfo) {
+                user.setFirstName(facebookUserInfo.getFirstName());
+                user.setLastName(facebookUserInfo.getLastName());
+            } else if (oAuth2UserInfo instanceof GoogleOAuth2UserInfo googleOAuth2UserInfo){
+                user.setFirstName(googleOAuth2UserInfo.getName());
+            }
+        }
         return userRepository.save(user);
     }
 
