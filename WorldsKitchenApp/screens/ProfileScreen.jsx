@@ -310,10 +310,10 @@ const Stack = createNativeStackNavigator();
 export const ProfileStack = () => {
     return (
         <Stack.Navigator
-            initialRouteName="Profile"
+            initialRouteName="ProfilePage"
             screenOptions={{headerShown: false}}
         >
-            <Stack.Screen name="Profile" component={ProfileScreen}/>
+            <Stack.Screen name="ProfilePage" component={ProfileScreen}/>
             <Stack.Screen name="MealDetails" component={MealScreen}/>
         </Stack.Navigator>
     );

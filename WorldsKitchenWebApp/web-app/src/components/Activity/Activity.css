@@ -1,0 +1,41 @@
+.activity-container {
+    display: flex;
+    flex-direction: row;
+    color: gray;
+    font-weight: bold;
+    border-left: solid 1px var(--clr-primary);
+}
+
+.activity-element::before {
+    content: '●';
+    color: var(--clr-primary);
+    font-size: xx-large;
+    margin-left: -10px;
+}
+
+.activity-element {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2rem;
+}
+
+.date-container {
+    margin-left: 0.5rem;
+    width: 10rem;
+}
+
+.activity-text-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.activity-link {
+    color: var(--clr-primary);
+}
+
+.activity-link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--clr-primary-gaslight);
+}

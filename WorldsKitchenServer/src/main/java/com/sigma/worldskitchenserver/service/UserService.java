@@ -1,13 +1,19 @@
 package com.sigma.worldskitchenserver.service;
 
-import com.sigma.worldskitchenserver.dto.User.CredentialsDto;
-import com.sigma.worldskitchenserver.dto.User.SignUpDto;
-import com.sigma.worldskitchenserver.dto.User.UserDto;
+import com.sigma.worldskitchenserver.dto.Dish.DishDto;
+import com.sigma.worldskitchenserver.dto.User.*;
 import com.sigma.worldskitchenserver.enums.AuthProvider;
+import com.sigma.worldskitchenserver.enums.Region;
 import com.sigma.worldskitchenserver.exception.AppException;
 import com.sigma.worldskitchenserver.exception.ResourceNotFoundException;
+import com.sigma.worldskitchenserver.mapper.DishMapper;
+import com.sigma.worldskitchenserver.mapper.RecentActivityMapper;
 import com.sigma.worldskitchenserver.mapper.UserMapper;
+import com.sigma.worldskitchenserver.model.Dish;
+import com.sigma.worldskitchenserver.model.RecentActivity;
 import com.sigma.worldskitchenserver.model.User;
+import com.sigma.worldskitchenserver.repository.CommentRepository;
+import com.sigma.worldskitchenserver.repository.RecentActivityRepository;
 import com.sigma.worldskitchenserver.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -19,7 +25,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.nio.CharBuffer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -29,6 +39,11 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final RecentActivityRepository recentActivityRepository;
+    private final DishMapper dishMapper;
+    private final CommentRepository commentRepository;
+    private final RecentActivityMapper recentActivityMapper;
+
 
     public UserDto login(CredentialsDto credentialsDto) {
         User user = userRepository.findByLoginOrEmail(credentialsDto.getLogin())
@@ -82,6 +97,50 @@ public class UserService {
         userRepository.save(user);
 
         logger.info("User {} successfully updated picture", user.getId());
+    }
 
+    public UserProfileDto mapUserToUserProfileDto (User user) {
+        UserProfileDto userProfileDto = new UserProfileDto();
+
+        List<Dish> likedMeals = user.getLikedDishes();
+        List<Dish> createdDishes = user.getCreatedDishes();
+
+        List<DishDto> likedMealsDto = new ArrayList<>();
+        List<DishDto> createdRecipes = new ArrayList<>();
+
+        likedMeals.forEach(meal ->
+                likedMealsDto.add(dishMapper.toDishDto(meal)));
+
+        createdDishes.forEach(meal ->
+                createdRecipes.add(dishMapper.toDishDto(meal)));
+
+        Map<Region, Long> regionCounts = likedMeals.stream()
+                .collect(Collectors.groupingBy(Dish::getRegion, Collectors.counting()));
+
+        Optional<Map.Entry<Region, Long>> mostCommonRegion = regionCounts.entrySet().stream()
+                .max(Map.Entry.comparingByValue());
+
+        List<RecentActivity> activities =  recentActivityRepository.findByUser(user);
+        List<RecentActivityDto> activitiesDto =  new ArrayList<>();
+
+        activities.forEach(recentActivity ->
+                activitiesDto.add(recentActivityMapper.toRecentActivityDto(recentActivity)));
+
+
+        userProfileDto.setId(user.getId());
+        userProfileDto.setFirstName(user.getFirstName());
+        userProfileDto.setLastName(user.getLastName());
+        userProfileDto.setEmail(user.getEmail());
+        userProfileDto.setLogin(user.getLogin());
+        userProfileDto.setImageUrl(user.getImageUrl());
+        userProfileDto.setActivities(activitiesDto);
+        userProfileDto.setUsersMeals(createdRecipes);
+        userProfileDto.setLikedMeals(likedMealsDto);
+        mostCommonRegion.ifPresent(region -> userProfileDto.setFavouriteCuisine(region.getKey()));
+        userProfileDto.setAmountOfCreatedRecipes(createdDishes.size());
+        userProfileDto.setAmountOfLikedMeals(likedMeals.size());
+        userProfileDto.setAmountOfCommentsAdded(commentRepository.countCommentByAuthor(user));
+
+        return userProfileDto;
     }
 }

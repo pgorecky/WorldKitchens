@@ -1,5 +1,5 @@
 import './App.css';
-import Header from "./components/Headers/Header";
+import LandingHeader from "./components/Headers/LandingHeader";
 import Footer from "./components/Footer/Footer";
 import HeroSection from "./components/HeroSection/HeroSection";
 
@@ -14,7 +14,7 @@ function App() {
 
     return (
         <>
-            <Header/>
+            <LandingHeader/>
             <HeroSection/>
             <Footer style={{position: "fixed", bottom: 0}}/>
         </>

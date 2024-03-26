@@ -19,10 +19,10 @@ export default function Footer({style = undefined}) {
                 </a>
             </div>
             <div className={'rights-container'}>
-                <span style={{color: "gray"}}>All right reserved © 2024</span>
+                <span style={{color: "black"}}>All right reserved © 2024</span>
                 <div className={'app-version'}>
-                    <Logo color={'gray'}/>
-                    <span style={{color: "gray"}}>Version: Beta 0.01</span>
+                    <Logo color={'black'}/>
+                    <span style={{color: "black"}}>Version: Beta 0.01</span>
                 </div>
             </div>
         </div>

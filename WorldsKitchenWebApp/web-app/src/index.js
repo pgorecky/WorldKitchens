@@ -7,9 +7,9 @@ import reportWebVitals from './reportWebVitals';
 import SignIn from "./pages/SignPages/SignIn";
 import TODO from "./pages/TODO";
 import SignUp from "./pages/SignPages/SignUp";
-import {LANDING_PAGE, SIGN_IN_PAGE, SIGN_UP_PAGE, TODO_PAGE} from "./const/Consts";
+import {LANDING_PAGE, PROFILE_PAGE, SIGN_IN_PAGE, SIGN_UP_PAGE, TODO_PAGE} from "./const/Consts";
 import {OAuth2Handler} from "./services/auth/OAuth2Handler";
-import Profile from "./pages/Profile";
+import ProfilePage from "./pages/ProfilePage";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -38,8 +38,8 @@ const router = createBrowserRouter([
                 element: <OAuth2Handler/>,
             },
             {
-                path: "/profile",
-                element: <Profile/>,
+                path: PROFILE_PAGE,
+                element: <ProfilePage/>,
             }
         ],
     },

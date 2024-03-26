@@ -870,3 +870,30 @@ VALUES (1, 1, 'ADD_MEAL', now());
 
 INSERT INTO recent_activities (user_id, dish_id, activity_type, date)
 VALUES (2, 8, 'ADD_MEAL', now());
+
+INSERT INTO recent_activities (user_id, dish_id, activity_type, date)
+VALUES (2, 1, 'ADD_COMMENT', now());
+
+INSERT INTO recent_activities (user_id, dish_id, activity_type, date)
+VALUES (2, 1, 'LIKE_MEAL', now());
+
+INSERT INTO recent_activities (user_id, dish_id, activity_type, date)
+VALUES (2, 15, 'UNLIKE_MEAL', now());
+
+INSERT INTO recent_activities (user_id, dish_id, activity_type, date)
+VALUES (2, 18, 'ADD_MEAL', now());
+
+INSERT INTO recent_activities (user_id, dish_id, activity_type, date)
+VALUES (2, 20, 'ADD_MEAL', now());
+
+INSERT INTO recent_activities (user_id, dish_id, activity_type, date)
+VALUES (2, 24, 'ADD_MEAL', now());
+
+INSERT INTO recent_activities (user_id, dish_id, activity_type, date)
+VALUES (2, 5, 'ADD_MEAL', now());
+
+INSERT INTO recent_activities (user_id, dish_id, activity_type, date)
+VALUES (2, 7, 'ADD_MEAL', now());
+
+INSERT INTO recent_activities (user_id, dish_id, activity_type, date)
+VALUES (2, 22, 'ADD_MEAL', now());

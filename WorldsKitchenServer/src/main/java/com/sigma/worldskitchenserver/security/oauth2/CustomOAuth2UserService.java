@@ -42,15 +42,15 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private OAuth2User processOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2User oAuth2User) {
         OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(oAuth2UserRequest.getClientRegistration().getRegistrationId(), oAuth2User.getAttributes());
-        if(StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
+        if (StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
 
         Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
         User user;
-        if(userOptional.isPresent()) {
+        if (userOptional.isPresent()) {
             user = userOptional.get();
-            if(!user.getAuthProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
+            if (!user.getAuthProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
                 throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
                         user.getAuthProvider() + " account. Please use your " + user.getAuthProvider() +
                         " account to login.");
@@ -71,13 +71,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setLogin(oAuth2UserInfo.getEmail());
         user.setEmail(oAuth2UserInfo.getEmail());
         user.setImageUrl(oAuth2UserInfo.getImageUrl());
-        if (user.getAuthProvider().equals(AuthProvider.facebook)) {
-            if (oAuth2UserInfo instanceof FacebookOAuth2UserInfo facebookUserInfo) {
-                user.setFirstName(facebookUserInfo.getFirstName());
-                user.setLastName(facebookUserInfo.getLastName());
-            } else if (oAuth2UserInfo instanceof GoogleOAuth2UserInfo googleOAuth2UserInfo){
-                user.setFirstName(googleOAuth2UserInfo.getName());
-            }
+        if (oAuth2UserInfo instanceof FacebookOAuth2UserInfo facebookUserInfo) {
+            user.setFirstName(facebookUserInfo.getFirstName());
+            user.setLastName(facebookUserInfo.getLastName());
+        } else if (oAuth2UserInfo instanceof GoogleOAuth2UserInfo googleOAuth2UserInfo) {
+            user.setFirstName(googleOAuth2UserInfo.getName());
         }
         return userRepository.save(user);
     }

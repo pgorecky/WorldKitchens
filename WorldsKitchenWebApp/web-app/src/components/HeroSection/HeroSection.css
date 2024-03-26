@@ -33,10 +33,6 @@
     animation: slideInFromRight 0.5s ease forwards;
 }
 
-/*.images-container:has(div:hover) div:not(:hover) {*/
-/*    filter: grayscale(0.2);*/
-/*}*/
-
 .image-card:nth-child(1) {
     animation: slideInFromTop 1s ease forwards;
 }

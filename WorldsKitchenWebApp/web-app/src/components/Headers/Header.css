@@ -9,24 +9,54 @@
     padding: 1rem;
 }
 
+#Header {
+    position: sticky;
+    z-index: 5;
+    top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: calc(15px + 1vmin);
+    color: white;
+    min-height: 5vh;
+    background-color: rgb(0, 0, 0, 0.7);
+    padding: 1rem;
+    border-radius: 80px;
+    margin: 0 5px 10px 5px;
+    box-shadow: rgb(0, 0, 0) 0 20px 30px -10px;
+}
+
+#Header > * {
+    margin-left: 30px;
+}
+
+.header-items-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
 .header-menu {
     list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin: 0 0 0 5rem;
     display: flex;
+    gap: 5rem;
     animation: slideInFromTop 1s ease forwards;
 }
 
 .header-menu li {
     padding: 7px;
-    margin-right: 80px;
+    margin-right: 5px;
     text-transform: uppercase;
-    font-size: large;
-    border-radius: 10px;
+    font-size: medium;
+    color: silver;
+    background-clip: text;
 }
 
 .header-menu li:hover {
-    background-color: var(--clr-primary);
+    color: white;
+    text-shadow: white 1px 0 15px;
     cursor: pointer;
 }
 
@@ -36,6 +66,63 @@
     align-items: center;
     gap: 5px;
     animation: slideInFromRight 1s ease forwards;
+}
+
+.notification-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-actions-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin-right: 10rem;
+    animation: slideInFromRight 1s ease forwards;
+}
+
+.header-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-image > img {
+    width: 40px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.hamburger {
+    position: relative;
+    width: 35px;
+    height: 15px;
+    border-top: 4px solid silver;
+    cursor: pointer;
+}
+
+.hamburger:hover {
+    border-color: white;
+}
+
+.hamburger:hover::after {
+    width: 40%;
+    border-color: white;
+}
+
+.hamburger::after {
+    content: '.';
+    color: transparent;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    border-bottom: 4px solid silver;
+    transition: 0.2s ease-in-out;
 }
 
 @media screen and (max-width: 768px) {

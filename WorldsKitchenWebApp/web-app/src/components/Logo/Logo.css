@@ -7,6 +7,10 @@
     animation: slideInFromLeft 1s ease forwards;
 }
 
+#logo:hover {
+    cursor: pointer;
+}
+
 #logo > span {
     color: transparent;
 }

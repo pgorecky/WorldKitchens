@@ -1,7 +1,9 @@
 :root {
   --clr-primary: #03a84e;
   --clr-primary-gaslight: rgb(3, 168, 78, 0.3);
-  --clr-secondary-a60: hsla(249, 36%, 21%, 0.6);
+  --clr-primary-third: #90EE90;
+  /*--clr-secondary-a60: hsla(249, 36%, 21%, 0.6);*/
+  --clr-secondary-a60: hsla(0, 6%, 1%, 0.6);
   --gray: gray;
 }
 
@@ -19,37 +21,37 @@
 
 @keyframes backgroundAnimation {
   0% {
-    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at bottom, var(--clr-primary), black);
+    background-image: linear-gradient(to top, var(--clr-primary-third), var(--clr-secondary-a60)), radial-gradient(circle at bottom, var(--clr-primary), black);
   }
   10% {
-    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 90%, var(--clr-primary), black);
+    background-image: linear-gradient(to top, var(--clr-primary-third), var(--clr-secondary-a60)), radial-gradient(circle at 50% 90%, var(--clr-primary), black);
   }
   20% {
-    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 80%, var(--clr-primary), black);
+    background-image: linear-gradient(to top, var(--clr-primary-third), var(--clr-secondary-a60)), radial-gradient(circle at 50% 80%, var(--clr-primary), black);
   }
   30% {
-    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 70%, var(--clr-primary), black);
+    background-image: linear-gradient(to top, var(--clr-primary-third), var(--clr-secondary-a60)), radial-gradient(circle at 50% 70%, var(--clr-primary), black);
   }
   40% {
-    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 60%, var(--clr-primary), black);
+    background-image: linear-gradient(to top, var(--clr-primary-third), var(--clr-secondary-a60)), radial-gradient(circle at 50% 60%, var(--clr-primary), black);
   }
   50% {
-    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle, var(--clr-primary), black);
+    background-image: linear-gradient(to top, var(--clr-primary-third), var(--clr-secondary-a60)), radial-gradient(circle, var(--clr-primary), black);
   }
   60% {
-    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 40%, var(--clr-primary), black);
+    background-image: linear-gradient(to top, var(--clr-primary-third), var(--clr-secondary-a60)), radial-gradient(circle at 50% 40%, var(--clr-primary), black);
   }
   70% {
-    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 30%, var(--clr-primary), black);
+    background-image: linear-gradient(to top, var(--clr-primary-third), var(--clr-secondary-a60)), radial-gradient(circle at 50% 30%, var(--clr-primary), black);
   }
   80% {
-    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 20%, var(--clr-primary), black);
+    background-image: linear-gradient(to top, var(--clr-primary-third), var(--clr-secondary-a60)), radial-gradient(circle at 50% 20%, var(--clr-primary), black);
   }
   90% {
-    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at 50% 10%, var(--clr-primary), black);
+    background-image: linear-gradient(to top, var(--clr-primary-third), var(--clr-secondary-a60)), radial-gradient(circle at 50% 10%, var(--clr-primary), black);
   }
   100% {
-    background-image: linear-gradient(to top, black, var(--clr-secondary-a60)), radial-gradient(circle at top, var(--clr-primary), black);
+    background-image: linear-gradient(to top, var(--clr-primary-third), var(--clr-secondary-a60)), radial-gradient(circle at top, var(--clr-primary), black);
   }
 }
 

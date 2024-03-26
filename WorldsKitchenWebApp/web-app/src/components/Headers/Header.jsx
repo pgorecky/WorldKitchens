@@ -1,24 +1,33 @@
-import Button from "../Button/Button";
 import './Header.css'
 import Logo from "../Logo/Logo";
 import {useNavigate} from "react-router-dom";
-import {SIGN_IN_PAGE, SIGN_UP_PAGE} from "../../const/Consts";
+import {IoNotifications} from "react-icons/io5";
 
-export default function Header({tabs}) {
+export default function Header({onLogoClick, tabs, image}) {
     const navigate = useNavigate();
 
     const TABS = tabs ? tabs : []
 
     return (
-        <header id="App-header">
-            <Logo/>
-            <ol className={'header-menu'}>
-                {TABS.map((tab, tabIndex) =>
-                    <li key={tabIndex}>{tab}</li>)}
-            </ol>
-            <div className={'button-container'}>
-                <Button type={'outline'} onClick={() => navigate(SIGN_IN_PAGE)}>Log in</Button>
-                <Button onClick={() => navigate(SIGN_UP_PAGE)}>Sign up</Button>
+        <header id="Header">
+            <div className={'header-items-container'}>
+                <div onClick={onLogoClick}>
+                    <Logo/>
+                </div>
+                <ol className={'header-menu'}>
+                    {TABS.map((tab, tabIndex) =>
+                        <li key={tabIndex}>{tab}</li>)}
+                </ol>
+            </div>
+            <div className={'header-actions-container'}>
+                <div className={'notification-icon'}>
+                    <IoNotifications color={'silver'}/>
+                </div>
+                <div className={'header-image'}>
+                    <img src={image} alt={'profile'}/>
+                </div>
+                <div className={'hamburger'}>
+                </div>
             </div>
         </header>
     )
