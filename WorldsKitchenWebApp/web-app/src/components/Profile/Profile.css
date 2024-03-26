@@ -1,5 +1,5 @@
 .profile-content-container {
-    background-color: rgb(0, 0, 0, 0.7);
+    background-color: var(--background-07);
     border-radius: 50px;
     min-height: 80vh;
     margin-left: 1.5rem;
@@ -32,19 +32,19 @@
 }
 
 .greeting-text-container > h2 {
-    color: darkgrey;
+    color: var(--gray2);
     text-transform: uppercase;
     font-size: x-large;
 }
 
 .greeting-text-container > h1 {
-    color: white;
+    color: var(--white-text);
     font-size: xxx-large;
     margin: 0;
 }
 
 .greeting-text-container > h3 {
-    color: darkgrey;
+    color: var(--gray2);
     font-size: medium;
     margin-top: 10px;
 }
@@ -56,9 +56,9 @@
 }
 
 .stats-section {
-    background-color: rgb(0, 0, 0, 0.7);
-    border: solid 1px #171614;
-    box-shadow: rgb(0, 0, 0) -20px 20px 30px -10px;
+    background-color: var(--background-07);
+    border: solid 1px var(--darkgray);
+    box-shadow: var(--shadow);
     min-height: 50vh;
     min-width: 50vh;
     height: fit-content;
@@ -90,14 +90,14 @@
 }
 
 .cuisine-name {
-    color: gray;
+    color: var(--gray);
     text-transform: uppercase;
     font-weight: bold;
     font-size: large;
 }
 
 .cuisine-value {
-    color: white;
+    color: var(--white-text);
     text-transform: uppercase;
     font-weight: bold;
     font-size: 6vh;
@@ -111,14 +111,14 @@
 }
 
 .stats-value {
-    color: white;
+    color: var(--white-text);
     text-transform: uppercase;
     font-weight: bold;
     font-size: xx-large;
 }
 
 .stats-name {
-    color: gray;
+    color: var(--gray);
     text-transform: uppercase;
     font-weight: bold;
     font-size: small;
@@ -132,8 +132,8 @@
 }
 
 .side-divider {
-    border-left: solid 2px gray;
-    border-right: solid 2px gray;
+    border-left: solid 2px var(--gray);
+    border-right: solid 2px var(--gray);
 }
 
 .mid-section {
@@ -144,30 +144,30 @@
 
 .profile-meals-section {
     height: 45vh;
-    background-color: rgb(0, 0, 0, 0.7);
+    background-color: var(--background-07);
     border-radius: 0 40px 40px 40px;
-    border: solid 1px #171614;
-    box-shadow: rgb(0, 0, 0) -20px 20px 30px -10px;
+    border: solid 1px var(--darkgray);
+    box-shadow: var(--shadow);
     overflow-y: scroll;
 }
 
 .meal-tab {
-    background-color: rgb(0, 0, 0, 0.7);
+    background-color: var(--background-07);
     height: 40px;
     width: 80px;
     border-radius: 20px 0 0 0;
-    border: solid 1px #171614;
+    border: solid 1px var(--darkgray);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: gray;
+    color: var(--gray);
 }
 
 .meal-tab:hover {
     cursor: pointer;
     background-color: rgb(255, 255, 255, 0.1);
-    border: solid 1px gray;
-    color: white;
+    border: solid 1px var(--gray);
+    color: var(--white-text);
 }
 
 .tab1 {
@@ -180,8 +180,8 @@
 
 .active-tab {
     background-color: rgb(255, 255, 255, 0.1);
-    border: solid 1px gray;
-    color: white;
+    border: solid 1px var(--gray);
+    color: var(--white-text);
 }
 
 .right-section {

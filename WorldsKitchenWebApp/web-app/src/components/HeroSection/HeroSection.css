@@ -1,5 +1,5 @@
 #HeroSection {
-    color: white;
+    color: var(--white-text);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -26,7 +26,7 @@
 
 .images-container {
     padding: 1rem;
-    background-color: rgb(0, 0, 0, 0.3);
+    background-color: var(--background-03);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;

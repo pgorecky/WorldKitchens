@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: center;
     font-size: 16px;
-    color: white;
+    color: var(--white-text);
     font-weight: bold;
     transition: transform 0.3s ease;
     cursor: pointer;
@@ -23,7 +23,7 @@
     background-color: var(--clr-primary-gaslight);
     width: 70%;
     cursor: not-allowed;
-    border: solid 1px white;
+    border: solid 1px var(--white-border);
     transition: transform 1s ease;
 }
 
@@ -34,12 +34,12 @@
 }
 
 .default-button:hover {
-    border: solid 1px white;
+    border: solid 1px var(--white-border);
 }
 
 .outline-button {
     background-color: transparent;
-    border: solid 1px white;
+    border: solid 1px var(--white-border);
 }
 
 .outline-button:hover {
@@ -54,7 +54,7 @@
 }
 
 .form-button:hover {
-    border: solid 1px white;
+    border: solid 1px var(--white-border);
 }
 
 @media screen and (max-width: 768px) {

@@ -1,18 +1,18 @@
 .list-element {
     display: flex;
     flex-direction: row;
-    border: solid 1px #171614;
+    border: solid 1px var(--darkgray);
 }
 
 .list-element:hover {
     border-color: var(--clr-primary);
-    background-color: black;
+    background-color: var(--app-black);
     cursor: pointer;
 }
 
 #List:has(div:hover) div:not(:hover) {
     filter: grayscale(0.3);
-    border-color: black;
+    border-color: var(--app-black);
     scale: 0.99;
 }
 

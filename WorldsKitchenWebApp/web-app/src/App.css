@@ -2,9 +2,18 @@
   --clr-primary: #03a84e;
   --clr-primary-gaslight: rgb(3, 168, 78, 0.3);
   --clr-primary-third: #90EE90;
-  /*--clr-secondary-a60: hsla(249, 36%, 21%, 0.6);*/
   --clr-secondary-a60: hsla(0, 6%, 1%, 0.6);
   --gray: gray;
+  --gray2: darkgray;
+  --white-text: white;
+  --white-border: white;
+  --footer-color: black;
+  --background-03: rgb(0, 0, 0, 0.3);
+  --background-07: rgb(0, 0, 0, 0.7);
+  --darkgray: #171614;
+  --app-black: black;
+  --shadow: rgb(0, 0, 0) -20px 20px 30px -10px;
+  --silver: silver;
 }
 
 ::-webkit-scrollbar {
