@@ -9,7 +9,13 @@ import Footer from "../components/Footer/Footer";
 export default function ProfilePage() {
     const [profileImage, setProfileImage] = useState();
     const navigate = useNavigate();
-    const tabs = ['Discover', 'Add', 'Favourite', 'FAQ']
+
+    const tabs = [
+        ['Discover', TODO_PAGE],
+        ['Add', TODO_PAGE],
+        ['Favourite', TODO_PAGE],
+        ['FAQ', TODO_PAGE]
+    ]
 
     useEffect(() => {
         getRequest('/me').then(r => {

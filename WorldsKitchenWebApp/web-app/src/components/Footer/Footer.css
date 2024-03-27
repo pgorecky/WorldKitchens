@@ -39,15 +39,15 @@
     margin-left: 10px;
 }
 
-.rights-container > * {
-    color: var(--footer-color);
-}
-
 .app-version {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
     margin-right: 10px;
+}
+
+.app-version > #logo > * {
+    color: var(--footer-color);
 }
 
 @media screen and (max-width: 768px) {

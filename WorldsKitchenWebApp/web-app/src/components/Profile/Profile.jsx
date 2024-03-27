@@ -83,8 +83,8 @@ export default function Profile({user}) {
     return (
         <div className={'profile-content-container'}>
             <div className={'left-section'}>
-                {getStatsImage()}
                 <div className={'stats-section'}>
+                    {getStatsImage()}
                     <div className={'cuisine stat'}>
                         <text className={'cuisine-value'}>{favouriteCuisine}</text>
                         <text className={'cuisine-name'}>Favourite cuisine</text>

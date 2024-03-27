@@ -71,8 +71,7 @@ public class SecurityConfig {
                         .failureHandler(oAuth2AuthenticationFailureHandler))
                 .logout(logout -> logout
                         .logoutUrl("/api/logout")
-                        .logoutSuccessUrl(appUrl))
-        ;
+                        .logoutSuccessUrl(appUrl));
         return http.build();
     }
 }

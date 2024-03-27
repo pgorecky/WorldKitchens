@@ -12,10 +12,10 @@
 
 .profile-greetings {
     display: flex;
-    gap: 3rem;
+    gap: 3vh;
     flex-direction: row;
     height: fit-content;
-    padding: 5rem;
+    padding: 5vh;
 }
 
 .profile-greetings > img {
@@ -60,7 +60,7 @@
     border: solid 1px var(--darkgray);
     box-shadow: var(--shadow);
     min-height: 50vh;
-    min-width: 50vh;
+    min-width: 40vh;
     height: fit-content;
     border-radius: 25px;
     margin-top: 15vh;
@@ -72,13 +72,17 @@
 }
 
 .stats-image {
-    position: absolute;
+    position: relative;
     z-index: 9;
-    top: 8vh;
-    left: 0;
+    top: -8vh;
+    left: -17vh;
     width: 500px;
     height: auto;
     rotate: -25deg;
+}
+
+.cuisine {
+    margin-top: -25vh;
 }
 
 .stat {
@@ -189,8 +193,8 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    margin-left: 10rem;
-    margin-top: 8rem;
+    margin-left: 5vh;
+    margin-top: 8vh;
 }
 
 .activity-label {

@@ -125,6 +125,14 @@
     transition: 0.2s ease-in-out;
 }
 
+.notification-icon > * {
+    color: var(--silver);
+}
+
+.notification-icon > *:hover {
+    color: var(--white-text);
+}
+
 @media screen and (max-width: 768px) {
     .button-container {
         gap: 2px;

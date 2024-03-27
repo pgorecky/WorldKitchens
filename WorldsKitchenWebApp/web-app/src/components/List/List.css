@@ -10,7 +10,7 @@
     cursor: pointer;
 }
 
-#List:has(div:hover) div:not(:hover) {
+#List:has(.list-element:hover) .list-element:not(:hover) {
     filter: grayscale(0.3);
     border-color: var(--app-black);
     scale: 0.99;
@@ -30,7 +30,7 @@
 .meal-name {
     color: var(--clr-primary);
     font-size: large;
-    width: 250px;
+    width: 20vh;
     font-weight: bold;
 }
 
@@ -42,8 +42,8 @@
 .list-text-container {
     display: flex;
     flex-direction: column;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 2vh;
+    margin-right: 2vh;
 }
 
 .list-meal-details {
@@ -58,7 +58,7 @@
     justify-content: center;
     align-items: center;
     gap: 5px;
-    width: 250px;
+    width: 20vh;
 }
 
 .details-value {

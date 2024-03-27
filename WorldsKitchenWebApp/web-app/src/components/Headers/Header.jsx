@@ -8,6 +8,10 @@ export default function Header({onLogoClick, tabs, image}) {
 
     const TABS = tabs ? tabs : []
 
+    const handleTabNavigation = (url) => {
+        navigate(url)
+    }
+
     return (
         <header id="Header">
             <div className={'header-items-container'}>
@@ -16,12 +20,17 @@ export default function Header({onLogoClick, tabs, image}) {
                 </div>
                 <ol className={'header-menu'}>
                     {TABS.map((tab, tabIndex) =>
-                        <li key={tabIndex}>{tab}</li>)}
+                        <li
+                            key={tabIndex}
+                            onClick={() => handleTabNavigation(tab[1])}>
+                            {tab[0]}
+                        </li>
+                    )}
                 </ol>
             </div>
             <div className={'header-actions-container'}>
                 <div className={'notification-icon'}>
-                    <IoNotifications color={'silver'}/>
+                    <IoNotifications/>
                 </div>
                 <div className={'header-image'}>
                     <img src={image} alt={'profile'}/>
