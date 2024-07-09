@@ -1,0 +1,143 @@
+.recipe-container {
+    background-color: var(--background-07);
+    border-radius: 50px;
+    height: 90vh;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    animation: slideInFromLeft 1s ease forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.meal-name-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 3rem;
+    max-width: 80rem;
+}
+
+.meal-name-section > p {
+    color: var(--gray2);
+    font-size: large;
+}
+
+.meal-name-section > h1 {
+    color: var(--white-text);
+    font-size: xxx-large;
+    margin: 0;
+}
+
+.meal-details-section {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    color: var(--gray2);
+}
+
+.meal-detail {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.ingredients-section {
+    display: flex;
+    flex-direction: row;
+}
+
+.ingredients-section > img {
+    width: 34rem;
+    height: 34rem;
+    box-shadow: var(--shadow);
+    object-fit: cover;
+    border-radius: 25px;
+    margin-top: 2rem;
+    margin-left: -8rem;
+}
+
+.ingredients {
+    background-color: var(--background-07);
+    border: solid 1px var(--darkgray);
+    box-shadow: var(--shadow);
+    color: var(--gray2);
+    font-size: large;
+    min-height: 38rem;
+    min-width: 40vh;
+    padding-left: 2rem;
+    height: fit-content;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.instructions-section {
+    color: var(--gray2);
+}
+
+.comments-section {
+    background-color: var(--background-07);
+    border-radius: 50px;
+    width: 120vh;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    animation: slideInFromLeft 1s ease forwards;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+    color: var(--gray2);
+    /*align-items: center;*/
+    /*overflow-y: scroll;*/
+}
+
+#comments-list {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
+}
+
+#comments-list:has(.comment:hover) .comment:not(:hover) {
+    filter: grayscale(0.3);
+    border-color: var(--app-black);
+    scale: 0.99;
+}
+
+.comment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 5px;
+    border: solid 1px var(--darkgray);
+    width: calc(120vh - 2rem);
+}
+
+.comment:hover {
+    border-color: var(--clr-primary);
+    background-color: var(--app-black);
+    cursor: pointer;
+}
+
+.comment > img {
+    width: 3rem;
+    height: auto;
+    border-radius: 15%;
+    object-fit: cover;
+}
+
+.comment-author {
+    color: var(--clr-primary);
+}
+
+.comment-author:hover {
+    color: var(--clr-primary-third);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.comment-content {
+    margin-left: 5px;
+}

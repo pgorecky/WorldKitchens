@@ -26,7 +26,11 @@ public class UserController {
     @PatchMapping("/me/updatePhoto")
     public ResponseEntity<?> updateProfilePicture(@RequestBody Map<String, String> requestBody) {
         String imageURI = requestBody.get("imageURI");
-        userService.updateUserPhoto(imageURI);
+
+        if (imageURI != null) {
+            userService.updateUserPhoto(imageURI);
+        }
+
         return ResponseEntity.ok().build();
     }
 }
