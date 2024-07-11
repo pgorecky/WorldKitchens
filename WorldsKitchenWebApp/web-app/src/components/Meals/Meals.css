@@ -141,3 +141,20 @@
 .comment-content {
     margin-left: 5px;
 }
+
+.add-comment-section > input {
+    width: calc(120vh - 2rem);
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 2px solid var(--darkgray);
+    background-color: var(--app-black);
+    color: var(--clr-primary);
+}
+
+.add-comment-section {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    width: calc(120vh - 2rem);
+}

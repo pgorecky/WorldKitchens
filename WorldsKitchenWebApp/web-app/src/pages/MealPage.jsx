@@ -10,9 +10,12 @@ import {IoMdPeople} from "react-icons/io";
 import {FaFlag} from "react-icons/fa";
 import {PiCookingPotFill} from "react-icons/pi";
 import MealCommentsList from "../components/List/MealCommentsList";
+import Button from "../components/Button/Button";
+import {addCommentRequest} from "../services/comment/CommentService";
 
 export default function MealPage() {
     const [profileImage, setProfileImage] = useState();
+    const [comment, setComment] = useState('');
     const navigate = useNavigate();
     const {id} = useParams();
     const [meal, setMeal] = useState({
@@ -36,6 +39,22 @@ export default function MealPage() {
         ['Favourite', TODO_PAGE],
         ['FAQ', TODO_PAGE]
     ]
+
+    const handleCommentChange = (event) => {
+        setComment(event.target.value)
+    }
+
+    const handleAddComment = () => {
+        addCommentRequest(id, comment).then(() => {
+            setComment('');
+            getRequest(`/dishes/${id}`).then(r => {
+                setMeal(prevMeal => ({
+                    ...prevMeal,
+                    comments: r.data.comments
+                }));
+            });
+        });
+    }
 
     useEffect(() => {
         getRequest('/me').then(r => {
@@ -117,6 +136,17 @@ export default function MealPage() {
 
                 <div className={'comments-section'}>
                     <h2>Comments:</h2>
+                    <div className={'add-comment-section'}>
+                        <input
+                            type={"text"}
+                            placeholder={"Add comment"}
+                            value={comment}
+                            onChange={handleCommentChange}/>
+                        <Button
+                            style={{padding: "9px 20px", fontSize: "12px", textTransform: "none"}}
+                            onClick={handleAddComment}
+                        >Add</Button>
+                    </div>
                     {meal.comments.length > 0 ? (
                         <>
                             <MealCommentsList
