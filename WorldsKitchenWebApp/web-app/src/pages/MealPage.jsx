@@ -1,13 +1,13 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {getRequest} from "../services/API_CONFIG";
+import {getRequest, postRequest} from "../services/API_CONFIG";
 import Header from "../components/Headers/Header";
 import {TODO_PAGE} from "../const/Consts";
 import '../components/Meals/Meals.css'
 import {RiTimer2Line} from "react-icons/ri";
 import {LiaBurnSolid} from "react-icons/lia";
 import {IoMdPeople} from "react-icons/io";
-import {FaFlag} from "react-icons/fa";
+import {FaFlag, FaHeart, FaRegHeart} from "react-icons/fa";
 import {PiCookingPotFill} from "react-icons/pi";
 import MealCommentsList from "../components/List/MealCommentsList";
 import Button from "../components/Button/Button";
@@ -16,6 +16,8 @@ import {addCommentRequest} from "../services/comment/CommentService";
 export default function MealPage() {
     const [profileImage, setProfileImage] = useState();
     const [comment, setComment] = useState('');
+    const [like, setLike] = useState(true);
+    const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
     const {id} = useParams();
     const [meal, setMeal] = useState({
@@ -39,6 +41,23 @@ export default function MealPage() {
         ['Favourite', TODO_PAGE],
         ['FAQ', TODO_PAGE]
     ]
+
+    const getLikeIcon = () => {
+        let size = '2.3rem'
+        let color = 'red'
+        let x = isHovered ? !like : like
+       return  x ? <FaHeart size={size} color={color} onClick={handleLike}/>
+           : <FaRegHeart size={size} color={color} onClick={handleLike}/>;
+    }
+
+    const handleLike = () => {
+        if (like) {
+            postRequest(`/dishes/${id}/unlike`)
+        } else {
+            postRequest(`/dishes/${id}/like`)
+        }
+        setLike(prevState => {setLike(!prevState)})
+    }
 
     const handleCommentChange = (event) => {
         setComment(event.target.value)
@@ -77,6 +96,8 @@ export default function MealPage() {
                 imageUrl: r.data.imageUrl
             })
         })
+
+        getRequest(`/dishes/${id}/isLiked`).then(r => setLike(r.data))
     }, []);
 
     return (
@@ -86,7 +107,15 @@ export default function MealPage() {
                 image={profileImage}/>
             <div className={'recipe-container'}>
                 <div className={'meal-name-section'}>
-                    <h1>{meal.name}</h1>
+                    <div className={'meal-name-like'}>
+                        <h1>{meal.name}</h1>
+                        <div
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                        >
+                            {getLikeIcon()}
+                        </div>
+                    </div>
                     <p>{meal.description}</p>
                     <div className={'meal-details-section'}>
                         <div className={'meal-detail'}>

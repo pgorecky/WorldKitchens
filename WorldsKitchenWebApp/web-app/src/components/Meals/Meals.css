@@ -30,6 +30,28 @@
     margin: 0;
 }
 
+.meal-name-like > h1 {
+    color: var(--white-text);
+    font-size: xxx-large;
+    margin: 0;
+}
+
+.meal-name-like {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.meal-name-like > * {
+    padding: 0.5rem;
+}
+
+.meal-name-like > div {
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
 .meal-details-section {
     display: flex;
     flex-direction: row;
@@ -77,6 +99,8 @@
 
 .instructions-section {
     color: var(--gray2);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .comments-section {
@@ -150,6 +174,7 @@
     border: 2px solid var(--darkgray);
     background-color: var(--app-black);
     color: var(--clr-primary);
+    margin-bottom: 2px;
 }
 
 .add-comment-section {

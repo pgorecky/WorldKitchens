@@ -97,6 +97,10 @@
     object-fit: cover;
 }
 
+.header-image:hover {
+    cursor: pointer;
+}
+
 .hamburger {
     position: relative;
     width: 35px;
