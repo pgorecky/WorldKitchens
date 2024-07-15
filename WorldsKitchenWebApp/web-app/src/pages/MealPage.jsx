@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {getRequest, postRequest} from "../services/API_CONFIG";
 import Header from "../components/Headers/Header";
 import {TODO_PAGE} from "../const/Consts";
@@ -18,7 +18,6 @@ export default function MealPage() {
     const [comment, setComment] = useState('');
     const [like, setLike] = useState(true);
     const [isHovered, setIsHovered] = useState(false);
-    const navigate = useNavigate();
     const {id} = useParams();
     const [meal, setMeal] = useState({
         name: '',
@@ -76,7 +75,7 @@ export default function MealPage() {
     }
 
     useEffect(() => {
-        getRequest('/me').then(r => {
+        getRequest('/users/me').then(r => {
             setProfileImage(r.data.imageUrl)
         });
 

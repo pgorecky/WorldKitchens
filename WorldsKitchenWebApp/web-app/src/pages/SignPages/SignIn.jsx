@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {removeAuthHeader, setAuthHeader} from "../../services/API_CONFIG";
 import {loginRequest} from "../../services/auth/AuthService";
-import {PROFILE_PAGE, REACT_APP_API, REACT_APP_HOST, SIGN_UP_PAGE, TODO_PAGE} from "../../const/Consts";
+import {MY_PROFILE_PAGE, REACT_APP_API, REACT_APP_HOST, SIGN_UP_PAGE, TODO_PAGE} from "../../const/Consts";
 
 export default function SignIn() {
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ export default function SignIn() {
                 password: password
             });
             await setAuthHeader(response.data.token)
-            navigate(PROFILE_PAGE)
+            navigate(MY_PROFILE_PAGE)
         } catch (error) {
             setErrorMessage(() => {
                 if (error.request.status === 0) {

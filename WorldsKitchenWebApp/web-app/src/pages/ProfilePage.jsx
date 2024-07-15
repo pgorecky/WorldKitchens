@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {getRequest} from "../services/API_CONFIG";
 import Header from "../components/Headers/Header";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {TODO_PAGE} from "../const/Consts";
 import Profile from "../components/Profile/Profile";
 import Footer from "../components/Footer/Footer";
@@ -9,6 +9,7 @@ import Footer from "../components/Footer/Footer";
 export default function ProfilePage() {
     const [profileImage, setProfileImage] = useState();
     const navigate = useNavigate();
+    const {id} = useParams();
 
     const tabs = [
         ['Discover', TODO_PAGE],
@@ -18,7 +19,7 @@ export default function ProfilePage() {
     ]
 
     useEffect(() => {
-        getRequest('/me').then(r => {
+        getRequest('/users/me').then(r => {
             setProfileImage(r.data.imageUrl)
         });
     }, []);
@@ -34,7 +35,7 @@ export default function ProfilePage() {
                 tabs={tabs}
                 image={profileImage}/>
             <Profile
-                user={'me'}/>
+                user={id}/>
             <Footer style={{position: "fixed", bottom: 0}}/>
         </>
     )

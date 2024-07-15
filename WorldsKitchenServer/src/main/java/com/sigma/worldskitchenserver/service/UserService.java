@@ -143,4 +143,10 @@ public class UserService {
 
         return userProfileDto;
     }
+
+    public UserProfileDto getUserById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));;
+
+        return mapUserToUserProfileDto(user);
+    }
 }

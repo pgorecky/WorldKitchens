@@ -11,7 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UserController {
 
     private final UserService userService;
@@ -21,6 +21,11 @@ public class UserController {
         User user = userService.getCurrentUser();
 
         return ResponseEntity.ok(userService.mapUserToUserProfileDto(user));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserProfileDto> getUserInfo(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PatchMapping("/me/updatePhoto")

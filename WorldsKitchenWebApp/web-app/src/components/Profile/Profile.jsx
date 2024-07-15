@@ -67,7 +67,7 @@ export default function Profile({user}) {
     }
 
     useEffect(() => {
-        getRequest(`/${user}`).then(r => {
+        getRequest(`/users/${user}`).then(r => {
             setProfileImage(r.data.imageUrl)
             setFirstName(r.data.firstName)
             setFavouriteCuisine(r.data.favouriteCuisine)

@@ -2,7 +2,7 @@ import './Header.css'
 import Logo from "../Logo/Logo";
 import {useNavigate} from "react-router-dom";
 import {IoNotifications} from "react-icons/io5";
-import {PROFILE_PAGE} from "../../const/Consts";
+import {MY_PROFILE_PAGE} from "../../const/Consts";
 
 export default function Header({onLogoClick, tabs, image}) {
     const navigate = useNavigate();
@@ -37,7 +37,7 @@ export default function Header({onLogoClick, tabs, image}) {
                     <img
                         src={image}
                         alt={'profile'}
-                        onClick={() => handleTabNavigation(PROFILE_PAGE)}
+                        onClick={() => handleTabNavigation(MY_PROFILE_PAGE)}
                     />
                 </div>
                 <div className={'hamburger'}>
