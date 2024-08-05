@@ -183,3 +183,52 @@
     flex-direction: column;
     width: calc(120vh - 2rem);
 }
+
+.meal-name-input {
+    width: calc(50vh - 2rem);
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border: 2px solid var(--darkgray);
+    background-color: var(--app-black);
+    color: var(--clr-primary);
+    margin-bottom: 2px;
+    font-size: x-large;
+}
+
+.meal-desc-input {
+    width: calc(100vh - 2rem);
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border: 2px solid var(--darkgray);
+    background-color: var(--app-black);
+    color: var(--gray);
+    margin-bottom: 2px;
+    font-size: large;
+}
+
+.meal-number-input {
+    padding: 8px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    border: 2px solid var(--darkgray);
+    background-color: var(--app-black);
+    color: var(--gray);
+    width: calc(14vh - 2rem);
+}
+
+.meal-add-photo {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 80px;
+    width: 60vh;
+    height: auto;
+    box-shadow: rgb(0, 0, 0) -20px 20px 30px -10px;
+    object-fit: cover;
+}
+
+.add-step-section {
+    display: flex;
+    flex-direction: row;
+}

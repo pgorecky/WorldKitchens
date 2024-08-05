@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getRequest, postRequest} from "../services/API_CONFIG";
 import Header from "../components/Headers/Header";
-import {TODO_PAGE} from "../const/Consts";
+import {ADD_MEAL_PAGE, TODO_PAGE} from "../const/Consts";
 import '../components/Meals/Meals.css'
 import {RiTimer2Line} from "react-icons/ri";
 import {LiaBurnSolid} from "react-icons/lia";
@@ -36,7 +36,7 @@ export default function MealPage() {
 
     const tabs = [
         ['Discover', TODO_PAGE],
-        ['Add', TODO_PAGE],
+        ['Add', ADD_MEAL_PAGE],
         ['Favourite', TODO_PAGE],
         ['FAQ', TODO_PAGE]
     ]

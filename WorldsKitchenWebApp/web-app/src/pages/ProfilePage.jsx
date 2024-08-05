@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {getRequest} from "../services/API_CONFIG";
 import Header from "../components/Headers/Header";
 import {useNavigate, useParams} from "react-router-dom";
-import {TODO_PAGE} from "../const/Consts";
+import {ADD_MEAL_PAGE, TODO_PAGE} from "../const/Consts";
 import Profile from "../components/Profile/Profile";
 import Footer from "../components/Footer/Footer";
 
@@ -13,7 +13,7 @@ export default function ProfilePage() {
 
     const tabs = [
         ['Discover', TODO_PAGE],
-        ['Add', TODO_PAGE],
+        ['Add', ADD_MEAL_PAGE],
         ['Favourite', TODO_PAGE],
         ['FAQ', TODO_PAGE]
     ]
