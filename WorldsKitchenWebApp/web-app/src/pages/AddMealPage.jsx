@@ -1,6 +1,6 @@
 import Header from "../components/Headers/Header";
 import {useEffect, useRef, useState} from "react";
-import {ADD_MEAL_PAGE, TODO_PAGE} from "../const/Consts";
+import {ADD_MEAL_PAGE, ALL_MEAL_PAGE, TODO_PAGE} from "../const/Consts";
 import {getRequest, postRequest} from "../services/API_CONFIG";
 import {PiCookingPotFill} from "react-icons/pi";
 import {LiaBurnSolid} from "react-icons/lia";
@@ -34,7 +34,7 @@ export default function AddMealPage() {
     const navigate = useNavigate();
 
     const tabs = [
-        ['Discover', TODO_PAGE],
+        ['Discover', ALL_MEAL_PAGE],
         ['Add', ADD_MEAL_PAGE],
         ['Favourite', TODO_PAGE],
         ['FAQ', TODO_PAGE]

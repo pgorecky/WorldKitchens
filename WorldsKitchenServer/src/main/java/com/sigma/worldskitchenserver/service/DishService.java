@@ -4,6 +4,7 @@ import com.sigma.worldskitchenserver.dto.Dish.DishAddRequest;
 import com.sigma.worldskitchenserver.dto.Dish.DishDto;
 import com.sigma.worldskitchenserver.dto.User.UserDto;
 import com.sigma.worldskitchenserver.enums.ActivityType;
+import com.sigma.worldskitchenserver.enums.Level;
 import com.sigma.worldskitchenserver.enums.Region;
 import com.sigma.worldskitchenserver.exception.ResourceNotFoundException;
 import com.sigma.worldskitchenserver.mapper.DishMapper;
@@ -81,6 +82,14 @@ public class DishService {
 
     public List<DishDto> getDishesByRegion(Region region) {
         return mapDishesToDishesDto(dishRepository.findByRegion(region));
+    }
+
+    public List<DishDto> getAllDishes(Region region, Level level) {
+        return mapDishesToDishesDto(dishRepository.findAll())
+                .stream()
+                .filter(meal -> (region == null || meal.getRegion() == region))
+                .filter(meal -> (level == null || meal.getLevel() == level))
+                .collect(Collectors.toList());
     }
 
     public Boolean checkIsDishLiked(Long dishId) {

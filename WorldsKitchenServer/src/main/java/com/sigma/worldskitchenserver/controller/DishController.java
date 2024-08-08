@@ -2,6 +2,7 @@ package com.sigma.worldskitchenserver.controller;
 
 import com.sigma.worldskitchenserver.dto.Dish.DishAddRequest;
 import com.sigma.worldskitchenserver.dto.Dish.DishDto;
+import com.sigma.worldskitchenserver.enums.Level;
 import com.sigma.worldskitchenserver.enums.Region;
 import com.sigma.worldskitchenserver.mapper.DishMapper;
 import com.sigma.worldskitchenserver.repository.DishRepository;
@@ -52,6 +53,16 @@ public class DishController {
     @GetMapping("/byRegion/{region}")
     public ResponseEntity<List<DishDto>> getDishesByRegion(@PathVariable Region region) {
         List<DishDto> dtoDishes = dishService.getDishesByRegion(region);
+
+        return ResponseEntity.ok(dtoDishes);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<DishDto>> getAllDishes(
+            @RequestParam(required = false) Region region,
+            @RequestParam(required = false) Level level) {
+
+        List<DishDto> dtoDishes = dishService.getAllDishes(region, level);
 
         return ResponseEntity.ok(dtoDishes);
     }

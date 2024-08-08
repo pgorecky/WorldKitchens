@@ -9,6 +9,7 @@ import TODO from "./pages/TODO";
 import SignUp from "./pages/SignPages/SignUp";
 import {
     ADD_MEAL_PAGE,
+    ALL_MEAL_PAGE,
     LANDING_PAGE,
     MEAL_PAGE,
     PROFILE_PAGE,
@@ -20,6 +21,7 @@ import {OAuth2Handler} from "./services/auth/OAuth2Handler";
 import ProfilePage from "./pages/ProfilePage";
 import MealPage from "./pages/MealPage";
 import AddMealPage from "./pages/AddMealPage";
+import AllMealsPage from "./pages/AllMealsPage";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -58,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: ADD_MEAL_PAGE,
                 element: <AddMealPage/>,
+            },
+            {
+                path: ALL_MEAL_PAGE,
+                element: <AllMealsPage/>,
             },
         ],
     },
