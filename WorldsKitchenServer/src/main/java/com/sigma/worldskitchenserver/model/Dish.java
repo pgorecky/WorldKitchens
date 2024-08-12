@@ -32,8 +32,10 @@ public class Dish {
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
     private List<Ingredient> ingredients;
 
+    @Column(name = "calories")
     private int calories;
 
+    @Column(name = "portion_size")
     private int portionSize;
 
     @Enumerated(EnumType.STRING)

@@ -1,5 +1,5 @@
 import Header from "../components/Headers/Header";
-import {useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {ADD_MEAL_PAGE, ALL_MEAL_PAGE, TODO_PAGE} from "../const/Consts";
 import {getRequest, postRequest} from "../services/API_CONFIG";
 import {PiCookingPotFill} from "react-icons/pi";
@@ -25,6 +25,7 @@ export default function AddMealPage() {
     const [ingredient, setIngredient] = useState('');
     const [ingredientPortion, setIngredientPortion] = useState('');
     const [ingredients, setIngredients] = useState([])
+    const [disabled, setDisabled] = useState(true)
     const [mealImage, setMealImage] = useState('https://firebasestorage.googleapis.com/v0/b/worldskitchenstorage.appspot.com/o/applepie.jpg?alt=media&token=f75a577e-fbd0-463e-9c70-606a82eced62');
 
     const stepInputRef = useRef(null);
@@ -40,12 +41,21 @@ export default function AddMealPage() {
         ['FAQ', TODO_PAGE]
     ]
 
+    const unlockButton = useCallback(() => {
+        if (name && desc && time && calories && portion && region && level) {
+            setDisabled(false);
+        } else {
+            setDisabled(true);
+        }
+    }, [name, desc, time, calories, portion, region, level]);
+
     useEffect(() => {
         getRequest('/users/me').then(r => {
             setProfileImage(r.data.imageUrl)
             setUserId(r.data.id)
+            unlockButton();
         });
-    }, []);
+    }, [unlockButton]);
 
     const handleNameChange = (event) => {
         setName(event.target.value)
@@ -104,6 +114,7 @@ export default function AddMealPage() {
             setIngredientPortion('');
         }
     };
+
 
     const addMeal = () => {
         postRequest('/dishes/add', {
@@ -263,6 +274,7 @@ export default function AddMealPage() {
                 </div>
                 <Button
                     style={{width: "100%", marginTop: "1rem"}}
+                    disabled={disabled}
                     onClick={addMeal}>Add meal</Button>
             </div>
         </div>

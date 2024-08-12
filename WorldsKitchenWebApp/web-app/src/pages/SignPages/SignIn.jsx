@@ -5,10 +5,10 @@ import {FaFacebookF, FaGoogle, FaUserAlt} from "react-icons/fa";
 import {RiLockPasswordFill} from "react-icons/ri";
 import Button from "../../components/Button/Button";
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
-import {removeAuthHeader, setAuthHeader} from "../../services/API_CONFIG";
+import {useEffect, useState} from "react";
+import {getAuthToken, setAuthHeader} from "../../services/API_CONFIG";
 import {loginRequest} from "../../services/auth/AuthService";
-import {MY_PROFILE_PAGE, REACT_APP_API, REACT_APP_HOST, SIGN_UP_PAGE, TODO_PAGE} from "../../const/Consts";
+import {ALL_MEAL_PAGE, REACT_APP_API, REACT_APP_HOST, SIGN_UP_PAGE, TODO_PAGE} from "../../const/Consts";
 
 export default function SignIn() {
     const navigate = useNavigate();
@@ -17,20 +17,25 @@ export default function SignIn() {
     const [password, setPassword] = useState();
     const [errorMessage, setErrorMessage] = useState(null);
 
+    useEffect(() => {
+        if (getAuthToken()) {
+            navigate(ALL_MEAL_PAGE)
+        }
+    }, []);
+
     const handleSubmit = async () => {
-        removeAuthHeader();
         try {
             const response = await loginRequest({
                 login: username,
                 password: password
             });
             await setAuthHeader(response.data.token)
-            navigate(MY_PROFILE_PAGE)
+            navigate(ALL_MEAL_PAGE)
         } catch (error) {
             setErrorMessage(() => {
                 if (error.request.status === 0) {
                     return 'Failed to connect to server'
-                } else if (error.response.status === 400) {
+                } else if (error.response.status === 401) {
                     return 'Incorrect password! Try again, if you forgot your password try to restore it.'
                 } else if (error.response.status === 404) {
                     return 'There is no such user! Check the name you entered. If you dont have an account yet - create one.'

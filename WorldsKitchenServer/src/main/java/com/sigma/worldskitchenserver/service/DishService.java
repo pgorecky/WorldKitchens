@@ -14,7 +14,16 @@ import com.sigma.worldskitchenserver.model.User;
 import com.sigma.worldskitchenserver.repository.DishRepository;
 import com.sigma.worldskitchenserver.repository.IngredientRepository;
 import com.sigma.worldskitchenserver.repository.UserRepository;
+import com.sigma.worldskitchenserver.util.HibernateUtil;
+import jakarta.persistence.Query;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -84,13 +93,52 @@ public class DishService {
         return mapDishesToDishesDto(dishRepository.findByRegion(region));
     }
 
-    public List<DishDto> getAllDishes(Region region, Level level) {
-        return mapDishesToDishesDto(dishRepository.findAll())
-                .stream()
-                .filter(meal -> (region == null || meal.getRegion() == region))
-                .filter(meal -> (level == null || meal.getLevel() == level))
-                .collect(Collectors.toList());
+    public List<DishDto> getAllDishes() {
+        return mapDishesToDishesDto(dishRepository.findAll());
     }
+
+    public List<DishDto> getDishesByCriteria(String name, Region region, Level level, int caloriesDown, int caloriesUp) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = null;
+        Transaction transaction = null;
+        List<DishDto> dishDtos = null;
+
+        try {
+            session = sessionFactory.getCurrentSession();
+            transaction = session.beginTransaction();
+
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<Dish> cr = cb.createQuery(Dish.class);
+            Root<Dish> root = cr.from(Dish.class);
+
+            Predicate nameItems = cb.like(root.get("name"), "%" + name + "%");
+            Predicate caloriesItems = cb.between(root.get("calories"), caloriesDown, caloriesUp);
+            Predicate regionItems = cb.like(root.get("region"), String.valueOf(region));
+            Predicate levelItems = cb.like(root.get("level"), String.valueOf(level));
+
+            Predicate[] predicates = new Predicate[]{nameItems, caloriesItems, regionItems, levelItems};
+
+            cr.select(root).where(predicates);
+
+            Query query = session.createQuery(cr);
+            List<Dish> results = query.getResultList();
+
+            dishDtos = mapDishesToDishesDto(results);
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return dishDtos;
+    }
+
 
     public Boolean checkIsDishLiked(Long dishId) {
         User currentUser = userService.getCurrentUser();

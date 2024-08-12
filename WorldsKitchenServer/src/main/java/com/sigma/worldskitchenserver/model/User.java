@@ -59,5 +59,6 @@ public class User {
     @Column(name = "auth_provider")
     AuthProvider authProvider;
 
+    @Column(name = "provider_id")
     private String providerId;
 }
