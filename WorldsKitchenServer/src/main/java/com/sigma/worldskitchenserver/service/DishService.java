@@ -21,11 +21,10 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,8 +34,8 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class DishService {
-    private static final Logger logger = LoggerFactory.getLogger(DishService.class);
 
     private final UserService userService;
     private final DishRepository dishRepository;
@@ -76,7 +75,7 @@ public class DishService {
         userRepository.save(user);
         dishRepository.save(dish);
         recentActivityService.addActivity(user, dish, ActivityType.LIKE_MEAL);
-        logger.info("User with id: {} liked dish {}", user.getId(), dish.getId());
+        log.info("User with id: {} liked dish {}", user.getId(), dish.getId());
     }
 
     public void unlikeDishById(Long dishId) {
@@ -87,7 +86,7 @@ public class DishService {
         userRepository.save(user);
         dishRepository.save(dish);
         recentActivityService.addActivity(user, dish, ActivityType.UNLIKE_MEAL);
-        logger.info("User with id: {} unliked dish {}", user.getId(), dish.getId());
+        log.info("User with id: {} unliked dish {}", user.getId(), dish.getId());
     }
 
     public List<DishDto> getDishesByRegion(Region region) {
@@ -184,7 +183,7 @@ public class DishService {
         ingredientRepository.saveAll(ingredients);
         recentActivityService.addActivity(user, savedDish, ActivityType.ADD_MEAL);
 
-        logger.info("User with id: {} created new dish {}", user.getId(), newDish.getId());
+        log.info("User with id: {} created new dish {}", user.getId(), newDish.getId());
 
         return dishMapper.toDishDto(savedDish);
     }

@@ -16,8 +16,7 @@ import com.sigma.worldskitchenserver.repository.CommentRepository;
 import com.sigma.worldskitchenserver.repository.RecentActivityRepository;
 import com.sigma.worldskitchenserver.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,8 +32,8 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class UserService {
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -50,7 +49,7 @@ public class UserService {
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
 
         if (passwordEncoder.matches(CharBuffer.wrap(credentialsDto.getPassword()), user.getPassword())) {
-            logger.info("User with id: {} logged in successfully!", user.getId());
+            log.info("User with id: {} logged in successfully!", user.getId());
             return userMapper.toUserDto(user);
         }
 
@@ -59,7 +58,7 @@ public class UserService {
 
     public UserDto register(SignUpDto userDto) {
         if (userRepository.existsByEmail(userDto.getLogin()) || userRepository.existsByLogin(userDto.getLogin())) {
-            logger.warn("Registration Failed. The user with the given login or email: {} already exists!", userDto.getLogin());
+            log.warn("Registration Failed. The user with the given login or email: {} already exists!", userDto.getLogin());
             throw new AppException("User already exists", HttpStatus.CONFLICT);
         }
 
@@ -69,7 +68,7 @@ public class UserService {
 
         User savedUser = userRepository.save(user);
 
-        logger.info("Registration successfully completed. New User ID: {}", savedUser.getId());
+        log.info("Registration successfully completed. New User ID: {}", savedUser.getId());
         return userMapper.toUserDto(savedUser);
     }
 
@@ -96,7 +95,7 @@ public class UserService {
         user.setImageUrl(photoURI);
         userRepository.save(user);
 
-        logger.info("User {} successfully updated picture", user.getId());
+        log.info("User {} successfully updated picture", user.getId());
     }
 
     public UserProfileDto mapUserToUserProfileDto (User user) {
@@ -145,7 +144,7 @@ public class UserService {
     }
 
     public UserProfileDto getUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));;
+        User user = userRepository.findById(id).orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
 
         return mapUserToUserProfileDto(user);
     }

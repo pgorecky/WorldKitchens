@@ -7,14 +7,13 @@ import com.sigma.worldskitchenserver.model.User;
 import com.sigma.worldskitchenserver.repository.CommentRepository;
 import com.sigma.worldskitchenserver.repository.DishRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class CommentService {
-    private static final Logger logger = LoggerFactory.getLogger(CommentService.class);
 
     private final UserService userService;
     private final DishRepository dishRepository;
@@ -25,7 +24,7 @@ public class CommentService {
         Dish dish = dishRepository.findById(comment.getDishId())
                 .orElseThrow(() -> new IllegalArgumentException("Dish not found"));
 
-        logger.info("Adding new comment by user with id: {} for dish: {}", currentUser.getId(), dish.getId());
+        log.info("Adding new comment by user with id: {} for dish: {}", currentUser.getId(), dish.getId());
 
         Comment newComment = new Comment();
         newComment.setAuthor(currentUser);
