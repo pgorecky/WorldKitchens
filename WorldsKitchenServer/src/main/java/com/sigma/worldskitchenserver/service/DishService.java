@@ -26,6 +26,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,7 @@ public class DishService {
         return dish.orElseThrow(() -> new ResourceNotFoundException("Dish", "id", dishId));
     }
 
+    @Transactional
     public void likeDishById(Long dishId) {
         User user = userService.getCurrentUser();
         Dish dish = getDishById(dishId);
@@ -78,6 +80,7 @@ public class DishService {
         log.info("User with id: {} liked dish {}", user.getId(), dish.getId());
     }
 
+    @Transactional
     public void unlikeDishById(Long dishId) {
         User user = userService.getCurrentUser();
         Dish dish = getDishById(dishId);
@@ -162,6 +165,7 @@ public class DishService {
                 .orElse(false);
     }
 
+    @Transactional
     public DishDto createDish(DishAddRequest dish) {
         Dish newDish = dishMapper.toDish(dish);
 
