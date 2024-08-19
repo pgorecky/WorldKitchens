@@ -60,18 +60,18 @@ public class DishController {
     @GetMapping("/all")
     public ResponseEntity<List<DishDto>> getAllDishes(
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) Integer caloriesDown,
-            @RequestParam(required = false) Integer caloriesUp,
+            @RequestParam(required = false) Integer caloriesMin,
+            @RequestParam(required = false) Integer caloriesMax,
             @RequestParam(required = false) Region region,
             @RequestParam(required = false) Level level) {
 
         List<DishDto> dtoDishes;
 
-        if (caloriesDown == null) caloriesDown = 0;
-        if (caloriesUp == null) caloriesUp = 10000;
+        if (caloriesMin == null) caloriesMin = 0;
+        if (caloriesMax == null) caloriesMax = 10000;
 
         if ((name != null) || (region != null) || (level != null)) {
-            dtoDishes = dishService.getDishesByCriteria(name, region, level, caloriesDown, caloriesUp);
+            dtoDishes = dishService.getDishesByCriteria(name, region, level, caloriesMin, caloriesMax);
         } else {
             dtoDishes = dishService.getAllDishes();
         }

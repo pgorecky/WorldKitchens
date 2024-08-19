@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -97,7 +98,7 @@ public class DishService {
         return mapDishesToDishesDto(dishRepository.findAll());
     }
 
-    public List<DishDto> getDishesByCriteria(String name, Region region, Level level, int caloriesDown, int caloriesUp) {
+    public List<DishDto> getDishesByCriteria(String name, Region region, Level level, int caloriesMin, int caloriesMax) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
@@ -111,12 +112,27 @@ public class DishService {
             CriteriaQuery<Dish> cr = cb.createQuery(Dish.class);
             Root<Dish> root = cr.from(Dish.class);
 
-            Predicate nameItems = cb.like(root.get("name"), "%" + name + "%");
-            Predicate caloriesItems = cb.between(root.get("calories"), caloriesDown, caloriesUp);
-            Predicate regionItems = cb.like(root.get("region"), String.valueOf(region));
-            Predicate levelItems = cb.like(root.get("level"), String.valueOf(level));
+            List<Predicate> list = new ArrayList<>();
 
-            Predicate[] predicates = new Predicate[]{nameItems, caloriesItems, regionItems, levelItems};
+            if (!name.isBlank()) {
+                Predicate nameItems = cb.like(root.get("name"), "%" + name + "%");
+                list.add(nameItems);
+            }
+
+            if (region != null) {
+                Predicate regionItems = cb.like(root.get("region"), String.valueOf(region));
+                list.add(regionItems);
+            }
+
+            if (level != null) {
+                Predicate levelItems = cb.like(root.get("level"), String.valueOf(level));
+                list.add(levelItems);
+            }
+
+            Predicate caloriesItems = cb.between(root.get("calories"), caloriesMin, caloriesMax);
+            list.add(caloriesItems);
+
+            Predicate[] predicates = list.toArray(Predicate[]::new);
 
             cr.select(root).where(predicates);
 

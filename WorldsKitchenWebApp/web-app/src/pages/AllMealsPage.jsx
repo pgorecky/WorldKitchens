@@ -3,17 +3,18 @@ import {useEffect, useState} from "react";
 import {getRequest} from "../services/API_CONFIG";
 import Header from "../components/Headers/Header";
 import ProfileMealsList from "../components/List/ProfileMealsList";
+import {Box, Slider} from '@mui/material';
+import Button from "../components/Button/Button";
 
 export default function AllMealsPage() {
     const [profileImage, setProfileImage] = useState();
     const [allMeals, setAllMeals] = useState([]);
-    const [italianMeals, setItalianMeals] = useState([]);
-    const [polishMeals, setPolishMeals] = useState([]);
-    const [mexicanMeals, setMexicanMeals] = useState([]);
-    const [americanMeals, setAmericanMeals] = useState([]);
-    const [asianMeals, setAsianMeals] = useState([]);
-    const [activeTab, setActiveTab] = useState('Italian');
-
+    const [name, setName] = useState("")
+    const [region, setRegion] = useState(null)
+    const [level, setLevel] = useState(null)
+    const [caloriesMin, setCaloriesMin] = useState(0)
+    const [caloriesMax, setCaloriesMax] = useState(1000)
+    const [caloriesRange, setCaloriesRange] = useState([0, 1000]);
 
     const tabs = [
         ['Discover', ALL_MEAL_PAGE],
@@ -32,33 +33,104 @@ export default function AllMealsPage() {
         })
     }, []);
 
-    const getMealsTab = () => {
-        let tab1Classes = 'meal-tab tab1 '
-        let tab2Classes = 'meal-tab tab2 '
-
-        if (activeTab === 'Italian') {
-            tab1Classes += 'active-tab'
-        } else tab2Classes += 'active-tab'
-
-        return <>
-            <div className={tab1Classes} onClick={() => setActiveTab('Italian')}>
-                Italian
-            </div>
-            <div
-                className={tab2Classes}
-                onClick={() => setActiveTab('Polish')}>
-                Polish
-            </div>
-        </>
+    const handleNameChange = (event) => {
+        setName(event.target.value)
     }
+
+    const handleRegionChange = (event) => {
+        setRegion(event.target.value)
+    }
+
+    const handleLevelChange = (event) => {
+        setLevel(event.target.value)
+    }
+
+    const handleSliderChange = (event, newValue) => {
+        setCaloriesRange(newValue);
+        setCaloriesMin(newValue[0]);
+        setCaloriesMax(newValue[1]);
+    };
+
+    const handleMealsSearching = () => {
+        let url = `/dishes/all?caloriesMin=${caloriesMin}&caloriesMax=${caloriesMax}&name=${name}`
+        if (region) url += `&region=${region}`
+        if (level) url += `&level=${level}`
+
+        getRequest(url).then(r => {
+            setAllMeals(r.data)
+        })
+    };
 
     return <>
         <Header
             tabs={tabs}
             image={profileImage}/>
         <div className={'recipe-container'}>
-            <div style={{display: 'flex', flexDirection: 'row', boxShadow: ''}}>
-                {getMealsTab()}
+            <div
+                style={{display: 'flex', flexDirection: 'row', marginTop: '1rem', marginBottom: '0.5rem', gap: "1rem"}}>
+                <input
+                    type={"text"}
+                    placeholder={"Enter a meal name..."}
+                    value={name}
+                    className={'meal-name-input'}
+                    onChange={handleNameChange}/>
+                <select
+                    id="region-select"
+                    value={region}
+                    onChange={handleRegionChange}
+                    className={'meal-number-input'}>
+                    <option value="">Select a region</option>
+                    <option value="ITALIAN">Italian</option>
+                    <option value="POLISH">Polish</option>
+                    <option value="ASIAN">Asian</option>
+                    <option value="AMERICAN">American</option>
+                    <option value="MEXICAN">Mexican</option>
+                </select>
+                <select
+                    id="level-select"
+                    value={level}
+                    onChange={handleLevelChange}
+                    className={'meal-number-input'}>
+                    <option value="">Select a difficulty</option>
+                    <option value="EASY">Easy</option>
+                    <option value="MEDIUM">Medium</option>
+                    <option value="HARD">Hard</option>
+                </select>
+                <div className={'meal-number-input'} style={{width: "fit-content"}}>
+                    <Box width={200} margin="20px auto">
+                        <span id="range-slider">
+                            Select Calorie Range
+                        </span>
+                        <Slider
+                            value={caloriesRange}
+                            onChange={handleSliderChange}
+                            valueLabelDisplay="auto"
+                            aria-labelledby="range-slider"
+                            min={0}
+                            max={1500}
+                            sx={{
+                                color: '#03a84e',
+                                '& .MuiSlider-thumb': {
+                                    backgroundColor: '#03a84e',
+                                },
+                                '& .MuiSlider-rail': {
+                                    color: 'gray',
+                                },
+                            }}
+                        />
+                        <div style={{display: "flex", flexDirection: "row", gap: "1rem"}}>
+                            <span>
+                                {caloriesRange[0]} kcal
+                            </span>
+                            <span>
+                                {caloriesRange[1]} kcal
+                            </span>
+                        </div>
+                    </Box>
+                </div>
+                <Button onClick={handleMealsSearching}>
+                    Search
+                </Button>
             </div>
             <div className={'profile-meals-section'} style={{height: "fit-content"}}>
                 <ProfileMealsList
