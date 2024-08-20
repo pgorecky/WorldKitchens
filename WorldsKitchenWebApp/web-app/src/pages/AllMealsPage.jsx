@@ -107,7 +107,7 @@ export default function AllMealsPage() {
                             valueLabelDisplay="auto"
                             aria-labelledby="range-slider"
                             min={0}
-                            max={1500}
+                            max={2000}
                             sx={{
                                 color: '#03a84e',
                                 '& .MuiSlider-thumb': {
