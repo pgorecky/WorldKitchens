@@ -2,12 +2,17 @@ import './Header.css'
 import Logo from "../Logo/Logo";
 import {useNavigate} from "react-router-dom";
 import {IoNotifications} from "react-icons/io5";
-import {MY_PROFILE_PAGE} from "../../const/Consts";
+import {ADD_MEAL_PAGE, ALL_MEAL_PAGE, MY_PROFILE_PAGE, TODO_PAGE} from "../../const/Consts";
 
-export default function Header({onLogoClick, tabs, image}) {
+export default function Header({onLogoClick, image}) {
     const navigate = useNavigate();
 
-    const TABS = tabs ? tabs : []
+    const tabs = [
+        ['Discover', ALL_MEAL_PAGE],
+        ['Add', ADD_MEAL_PAGE],
+        ['Favourite', TODO_PAGE],
+        ['FAQ', TODO_PAGE]
+    ]
 
     const handleTabNavigation = (url) => {
         navigate(url)
@@ -20,7 +25,7 @@ export default function Header({onLogoClick, tabs, image}) {
                     <Logo/>
                 </div>
                 <ol className={'header-menu'}>
-                    {TABS.map((tab, tabIndex) =>
+                    {tabs.map((tab, tabIndex) =>
                         <li
                             key={tabIndex}
                             onClick={() => handleTabNavigation(tab[1])}>
