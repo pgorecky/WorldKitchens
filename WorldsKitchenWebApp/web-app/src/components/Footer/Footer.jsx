@@ -4,9 +4,9 @@ import {FaGithub, FaLinkedin} from "react-icons/fa";
 import {SiGmail} from "react-icons/si";
 import {EMAIL_ADDRESS, GITHUB_LINK, LINKEDIN_LINK} from "../../const/Consts";
 
-export default function Footer({style = undefined}) {
+export default function Footer() {
     return (
-        <div id={'Footer'} style={style}>
+        <div id={'Footer'} style={{position: "fixed", bottom: 0}}>
             <div className={'icons-container'}>
                 <a href={GITHUB_LINK}>
                     <FaGithub className={'footer-icon'} size={'3vh'}/>

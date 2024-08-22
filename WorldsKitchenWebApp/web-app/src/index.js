@@ -23,11 +23,14 @@ import MealPage from "./pages/MealPage";
 import AddMealPage from "./pages/AddMealPage";
 import AllMealsPage from "./pages/AllMealsPage";
 import MainLayout from "./layouts/MainLayout";
+import NotLoggedLayout from "./layouts/NotLoggedLayout";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const router = createBrowserRouter([
     {
+        path: '/',
+        element: <NotLoggedLayout/>,
         children: [
             {
                 path: LANDING_PAGE,
@@ -40,10 +43,6 @@ const router = createBrowserRouter([
             {
                 path: SIGN_UP_PAGE,
                 element: <SignUp/>,
-            },
-            {
-                path: TODO_PAGE,
-                element: <TODO/>
             },
             {
                 path: "/oauth2/redirect",
@@ -70,6 +69,10 @@ const router = createBrowserRouter([
             {
                 path: ALL_MEAL_PAGE,
                 element: <AllMealsPage/>,
+            },
+            {
+                path: TODO_PAGE,
+                element: <TODO/>
             },
         ]
     }

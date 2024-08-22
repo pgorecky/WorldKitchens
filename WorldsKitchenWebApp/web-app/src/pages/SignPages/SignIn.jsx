@@ -5,8 +5,8 @@ import {FaFacebookF, FaGoogle, FaUserAlt} from "react-icons/fa";
 import {RiLockPasswordFill} from "react-icons/ri";
 import Button from "../../components/Button/Button";
 import {useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {getAuthToken, setAuthHeader} from "../../services/API_CONFIG";
+import {useState} from "react";
+import {setAuthHeader} from "../../services/API_CONFIG";
 import {loginRequest} from "../../services/auth/AuthService";
 import {ALL_MEAL_PAGE, REACT_APP_API, REACT_APP_HOST, SIGN_UP_PAGE, TODO_PAGE} from "../../const/Consts";
 
@@ -16,12 +16,6 @@ export default function SignIn() {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [errorMessage, setErrorMessage] = useState(null);
-
-    useEffect(() => {
-        if (getAuthToken()) {
-            navigate(ALL_MEAL_PAGE)
-        }
-    }, []);
 
     const handleSubmit = async () => {
         try {
@@ -41,7 +35,6 @@ export default function SignIn() {
                     return 'There is no such user! Check the name you entered. If you dont have an account yet - create one.'
                 }
             })
-
         }
     }
 

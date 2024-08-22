@@ -6,10 +6,9 @@ import {MdAlternateEmail} from "react-icons/md";
 import Button from "../../components/Button/Button";
 import {useNavigate} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
-import {getAuthToken} from "../../services/API_CONFIG";
 import {signupRequest} from "../../services/auth/AuthService";
 import Alert from "../../components/Alerts/Alert";
-import {ALL_MEAL_PAGE, SIGN_IN_PAGE} from "../../const/Consts";
+import {SIGN_IN_PAGE} from "../../const/Consts";
 
 export default function SignUp() {
     const navigate = useNavigate();
@@ -25,12 +24,6 @@ export default function SignUp() {
     const [alertType, setAlertType] = useState(null);
     const [alertTitle, setAlertTitle] = useState(null);
     const [disabled, setDisabled] = useState(true)
-
-    useEffect(() => {
-        if (getAuthToken()) {
-            navigate(ALL_MEAL_PAGE)
-        }
-    }, []);
 
     const handleSubmit = async () => {
         try {
