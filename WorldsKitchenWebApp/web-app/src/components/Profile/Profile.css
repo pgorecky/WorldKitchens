@@ -1,13 +1,7 @@
 .profile-content-container {
-    background-color: var(--background-07);
-    border-radius: 50px;
-    min-height: 80vh;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    animation: slideInFromLeft 1s ease forwards;
 }
 
 .profile-greetings {

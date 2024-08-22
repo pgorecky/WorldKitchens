@@ -1,6 +1,4 @@
-import Header from "../components/Headers/Header";
 import {useCallback, useEffect, useRef, useState} from "react";
-import {ADD_MEAL_PAGE, ALL_MEAL_PAGE, TODO_PAGE} from "../const/Consts";
 import {getRequest, postRequest} from "../services/API_CONFIG";
 import {PiCookingPotFill} from "react-icons/pi";
 import {LiaBurnSolid} from "react-icons/lia";
@@ -11,7 +9,6 @@ import Button from "../components/Button/Button";
 import {useNavigate} from "react-router-dom";
 
 export default function AddMealPage() {
-    const [profileImage, setProfileImage] = useState();
     const [userId, setUserId] = useState();
     const [name, setName] = useState()
     const [desc, setDesc] = useState()
@@ -34,13 +31,6 @@ export default function AddMealPage() {
 
     const navigate = useNavigate();
 
-    const tabs = [
-        ['Discover', ALL_MEAL_PAGE],
-        ['Add', ADD_MEAL_PAGE],
-        ['Favourite', TODO_PAGE],
-        ['FAQ', TODO_PAGE]
-    ]
-
     const unlockButton = useCallback(() => {
         if (name && desc && time && calories && portion && region && level) {
             setDisabled(false);
@@ -51,7 +41,6 @@ export default function AddMealPage() {
 
     useEffect(() => {
         getRequest('/users/me').then(r => {
-            setProfileImage(r.data.imageUrl)
             setUserId(r.data.id)
             unlockButton();
         });
@@ -135,9 +124,6 @@ export default function AddMealPage() {
     }
 
     return <>
-        <Header
-            tabs={tabs}
-            image={profileImage}/>
         <div className={'recipe-container'}>
             <div className={'meal-name-section'}>
                 <div className={'meal-name-like'}>

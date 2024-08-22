@@ -22,12 +22,12 @@ import ProfilePage from "./pages/ProfilePage";
 import MealPage from "./pages/MealPage";
 import AddMealPage from "./pages/AddMealPage";
 import AllMealsPage from "./pages/AllMealsPage";
+import MainLayout from "./layouts/MainLayout";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const router = createBrowserRouter([
     {
-
         children: [
             {
                 path: LANDING_PAGE,
@@ -49,6 +49,12 @@ const router = createBrowserRouter([
                 path: "/oauth2/redirect",
                 element: <OAuth2Handler/>,
             },
+        ],
+    },
+    {
+        path: '/',
+        element: <MainLayout/>,
+        children: [
             {
                 path: PROFILE_PAGE,
                 element: <ProfilePage/>,
@@ -65,8 +71,8 @@ const router = createBrowserRouter([
                 path: ALL_MEAL_PAGE,
                 element: <AllMealsPage/>,
             },
-        ],
-    },
+        ]
+    }
 ],);
 
 

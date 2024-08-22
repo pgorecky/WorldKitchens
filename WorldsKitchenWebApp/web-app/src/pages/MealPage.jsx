@@ -1,8 +1,6 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getRequest, postRequest} from "../services/API_CONFIG";
-import Header from "../components/Headers/Header";
-import {ADD_MEAL_PAGE, ALL_MEAL_PAGE, TODO_PAGE} from "../const/Consts";
 import '../components/Meals/Meals.css'
 import {RiTimer2Line} from "react-icons/ri";
 import {LiaBurnSolid} from "react-icons/lia";
@@ -14,7 +12,6 @@ import Button from "../components/Button/Button";
 import {addCommentRequest} from "../services/comment/CommentService";
 
 export default function MealPage() {
-    const [profileImage, setProfileImage] = useState();
     const [comment, setComment] = useState('');
     const [like, setLike] = useState(true);
     const [isHovered, setIsHovered] = useState(false);
@@ -33,13 +30,6 @@ export default function MealPage() {
         comments: [],
         imageUrl: ''
     })
-
-    const tabs = [
-        ['Discover', ALL_MEAL_PAGE],
-        ['Add', ADD_MEAL_PAGE],
-        ['Favourite', TODO_PAGE],
-        ['FAQ', TODO_PAGE]
-    ]
 
     const getLikeIcon = () => {
         let size = '2.3rem'
@@ -75,9 +65,6 @@ export default function MealPage() {
     }
 
     useEffect(() => {
-        getRequest('/users/me').then(r => {
-            setProfileImage(r.data.imageUrl)
-        });
 
         getRequest(`/dishes/${id}`).then(r => {
             setMeal({
@@ -101,9 +88,6 @@ export default function MealPage() {
 
     return (
         <>
-            <Header
-                tabs={tabs}
-                image={profileImage}/>
             <div className={'recipe-container'}>
                 <div className={'meal-name-section'}>
                     <div className={'meal-name-like'}>

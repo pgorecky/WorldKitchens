@@ -1,14 +1,7 @@
 .recipe-container {
-    background-color: var(--background-07);
-    border-radius: 50px;
-    height: 90vh;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
-    animation: slideInFromLeft 1s ease forwards;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: scroll;
 }
 
 .meal-name-section {

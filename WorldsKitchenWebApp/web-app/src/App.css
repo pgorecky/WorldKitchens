@@ -73,6 +73,16 @@
   color: var(--clr-primary-gaslight);
 }
 
+.content-container {
+  background-color: var(--background-07);
+  animation: slideInFromLeft 1s ease forwards;
+  border-radius: 50px;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  height: 90vh;
+  overflow-y: scroll;
+}
+
 @keyframes slideInFromRight {
   0% {
     transform: translateX(100%);

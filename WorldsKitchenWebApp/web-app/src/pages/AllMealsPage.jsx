@@ -1,13 +1,10 @@
-import {ADD_MEAL_PAGE, ALL_MEAL_PAGE, TODO_PAGE} from "../const/Consts";
 import {useEffect, useState} from "react";
 import {getRequest} from "../services/API_CONFIG";
-import Header from "../components/Headers/Header";
 import ProfileMealsList from "../components/List/ProfileMealsList";
 import {Box, Slider} from '@mui/material';
 import Button from "../components/Button/Button";
 
 export default function AllMealsPage() {
-    const [profileImage, setProfileImage] = useState();
     const [allMeals, setAllMeals] = useState([]);
     const [name, setName] = useState("")
     const [region, setRegion] = useState(null)
@@ -16,18 +13,7 @@ export default function AllMealsPage() {
     const [caloriesMax, setCaloriesMax] = useState(1000)
     const [caloriesRange, setCaloriesRange] = useState([0, 1000]);
 
-    const tabs = [
-        ['Discover', ALL_MEAL_PAGE],
-        ['Add', ADD_MEAL_PAGE],
-        ['Favourite', TODO_PAGE],
-        ['FAQ', TODO_PAGE]
-    ]
-
     useEffect(() => {
-        getRequest('/users/me').then(r => {
-            setProfileImage(r.data.imageUrl)
-        });
-
         getRequest('/dishes/all').then(r => {
             setAllMeals(r.data)
         })
@@ -62,9 +48,6 @@ export default function AllMealsPage() {
     };
 
     return <>
-        <Header
-            tabs={tabs}
-            image={profileImage}/>
         <div className={'recipe-container'}>
             <div
                 style={{display: 'flex', flexDirection: 'row', marginTop: '1rem', marginBottom: '0.5rem', gap: "1rem"}}>
