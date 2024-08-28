@@ -129,6 +129,37 @@
     transition: 0.2s ease-in-out;
 }
 
+.hamburger-menu {
+    background-color: black;
+    width: fit-content;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 20px;
+    border: solid 2px var(--clr-primary);
+    margin-top: 1rem;
+    margin-left: -8rem;
+    animation: slideInFromRight 0.5s ease forwards;
+}
+
+.hamburger-menu-item {
+    border: solid 1px var(--clr-primary-gaslight);
+    width: 100%;
+    min-width: 12rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: medium;
+    gap: 0.5rem;
+    color: var(--gray);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.hamburger-menu-item:hover {
+    border: solid 1px var(--clr-primary);
+    color: white;
+}
+
 .notification-icon > * {
     color: var(--silver);
 }

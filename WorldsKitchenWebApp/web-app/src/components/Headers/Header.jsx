@@ -3,6 +3,7 @@ import Logo from "../Logo/Logo";
 import {useNavigate} from "react-router-dom";
 import {IoNotifications} from "react-icons/io5";
 import {ADD_MEAL_PAGE, ALL_MEAL_PAGE, MY_PROFILE_PAGE, TODO_PAGE} from "../../const/Consts";
+import Hamburger from "./Hamburger";
 
 export default function Header({onLogoClick, image}) {
     const navigate = useNavigate();
@@ -45,8 +46,7 @@ export default function Header({onLogoClick, image}) {
                         onClick={() => handleTabNavigation(MY_PROFILE_PAGE)}
                     />
                 </div>
-                <div className={'hamburger'}>
-                </div>
+                <Hamburger/>
             </div>
         </header>
     )

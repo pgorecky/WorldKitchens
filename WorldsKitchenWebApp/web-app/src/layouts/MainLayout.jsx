@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {getRequest} from "../services/API_CONFIG";
-import {TODO_PAGE} from "../const/Consts";
+import {ALL_MEAL_PAGE} from "../const/Consts";
 import Header from "../components/Headers/Header";
 import {Outlet, useNavigate} from "react-router-dom";
 
@@ -15,7 +15,7 @@ function MainLayout() {
     }, []);
 
     const handleLogoClick = () => {
-        navigate(TODO_PAGE)
+        navigate(ALL_MEAL_PAGE)
     }
 
     return <>

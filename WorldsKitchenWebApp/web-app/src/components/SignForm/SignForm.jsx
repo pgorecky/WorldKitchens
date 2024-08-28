@@ -1,5 +1,5 @@
 import './SignForm.css'
-import Footer from "../../components/Footer/Footer";
+import Footer from "../Footer/Footer";
 
 export default function SignForm({title, children}) {
     return <>

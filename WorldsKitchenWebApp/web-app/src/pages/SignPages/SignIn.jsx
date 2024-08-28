@@ -1,4 +1,4 @@
-import SignForm from "../../layouts/SignForm/SignForm";
+import SignForm from "../../components/SignForm/SignForm";
 import Alert from "../../components/Alerts/Alert";
 import FormInput from "../../components/Inputs/FormInput";
 import {FaFacebookF, FaGoogle, FaUserAlt} from "react-icons/fa";

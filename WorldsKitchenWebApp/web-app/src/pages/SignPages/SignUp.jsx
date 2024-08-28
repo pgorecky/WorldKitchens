@@ -1,4 +1,4 @@
-import SignForm from "../../layouts/SignForm/SignForm";
+import SignForm from "../../components/SignForm/SignForm";
 import FormInput from "../../components/Inputs/FormInput";
 import {FaUserAlt} from "react-icons/fa";
 import {RiLockPasswordFill} from "react-icons/ri";
